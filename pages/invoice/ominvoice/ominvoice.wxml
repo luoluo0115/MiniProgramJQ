@@ -1,0 +1,52 @@
+ <wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<van-row custom-class="num-wrapper">
+    <van-col span="8">
+        <view class="num"><text class="color-red">{{invoice_total_items}}</text></view>
+        <text class="title">认证票数</text>
+    </van-col>
+    <van-col span="8">
+        <view class="num"><text class="color-red">{{filter.numberToFixed(invoice_total_tax)}}</text></view>
+        <text class="title">认证税额</text>
+    </van-col>
+    <van-col span="8">
+        <view class="num"><text class="color-red">{{filter.numberToFixed(invoice_total_amt)}}</text></view>
+        <text class="title">认证金额</text>
+    </van-col>
+</van-row>
+ <view class="page">
+    <view class="expend-list">
+            <block wx:if="{{withReceiptsList!=''}}">
+               <view class="expend-item" wx:for="{{withReceiptsList}}" wx:key="index">
+                   <van-row custom-class="title">
+                        <van-col span="24" >
+                           销方名称:{{item.vendor_name}}                  
+                        </van-col>
+                    </van-row>
+                    <view class="a-expend">
+                        <van-row>
+                            <!-- <van-col span="7" custom-class="text-center">
+                                <van-image width="80" height="80" fit="fill" src="{{FileOssUrl + item.upload_file_guid}}" data-list="{{FileOssUrl + item.upload_file_guid}}" data-src="{{FileOssUrl + item.upload_file_guid}}" bindtap="previewImage"  />
+                            </van-col> -->
+                            <van-col span="24" >
+                                <van-row >
+                                    <van-col span="12" custom-class="label">发票类型：{{item.accounting_type}} </van-col>
+                                    <van-col span="12" custom-class="label text-right">税额:{{filter.numberToFixed(item.invoice_tax)}}</van-col>
+                                    <van-col span="12" custom-class="label">发票号码:{{item.invoice_no}}</van-col>
+                                    <van-col span="12" custom-class="label text-right">金额:{{filter.numberToFixed(item.invoice_amt)}}</van-col>
+                                    <van-col span="12" custom-class="label">开票日期:{{filter.formatTime(item.invoice_date,'yyyy-MM-dd')}}</van-col>
+                                    <van-col span="12" custom-class="label text-right">认证日期:{{filter.formatTime(item.verify_date,'yyyy-MM-dd')}}</van-col>
+                                </van-row>
+                            </van-col>
+                        </van-row>
+                    </view>
+                    
+                </view>
+            
+            </block>
+            <block wx:else>
+                <view class="empty">{{msg}}</view>
+            </block>
+        </view>
+       
+ </view>
+ <van-toast id="van-toast" />

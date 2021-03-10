@@ -1,0 +1,86 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<scroll-view class="scroll-view_H" scroll-y="true" bindscroll="scrollTopFun">
+<view class=" page__bd_spacing text-center btn-group" >
+  <van-row>
+      <van-col span="24">
+         
+          <picker  class="picker-date-wrapper" mode="date" fields="month" value="{{begin_month}}" start="2009-09" end="2040-09" bindchange="bindDateChange">
+              <view class="picker-date">
+                  <view class="label">起始:{{begin_month}} </view>
+              </view>
+          </picker>
+          <picker class="picker-date-wrapper" mode="date" fields="month" value="{{end_month}}" start="2009-09" end="2040-09" bindchange="bindDateChangeEnd">
+              <view class="picker-date">
+                  <view class="label">结束:{{end_month}} </view>
+              </view>
+          </picker>
+          <van-button icon="upgrade" size="small" color="#1e6ce8" custom-class="top-btn " bind:click="DownExcel">下载余额表</van-button>
+      </van-col>
+      
+  </van-row>
+</view>
+  <view class="table">
+      <view class="tr {{top>130 ? 'topnav' : ''}}" >
+        <view class="th th0">科目编号</view>
+        <view class="th th1">科目名称</view>
+        <view class="th th2">
+          <view>期初余额</view>
+          <view class="btm">
+            <text class="btm-text">借方</text>
+            <text class="btm-text">贷方</text>
+          </view>
+        </view>
+        <view class="th th3">
+          <view>本期发生额</view>
+          <view class="btm">
+            <text class="btm-text">借方</text>
+            <text class="btm-text">贷方</text>
+          </view>
+        </view>
+        <view class="th th4">
+          <view>期末余额</view>
+          <view class="btm">
+            <text class="btm-text">借方</text>
+            <text class="btm-text">贷方</text>
+          </view>
+        </view>
+      </view>
+      <block wx:for="{{balanceData}}" wx:key="index">
+        <view class='tr'>
+          <view class="td th0 text-left">
+            <text  wx:if="{{item.code_no.length==6}}" class="c6">{{item.code_no}}</text>
+            <text  wx:if="{{item.code_no.length==8}}" class="c8">{{item.code_no}}</text>
+            <text  wx:if="{{item.code_no.length==4}}">{{item.code_no}}</text>
+             <text  wx:if="{{item.code_no.length==10}}"class="c10">{{item.code_no}}</text>
+          </view>
+          <view class="td th1 text-left">{{item.code_name}}</view>
+          <view class="td th2">
+            <view class=" btm">
+              <text class="btm-text">{{item.code_begin_direction=='借'?filter.numberToFixed(item.amt_begin):''}}</text>
+              <text class="btm-text">{{item.code_begin_direction=='贷'?filter.numberToFixed(item.amt_begin):''}}</text>
+            </view>
+          </view>
+          <view class="td th3">
+            <view class=" btm">
+              <text class="btm-text">
+                <block wx:if="{{item.amt_dr==0}}"></block>
+                <block wx:else>{{filter.numberToFixed(item.amt_dr)}}</block>
+              </text>
+              <text class="btm-text">
+                <block wx:if="{{item.amt_cr==0}}"></block>
+                <block wx:else> {{filter.numberToFixed(item.amt_cr )}}</block>
+              </text>
+            </view>
+          </view>
+          <view class="td th4">
+            <view class=" btm">
+              <text class="btm-text">{{item.code_end_direction=='借'?filter.numberToFixed(item.amt_end):''}}</text>
+              <text class="btm-text">{{item.code_end_direction=='贷'?filter.numberToFixed(item.amt_end):''}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+  </view>
+</scroll-view>
+<van-toast id="van-toast" />
+

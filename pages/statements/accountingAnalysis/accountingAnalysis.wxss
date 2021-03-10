@@ -1,0 +1,136 @@
+/* pages/statements/accountingAnalysis/accountingAnalysis.wxss */
+page{
+    background: #f5f5f5
+}
+.page{
+    position: relative
+}
+.pay-f2{
+    position: relative;
+    height: 300px;
+}
+.billing-wrapper{
+    position: relative;
+    margin-bottom:10px ;
+    background: #fff;
+   
+}
+.mountNode-canvas{
+    height: 220px;
+}
+.mountNode-canvas-pay{
+    height: 420px;
+}
+.mountNode-canvas-l{
+    height: 800px;
+}
+.title{
+    text-align: left;
+    margin-left:20px;
+   padding: 2% 0;
+   font-size: 14px;
+   color: #666;
+  
+}
+.title:before {   
+    content: "";   
+    border-left:3px solid #1e6ce8;
+    height: 8px;
+    padding-right: 3px;   
+  }  
+  .pay-container {
+    position: absolute;
+    top: 20px;
+   
+    left:0;
+    right:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  } 
+  .pay-container-l{
+    position: absolute;
+    top: 200px;
+   
+    left:0;
+    right:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  } 
+  .pay-container-ll{
+    position: absolute;
+    top: 400px;
+   
+    left:0;
+    right:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  } 
+  .pay-container-lll{
+    position: absolute;
+    top: 600px;
+   
+    left:0;
+    right:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  } 
+
+  ff-canvas{
+    width:100%;
+    height: 200px;
+  }
+
+.three-chart{
+   margin-top: 180px;
+  }
+  /*资产状况*/
+.account-wrapper{
+    font-size: 14px
+}
+.account-wrapper .weui-flex{
+    padding: 3% 20px
+}
+.account-wrapper .weui-flex{
+    border-bottom:1px dashed #EAE7E7; 
+   
+}
+.account-wrapper .weui-flex:last-child{
+    border-bottom:none; 
+}
+.account-wrapper .weui-flex strong,.account-wrapper .weui-flex text{
+    display: block;
+    line-height: 1.6;
+}
+.account-wrapper .weui-flex strong{
+    color: #1e6ce8;
+    font-size: 14px
+}
+.account-wrapper .weui-flex text{
+    color:#AAAAAA ;
+    font-size: 12px
+}
+.account-wrapper .weui-flex .weui-flex__item{
+    text-align: center;
+}
+.wrapper-title{
+    color: #666;
+    margin-top: 10px;
+
+}
+
+.s{
+    position: relative;
+    top: 10px; 
+}

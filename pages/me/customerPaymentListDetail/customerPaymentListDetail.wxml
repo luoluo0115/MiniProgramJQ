@@ -1,0 +1,61 @@
+<!--pages/me/customerPaymentListDetail/customerPaymentListDetail.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ')
+}
+var dateFormatMonth = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.substring(0, 7)
+}
+var dateFormatDay = function (dateDay) {
+    if(dateDay == null){
+        return '';
+    }
+  return dateDay.substring(0, 10)
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  dateFormatMonth: dateFormatMonth,
+   dateFormatDay: dateFormatDay,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<view class="section">
+    <view class="page">
+        <view class="page__bd page__bd_spacing">
+           
+            <view class="invoice-list">
+                <view class="item weui-flex" wx:for="{{customerList}}" wx:key >
+                        <view class="weui-flex__item left">
+                            <view class="name">{{item.service_category}}:{{item.service_name}}</view>
+                            <view class="time">开始月份:<block wx:if="{{item.service_month_fm != null}}">{{m1.dateFormatMonth(item.service_month_fm)}}</block></view>
+                            <view class="time">服务价格:<block wx:if="{{item.service_price == '--'}}">{{item.service_price}}</block><block wx:else>{{filter.numberToFixed(item.service_price)}}</block></view>
+                            <view class="time" wx:if="{{(item.service_limit_to != null)&&(item.service_limit_to != 0)}}">限定:{{item.service_limit_to}}</view>
+                           
+                        
+                        </view>
+                        <view class="right">
+                            
+                            <view class="time" >核准收款金额:{{filter.numberToFixed(item.approved_amount)}}</view>
+                            <view class="time">结束月份:<block wx:if="{{item.service_month_to != null}}">{{m1.dateFormatMonth(item.service_month_to)}}</block><block wx:else >--</block></view>
+                            
+                            <view class="time">付款周期:{{item.payment_period}} </view>
+                            <view class="time"></view>
+                        </view>
+                    
+                </view>  
+            </view>
+        </view>
+    </view>
+</view>

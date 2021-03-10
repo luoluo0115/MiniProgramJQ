@@ -1,0 +1,35 @@
+<view class="account">
+	<view class=" page">
+		<view class="invoice page__bd page__bd_spacing">
+			<view class="invoice-item">
+				<view class="area-title ">
+					<view class="area-text">常用快递地址</view>
+				</view>
+				<van-row custom-class="upload-btn" gutter="10">
+					<van-col span="24">
+						<van-button round type="info" block color="#1e6ce8" data-type="AddAll" bindtap="goAdd" size="normall">新增快递地址</van-button>
+					</van-col>
+				</van-row>
+				<van-row custom-class="grids-wrapper" wx:for="{{ExpressList}}" wx:key="index">
+					<van-col span="24" custom-class="font-14 text-1e6ce8">
+						客户名称:{{item.customer_name}}
+					</van-col>
+					<van-col span="12">
+						联系人:{{item.express_contact_name}}
+					</van-col>
+					<van-col span="12">
+						联系方式:{{item.express_contact_phone}}
+					</van-col>
+					<van-col span="24">
+						地址:{{item.province+item.city+item.district+item.express_address}}
+					</van-col>
+					<van-col span="24" custom-class="card-bottom">
+						<van-button round color="#1e6ce8" size="mini" data-item="{{item}}" catchtap="deleteExp" custom-class="detail-btn">删除</van-button>
+						<van-button round color="#1e6ce8" size="mini" data-type="EditAll" data-item="{{item}}" catchtap="goEdit">修改</van-button>
+					</van-col>
+				</van-row>    
+			</view>
+		</view>
+	</view>
+</view>
+<van-toast id="van-toast" />

@@ -1,0 +1,67 @@
+/* pages/statements/incomeAndIsByMonth/incomeAndIsByMonth.wxss */
+.page{
+    position: relative
+}
+.pay-f2{
+    position: relative;
+    height: 300px;
+}
+.pay-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  } 
+  ff-canvas{
+    width:100%;
+    height: 300px;
+  }
+  
+  
+.pay-header{
+   
+    background: #1e6ce8;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5%;
+    font-size: 12px;
+}
+.pay-header .title{
+   color: #f8f8f8
+}
+.pay-header .price{
+    font-size: 24px;
+    line-height: 40px
+   
+ }
+ .pay-header .right{
+    color: #f8f8f8
+   
+ }
+.pay-content{
+    position: relative;
+    font-size: 12px;
+}
+.pay-content .pay-title{
+    padding:2% 5%;
+    background: #f8f8f8;
+    color: #666666
+}
+.left{
+    text-align: left
+}
+.right{
+    text-align: right
+}
+.van-cell__title{
+    color: #333333!important;
+}
+.van-cell{
+    font-size: 12px!important;
+}

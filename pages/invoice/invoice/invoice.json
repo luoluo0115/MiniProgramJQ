@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "topwrapper": "../../../components/topwrapper/topwrapper",
+    "noticewrapper": "../../../components/noticewrapper/noticewrapper"
+  },
+  "navigationBarTitleText": "开票中心"
+}

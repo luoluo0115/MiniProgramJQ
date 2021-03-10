@@ -1,0 +1,250 @@
+<!--pages/statements/account/account.wxml-->
+<!--顶部-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="account">
+	<noticewrapper class="noticewrapper" bindtap="onGoNoticeWrapper"></noticewrapper>
+	<topwrapper class="top-wrapper" customerlist="{{customer_info_id_list}}" customerindex="{{index}}"
+		pickerDate="{{pickerDate}}" wx:if="{{topwrapper==true}}" bind:pickerdateevent="onPickerDateEvent"
+		bind:pickercompanyevent="onPickerCompanyEvent"></topwrapper>
+	<view class="section ">
+		<view class="page">
+			<view class="page__bd page__bd_spacing">
+				<view class="steps-wrapper">
+					<view class="steps-header">
+						<view class="swiper-tab steps-arrow">
+							<block wx:for="{{stepsArray}}" wx:key="index">
+								<view class="swiper-tab-item {{index < currentVal?'active':''}}">
+									<view class="{{index==currentVal-1?'activeCircle':''}}">
+										<view class="i-center">
+											<icon wx:if="{{item.name=='传票'}}" class='./iconfont/iconSAAS-daochushuju:before'></icon>
+											<icon wx:if="{{item.name=='记账'}}" class='./iconfont/iconSAAS-xiangmufuwu:before'></icon>
+											<icon wx:if="{{item.name=='审核'}}" class='./iconfont/iconSAAS-dingdanguanli:before'></icon>
+											<icon wx:if="{{item.name=='报税'}}" class='./iconfont/iconSAAS-caishuifuwu:before'></icon>
+											<icon wx:if="{{item.name=='缴款'}}" class='./iconfont/iconSAAS-caishuiguanli_huaban1:before'></icon>
+										</view>
+									</view>
+									<view class="num">{{item.name}}</view>
+									<view class="time">{{item.time}}</view>
+								</view>
+							</block>
+
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!--列表-->
+	<view class="section grids-content">
+		<view class="page">
+			<view class="page__bd page__bd_spacing">
+				<view class="grids-wrapper">
+					<view class="title ">
+						<view class="text">
+							<van-row gutter="10">
+								<van-col span="6" custom-class="icon-title">资料上传</van-col>
+								<van-col span="12" custom-class="icon-eye text-right color-gray">
+									余额:{{filter.numberToFixed(amt)}} 票据数:{{file_qty}}
+								</van-col>
+								<van-col span="6">
+									<!-- <view bind:click="{{!btnDisabled?'Affirm':''}}" data-type="{{recv_status}}"  class="confim-btn {{btnDisabled?'gray-bg':''}}">汇总确认
+									</view> -->
+									<van-button color="#1e6ce8" wx:if="{{isConfirmStat}}" round size="mini"
+										bind:click="{{!btnDisabled?'Affirm':''}}" data-type="{{recv_status}}"
+										custom-class="confim-btn {{btnDisabled?'gray-bg':''}}">汇总确认</van-button>
+									<van-button color="#1e6ce8" wx:if="{{isConfirmPay}}" round size="mini"
+										bind:click="{{!btnDisabled?'AffirmTaxPayDiv':''}}" data-type="{{recv_status}}"
+										custom-class="confim-btn {{btnDisabled?'gray-bg':''}}">缴款确认</van-button>
+								</van-col>
+							</van-row>
+							<van-popup show="{{ showModal }}" bind:close="close" round custom-class="popWrapper" closeable="true">
+								<view class="pop-title">本月预估</view>
+								<view class="pop-notice color-red ">重要提醒：根据《会计档案管理办法》您拍摄或上传的原始票据请您按年按月分类保存30年，不要随意抛弃。</view>
+								<van-cell-group custom-class="pop-center">
+									<van-cell title="预计累计利润：" value="{{curr_total_profit}}" custom-class="invoice-info-item" />
+									<van-cell title="预计应缴税款：" value="{{total_tax}}" custom-class="invoice-info-item" />
+									<van-cell title="预估凭证数：" value="{{est_voucher_qty}}" custom-class="invoice-info-item" />
+									<van-cell title="上月调整凭证数：" value="{{act_voucher_qty}}" custom-class="invoice-info-item" />
+									<van-cell title="申报服务费：" value="{{base_service_amt}}" custom-class="invoice-info-item" />
+									<van-cell title="记账服务费：" value="{{est_service_amt-base_service_amt}}"
+										custom-class="invoice-info-item" />
+									<van-cell title="本月({{nian}}/{{yue}})服务费总计：" value="{{est_service_amt}}"
+										custom-class="invoice-info-item" />
+									<van-cell wx:if="{{taxMoney>0}}" title="按次开票{{taxName}}：" value="{{taxMoney}}" custom-class="invoice-info-item" />
+									<van-cell wx:if="{{bank_bill_fee>0}}" title="银行取单费：" value="{{bank_bill_fee}}" custom-class="invoice-info-item" />
+									<van-cell wx:if="{{is_hr_agent=='Y'}}" title="人事代理费：" value="{{hr_fee}}" custom-class="invoice-info-item" />
+									<view class="peisong-way" wx:if="{{couponLength>0}}">
+										<van-cell custom-class="invoice-info-item" title="优惠券：" wx:if="{{coupon_amount=='0'}}" is-link
+											value="{{couponLength}}张可用" bindtap="goCoupon" />
+										<van-cell custom-class="invoice-info-item" title="优惠券：" wx:else is-link
+											value="{{filter.numberToFixed(coupon_amount)}}" bindtap="goCoupon" />
+									</view>
+									<van-cell title="服务费总计："
+										value="{{((est_service_amt-coupon_amount>0?est_service_amt-coupon_amount:0)+other_cost)}}"
+										custom-class="invoice-info-item" />
+									<van-cell title="账户余额({{balance_amt}})付费：" value="{{balancepayment}}"
+										custom-class="invoice-info-item" />
+									<van-cell wx:if="{{agentpayment>0}}" title="{{pay_customer_name}}余额({{pay_balance_amt}})代付："
+										value="{{agentpayment}}" custom-class="invoice-info-item" />
+									<van-cell title="支付费用：" wx:if="{{!isbalance_amt}}" value="{{codepayment}}" border="{{false}}"
+										custom-class="invoice-info-item" />
+									
+								</van-cell-group>
+								
+								<van-button round size="small" wx:if="{{est_service_amt>0 && return_flag !='P'}}" block color="#1e6ce8" custom-class="{{payDisabled?'gray-bg':''}}"
+										bindtap="{{!payDisabled?'AffirmPay':''}}">{{isbalance_amt?'确认付款':'立即付款'}}</van-button>
+								<block  wx:if="{{return_flag=='P'}}">
+											<view class="pop-notice color-red mb-5">注意：财务退回让您补充资料后再次汇总确认不会扣费，请放心点击确认。</view>
+								<van-button round size="small"  block color="#1e6ce8" custom-class="{{payDisabled?'gray-bg':''}}"
+								bindtap="{{!payDisabled?'AffirmAgain':''}}">确认</van-button>
+								</block>
+									
+
+							</van-popup>
+						</view>
+					</view>
+					<van-row custom-class="wrapperlist">
+						<van-col span="12" custom-class="wrapperitem ">
+							<navigator url="../Income/Income" class="item ">
+								<text>收入<text class="icon-eye">{{tax_invoice_method}}</text></text>
+								<icon class='./iconfont/iconcaishuijinrong:before'></icon>
+								<view class="sub mt-30">票数:{{income_bill_qty}}</view>
+								<view class="sub">总额: {{filter.numberToFixed(income_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem">
+							<navigator url="../expend/expend" class="item">
+								<text>支出</text>
+								<icon class='./iconfont/iconnashuichouhuayouhua:before'></icon>
+								<view class="sub mt-30">票数:{{expense_bill_qty}}</view>
+								<view class="sub">总额:{{filter.numberToFixed(expense_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem">
+							<navigator url="../bank/bank" class="item">
+								<text>银行</text>
+								<icon class='./iconfont/iconshuishouweifa:before'></icon>
+								<view class="sub mt-30">单数:{{bank_bill_qty}}</view>
+								<view class="sub">余额:{{filter.numberToFixed(bank_balance_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem">
+							<navigator url="../salary/salary" class="item">
+								<text>工资<text class="icon-eye">{{personnel_agency}}</text></text>
+								<icon class='./iconfont/icongeshuishezhi:before'></icon>
+								<view class="sub mt-30">人数:{{salary_person_qty}}</view>
+								<view class="sub">金额:{{filter.numberToFixed(salary_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem" wx:if="{{tax_type=='Y'}}">
+							<navigator url="../receipts/receipts" class="item">
+								<text>认证<text class="icon-eye">{{tax_certification_method}}</text></text>
+								<icon class='./iconfont/iconshuiwuganbuweijijubao:before'></icon>
+								<view class="sub mt-30">票数:{{verify_bill_qty}}</view>
+								<view class="sub">总额:{{filter.numberToFixed(verify_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem">
+							<navigator url="../tax/tax" class="item cancel">
+								<text>税单<text class="icon-eye">(查阅)</text></text>
+								<icon class='./iconfont/iconjiaocuntiqumingxi:before'></icon>
+								<view class="sub mt-30">单数:{{tax_paid_bill_qty}}</view>
+								<view class="sub">总额:{{filter.numberToFixed(tax_paid_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem">
+							<navigator url="../asset/asset" class="item cancel">
+								<text>固资<text class="icon-eye">(查阅)</text></text>
+								<icon class='./iconfont/iconqingdan:before'></icon>
+								<view class="sub mt-30">数量:{{fa_asset_qty}}</view>
+								<view class="sub">总额:{{filter.numberToFixed(fa_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem" wx:if="{{amortization_qty > 0 || tax_type=='N'}}">
+							<navigator url="../amortization/amortization" class="item cancel">
+								<text>待摊<text class="icon-eye">(查阅)</text></text>
+								<icon class='./iconfont/iconzhengce:before'></icon>
+								<view class="sub mt-30">数量:{{amortization_qty}}</view>
+								<view class="sub">总额:{{filter.numberToFixed(amortization_total_amt)}}</view>
+							</navigator>
+						</van-col>
+						<van-col span="12" custom-class="wrapperitem">
+							<navigator url="../taxation/taxation" class="item cancel">
+								<text>税金<text class="icon-eye">(查阅)</text></text>
+								<icon class='./iconfont/iconshuishouxuanchuan:before'></icon>
+								<view class="sub mt-30"></view>
+								<view class="sub">总额:{{filter.numberToFixed(tax_payable_total_amt)}}</view>
+							</navigator>
+						</van-col>
+
+					</van-row>
+				</view>
+			</view>
+		</view>
+	</view>
+
+</view>
+<van-popup show="{{ showCoupon }}" bind:close="onClose" position="bottom" custom-class="showCoupon">
+	<form bindsubmit="userCoupon">
+		<view class="page">
+			<view class="page__bd page__bd_spacing">
+				<view class="nouserCoupon" bindtap='noCoupon'>
+					暂不使用优惠券
+				</view>
+				<scroll-view style="max-height: 370px;" scroll-y="{{true}}"  >
+					<van-radio-group value="{{ radio }}" bind:change="onChange">
+						<view class="coupons-item " wx:for="{{couponUseList}}" wx:key="index"
+							style="background-image:url('{{item.wait_image_path}}');">
+							<view class="coupons-item-box">
+								<block wx:if="{{item.coupon_category=='减免'}}">
+									<view class="money-left"> <text class="free-txt">免</text>
+									</view>
+								</block>
+								<block wx:else>
+									<view class="money-left"> <text>¥</text>{{item.coupon_amount}}
+									</view>
+								</block>
+								<view class="money-right">
+									<view class="money-hold">{{item.coupon_desc}}</view>
+									<view class="money-data">有效期: {{item.get_time}} - {{item.end_date}}</view>
+								</view>
+								<view class="money-home">
+									<van-radio name="{{index}}" />
+								</view>
+							</view>
+						</view>
+					</van-radio-group>
+				</scroll-view>
+				<button class="user-btn" formType="submit">立即使用</button>
+			</view>
+		</view>
+	</form>
+</van-popup>
+<van-popup show="{{ showTax }}" bind:close="closeTax" round custom-class="popWrapper" closeable="true">
+	<view class="pop-title">扣款确认</view>
+	<van-cell-group custom-class="pop-center">
+		<van-cell title="本期应纳税额：" value="{{filter.numberToFixed(currMonthlyTax.curr_payment_vat)}}" custom-class="invoice-info-item" />
+		<van-cell title="城市维护建设税：" value="{{filter.numberToFixed(currMonthlyTax.city_construction_tax)}}" custom-class="invoice-info-item" />
+		<van-cell title="地方教育费附加：" value="{{filter.numberToFixed(currMonthlyTax.local_education_supplementary_tax)}}" custom-class="invoice-info-item" />
+		<van-cell title="教育费附加：" value="{{filter.numberToFixed(currMonthlyTax.education_supplementary_tax)}}" custom-class="invoice-info-item" />
+		<van-cell title="企业所得税：" value="{{filter.numberToFixed(currMonthlyTax.curr_income_tax)}}" custom-class="invoice-info-item" />
+	</van-cell-group>
+	<view class="table price" wx:if="{{currMonthlyTax.dtIndividualtax!=''}}">
+		<view class="tr">
+			<view class="th th1" style='width:50%'>股东姓名</view>
+			<view class="th th2" style='width:50%'>生产经营个税</view>
+		</view>
+		<view class='tr top' wx:for="{{currMonthlyTax.dtIndividualtax}}" wx:key="index">
+			<view class="td th1" style='width:50%'>{{item.stockhold_name}}</view>
+			<view class="td th2" style='width:50%'>
+				{{filter.numberToFixed(item.declarer_individual_tax)}}
+			</view>
+		</view>
+	</view>
+	<van-button custom-class="confim-btn {{btnDisabled?'gray-bg':''}}" round size="small" block color="#1e6ce8" wx:if="{{isConfirmPay}}" 
+	bind:click="{{!btnDisabled?'AffirmTaxPay':''}}" data-type="{{recv_status}}"
+	>缴款确认</van-button>
+</van-popup>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

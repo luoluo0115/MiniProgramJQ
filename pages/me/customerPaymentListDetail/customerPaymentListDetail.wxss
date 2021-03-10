@@ -1,0 +1,19 @@
+/* pages/me/customerPaymentListDetail/customerPaymentListDetail.wxss */
+page{
+    background-color: #EDEDED;
+  }
+.invoice-list .item{
+    background:#fff;
+    margin-top: 4%;
+    border-radius:15px;
+    color: #666;
+    padding:5%;
+    border: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+.time{
+    color:#AAAAAA;
+}
+.right{
+   text-align: right
+}

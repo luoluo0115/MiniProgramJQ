@@ -1,0 +1,174 @@
+<!--pages/bill/expend/expend.wxml-->
+<!--顶部-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tab title="费用">
+        <view class="account">
+            <van-row custom-class="num-wrapper">
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{filter.numberToFixed(num_qty)}}</text></view>
+                    <text class="title">识别总金额</text>
+                </van-col>
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{sum_qty}}</text></view>
+                    <text class="title">总上传数</text>
+                </van-col>
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{succ_qty}}</text></view>
+                    <text class="title">识别成功数</text>
+                </van-col>
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{fail_qty}}</text></view>
+                    <text class="title">识别失败数</text>
+                </van-col>
+            </van-row>
+            <van-row custom-class="grids-wrapper" wx:for="{{expendList}}" wx:key="index" data-index="{{index}}"
+                data-item="{{item}}" bindtap="{{curr_status =='N' ?'gotoUpload': ''}}">
+                <van-col span="24" custom-class="card-header">
+                    <van-row>
+                        <van-col span="12">
+                            <van-tag mark color="#1e6ce8">{{index+1}} </van-tag> <text> {{item.expense_name}}</text>
+                        </van-col>
+                        <van-col span="12" custom-class=" text-right">
+                            <van-button round color="#1e6ce8" size="small" data-item="{{item}}" catchtap="gotoDetail"
+                                custom-class="detail-btn">查看明细</van-button>
+                            <van-button round color="#1e6ce8" size="small" wx:if="{{curr_status=='N'}}">开始上传
+                            </van-button>
+                        </van-col>
+                    </van-row>
+                </van-col>
+                <van-col span="24">
+                    {{item.expense_desc}}
+                </van-col>
+                <van-col span="6">
+                    数量：<text class="color-blue">{{item.count}}</text>
+                </van-col>
+                <van-col span="6" custom-class="text-right">
+                    失败：<text class="color-blue">{{item.fail}}</text>
+                </van-col>
+                <van-col span="12" custom-class="text-right">
+                    金额: <text class="color-blue">{{filter.numberToFixed(item.amout)}}</text>
+                </van-col>
+            </van-row>
+        </view>
+    </van-tab>
+    <van-tab title="成本">
+        <view class="account">
+            <van-row custom-class="num-wrapper">
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{filter.numberToFixed(num_qty_cb)}}</text></view>
+                    <text class="title">识别总金额</text>
+                </van-col>
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{sum_qty_cb}}</text></view>
+                    <text class="title">总上传数</text>
+                </van-col>
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{succ_qty_cb}}</text></view>
+                    <text class="title">识别成功数</text>
+                </van-col>
+                <van-col span="6">
+                    <view class="num"><text class="color-red">{{fail_qty_cb}}</text></view>
+                    <text class="title">识别失败数</text>
+                </van-col>
+            </van-row>
+            <view class="page" style="background:#fff" wx:if="{{curr_status=='N'}}">
+                <view class="page__bd page__bd_spacing">
+                    <view class="upload-list">
+                        <view class="border-bottom item">
+                            <van-row>
+                                <van-col span="8">付款方式</van-col>
+                                <van-col span="16" custom-class="text-right">
+                                    <radio-group name="payCategory" bindchange="radioChange"
+                                        custom-class="d-inline-block">
+                                        <label>
+                                            <radio value="个人垫付" checked />个人垫付 </label>
+                                        <label>
+                                            <radio value="公司转账" />公司转账 </label>
+                                    </radio-group>
+                                </van-col>
+                            </van-row>
+                        </view>
+                        <view class=" border-bottom item" wx:if="{{payCategory == '个人垫付'}}">
+                            <picker bindchange="bindEmpNameChange" value="{{listEmp[empIndex].hr_employee_id}}"
+                                range-key="{{'emp_name'}}" range="{{listEmp}}">
+                                <view class="picker">
+                                    <van-cell title="人员选择" value="{{listEmp[empIndex].emp_name}}"
+                                        custom-class="picker-item" is-link arrow-direction="down"
+                                        border="{{ false }}" />
+                                </view>
+                            </picker>
+                        </view>                                                 
+                        <view class=" border-bottom item">
+                            <van-row>
+                                <van-col span="8">选择发票</van-col>
+                                <van-col span="16" custom-class="text-right">                                    
+                                    <van-button icon="upgrade" size="small" custom-class="top-btn"
+                                        bind:click="chooseImg">拍票上传</van-button>
+                                    <van-button icon="upgrade" size="small" custom-class="top-btn"
+                                        bind:click="chooseFile">发票上传(PDF)</van-button>
+                                </van-col>
+                            </van-row>
+                        </view>                        
+                    </view>
+                </view>
+            </view>
+            <view class="page">
+                <view class="expend-list">
+                    <block wx:if="{{expendFileList!=''}}">
+                        <view class="expend-item" wx:for="{{expendFileList}}" wx:key="index">                            
+                            <view class="title">
+                                <van-row>
+                                    <van-col span="18">
+                                        <text>垫付人/垫付公司:{{item.bill_pay_name}}</text>
+                                    </van-col>
+                                    <van-col span="6" wx:if="{{curr_status=='N'}}" custom-class="text-right">
+                                        <van-button size="mini" color="#aaa" bindtap="deleteFile" data-item="{{item}}"
+                                            data-id="{{item.process_recv_file_id}}" round plain>删除</van-button>
+                                    </van-col>
+                                </van-row>
+
+                            </view>
+                            <view class="a-expend">
+                                <view class="img-box">
+                                    <image src="{{FileOssUrl + item.upload_file_guid}}"
+                                        data-list="{{FileOssUrl + item.upload_file_guid}}"
+                                        data-src="{{FileOssUrl + item.upload_file_guid}}" bindtap="previewImage"
+                                        class="img" />
+                                </view>
+                                <view
+                                    class="text-box {{(item.bill_non_tax_amt+item.bill_tax_amt!=item.trans_amount ||(item.process_flag=='E')) ? 'color-red':''}}">
+                                    <view class="arow arow01">
+                                        <view class="label">开票日期:{{item.invoice_date==null?'':item.invoice_date}}</view>
+                                        <view class="label-right">
+                                            金额:{{(item.bill_non_tax_amt==null?'':item.bill_non_tax_amt)}}</view>
+                                    </view>
+                                    <view class="arow arow01">
+                                        <view class="label">
+                                            费用明细:{{item.file_small_category==null?'':item.file_small_category}}</view>
+                                        <view class="label-right">税额:{{(item.bill_tax_amt==null?'':item.bill_tax_amt)}}
+                                        </view>
+                                    </view>
+                                    <view class="arow arow01">
+                                        <view class="label">发票类型:{{item.bill_type==null?'':item.bill_type}}</view>
+                                        <view class="label-right">
+                                            价税合计:{{item.trans_amount==null?'':(item.trans_amount)}}</view>
+                                    </view>
+                                    <view class="arow ">
+                                        <view class="label">
+                                            付款方式:{{item.bill_pay_category==null?'':item.bill_pay_category}}</view>
+                                    </view>
+                                </view>
+
+                            </view>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view class="empty">{{msg}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </van-tab>
+</van-tabs>
+<van-toast id="van-toast" />

@@ -1,0 +1,222 @@
+/* pages/me/myOrder/myOrder.wxss */
+page{
+    background-color: #f9f9f9;
+}
+.goods-list {
+    width: 100%;
+    margin-bottom: 20rpx;
+  }
+.goods-item{
+    background-color: #fff;
+    margin-bottom: 20rpx;
+    overflow: hidden;
+}
+.goods-list .list-title {
+    font-size: 28rpx;
+    color: #000;
+    padding: 30rpx 0 25rpx 30rpx;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .goods-list  .a-goods {
+    display: flex;
+    padding: 30rpx 30rpx 30rpx 0;
+    border-bottom: 1px solid #eee;
+
+  }
+  
+  .goods-list  .a-goods .img-box {
+    width: 160rpx;
+    height: 160rpx;
+    overflow: hidden;
+    margin-right: 20rpx;
+    margin-left: 30rpx;
+    background-color: #d8d8d8;
+  }
+  
+  .goods-list .img-box .img {
+    width: 160rpx;
+    height: 160rpx;
+  }
+  
+  .goods-list  .a-goods .text-box {
+    width: 510rpx;
+    box-sizing: border-box;
+    padding-top: 10rpx;
+  }
+  
+  .a-goods .text-box .arow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .a-goods .text-box .arow .goods-name {
+    width: 330rpx;
+    font-size: 26rpx;
+    height: 46rpx;
+    color: #000;
+    line-height: 1.6;
+    overflow: hidden;
+  }
+  
+  .a-goods .text-box .arow01 {
+  }
+  
+  .a-goods .text-box .arow .goods-price {
+    font-size: 24rpx;
+    color: #0C30DF;
+    align-self: flex-start;
+
+  }
+  
+  .a-goods .text-box .arow .goods-label {
+    font-size:22rpx;
+    color: #999;
+  }
+  .a-goods .text-box .arow .goods-num {
+    font-size: 26rpx;
+    color: #999;
+  }
+  
+  .peisong-way {
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 20rpx;
+  }
+  
+  .peisong-way .row-box {
+    width: 720rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 24rpx 0 24rpx 30rpx;
+  }
+  
+  .peisong-way .row-label {
+    font-size: 28rpx;
+    color: #000;
+  }
+  
+  .peisong-way .right-text {
+    font-size: 28rpx;
+    color: #666;
+    padding-right: 30rpx;
+  }
+  
+  .peisong-way .liuyan {
+    width: 510rpx;
+    font-size: 28rpx;
+  }
+  
+  .goods-info {
+    width: 100%;
+    background-color: #fff;
+    padding-bottom: 24rpx;
+  }
+  
+  .goods-info .row-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 24rpx 30rpx 12rpx 30rpx;
+    font-size: 28rpx;
+    color: #000;
+  }
+  
+  .goods-info .row-box .right-text {
+    text-align: right;
+  }
+  .bottom-time{
+    font-size: 22rpx;
+    color: #999;
+  }
+  .bottom-wrapper{
+    padding: 15rpx;
+  }
+  .commission_ratio_amt{
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    color: #666;
+    height: 38rpx;
+    line-height: 38rpx;
+  }
+  .pay-btn{
+      border-radius: 20rpx;
+      height: 38rpx;
+      line-height: 38rpx;
+      font-size: 24rpx;
+      float: right;
+      color: #F0433D;
+      border: 1px solid #F0433D;
+      text-align: center;
+      padding: 0 20rpx;
+      margin-left:20rpx;
+      display: inline-block;
+  }
+  .pay-btn.red{
+    color: #F0433D;
+    border: 1px solid #F0433D;
+}
+.pay-btn.blue{
+  color: #0C30DF;
+  border: 1px solid #0C30DF;
+}
+.pay-btn.purple{
+  color: #647bfe;
+  border: 1px solid #647bfe;
+}
+.pay-btn.green{
+  color: #07c160;
+  border: 1px solid #07c160;
+}
+.van-tabs__line {
+    background-color: #647bfe!important;
+}
+    
+.pay-btn.cancel{
+  color: #999;
+  border: 1px solid #999;
+}
+/*订单备注*/
+.remark{
+  width: 100%;
+  display: block;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 20rpx;
+  color: #666;
+  border-bottom: 1px solid #eee;
+  padding:0 30rpx;
+
+}
+
+.pay-way{
+  font-size: 14px;
+  padding: 24rpx 0 24rpx 30rpx;
+  color: #333;
+
+}
+.peisong-way .van-cell__title,.peisong-way .van-cell__value {
+  color: #1e6ce8;
+  font-size: 13px;
+}
+.pop-pay-btn{
+  padding: 20rpx;
+}
+.van-cell__label {
+  margin-top: 3px;
+  margin-top: var(--cell-label-margin-top,3px);
+  font-size: 10px!important;
+  font-size: var(--cell-label-font-size,10px)!important;
+  line-height: 10px!important;
+  line-height: var(--cell-label-line-height,10px)!important;
+  color: #969799;
+  color: var(--cell-label-color,#969799);
+}
+
+  

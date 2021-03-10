@@ -1,0 +1,241 @@
+<!--pages/bill/taxation/taxation.wxml-->
+<wxs module="m1">
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+var moneyFormatFixed0 = function (money) {
+  return money.toFixed(0);
+}
+module.exports = {
+  moneyFormat: moneyFormat,
+  moneyFormatFixed0: moneyFormatFixed0,
+  
+}
+</wxs>
+<view class="top">
+    <van-row custom-class="header-title">
+    <van-col span="16" custom-class="text-left">申报单位:{{customer_name}} ({{account_month}})</van-col>
+    <van-col span="8" custom-class="text-right">纳税类型:{{tax_type}}</van-col>
+    </van-row>
+    <!-- <van-row custom-class="header-thead text-center">
+        <block wx:for='{{groupArr}}' wx:key="index">
+            <van-col span="{{item.span}}" custom-class="{{item.border}}">{{item.taxName}}</van-col>
+        </block>
+    </van-row> -->
+</view>
+  <view class="table">
+      <!-- 增值税-->
+      <view class="tr header bg-purple" >
+        <view class="th th0 ">税种</view>
+        <view class="th th1">增值税</view>
+      </view>
+      <view class="tr" >
+         <view class="th th0">项目</view>
+        <view class="th th1">本期销项税</view>
+        <view class="th th2">本期进项税</view>
+        <view class="th th3">本期进项税转出</view>
+        <view class="th th4">已缴增值税</view>
+        <view class="th th5">上期留抵</view>
+        <view class="th th6">本期应纳税额</view>
+        <view class="th th7">本期留抵</view>
+      </view>
+      <view class="tr tr2" >
+        <view class="td th0 lin">
+          <view class="btm-text  btm-text0">商品</view>
+          <view class="btm-text">服务</view>
+        </view>
+        <view class="td th1 lin">
+            <view class="btm-text btm-text0">{{m1.moneyFormat(curr_output_goods_vat)}}</view>
+            <view class="btm-text">{{m1.moneyFormat(curr_output_service_vat)}}</view>
+        </view>
+        <view class="td th2">{{m1.moneyFormat(curr_input_vat)}}</view>
+        <view class="td th3">{{m1.moneyFormat(curr_input_vat_out)}}</view>
+        <view class="td th4">{{m1.moneyFormat(curr_output_vat_paid)}}</view>
+        <view class="td th5">{{m1.moneyFormat(last_remained_vat)}}</view>
+        <view class="td th6">{{m1.moneyFormat(curr_payment_vat)}}</view>
+        <view class="td th7">{{m1.moneyFormat(curr_remained_vat)}}</view>
+      </view>
+      <!-- 减税-->
+      <block wx:if="{{dataDeductTable.length>0}}">
+        <view class="tr header bg-purple" >
+          <view class="th th0 ">税种</view>
+          <view class="th th1">减税</view>
+        </view>
+        <view class="tr " >
+          <view class="th th0">项目</view>
+          <view class="th th1">期初余额</view>
+          <view class="th th2">本期发生额</view>
+          <view class="th th8">本期抵扣税额</view>
+          <view class="th th9">期末余额</view>
+        </view>
+        <view class="tr "  wx:for="{{dataDeductTable}}" wx:key="index">
+          <block wx:if="{{item.deduct_tax_type=='税控盘减免税款'}}">
+            <view class="td th0">{{item.deduct_tax_type}}</view>
+            <view class="td th1">{{m1.moneyFormat(item.deduct_tax_add_amt-item.monthly_add_amt-item.deduct_tax_use_amt+item.monthly_use_amt)}}</view>
+            <view class="td th2">{{m1.moneyFormat(item.monthly_add_amt==null?0.00:item.monthly_add_amt)}}</view>
+            <view class="td th8">{{m1.moneyFormat(item.monthly_use_amt==null?0.00:item.monthly_use_amt)}}</view>
+            <view class="td th9">{{m1.moneyFormat(item.deduct_tax_add_amt-item.deduct_tax_use_amt)}}</view>
+          </block>
+          <block wx:if="{{item.deduct_tax_type=='小规模月(季)减免税款'}}">
+            <view class="td th0">{{item.deduct_tax_type}}</view>
+            <view class="td th1">0.00</view>
+            <view class="td th2">{{m1.moneyFormat(item.monthly_add_amt==null?0.00:item.monthly_add_amt)}}</view>
+            <view class="td th8">{{m1.moneyFormat(item.deduct_tax_use_amt==null?0.00:item.deduct_tax_use_amt)}}</view>
+            <view class="td th9">0.00</view>
+          </block>
+        </view>
+      </block>
+      <!-- 附加税-->
+      <view class="tr header bg-purple" >
+        <view class="th th0 ">税种</view>
+        <view class="th th1">附加税</view>
+      </view>
+      <view class="tr tr2" >
+        <view class="td th0">项目</view>
+        <view class="td th1 lin">
+          <view class="btm-text  btm-text0">税额</view>
+          <view class="btm-text">1</view>
+        </view>
+        <view class="td th10 lin">
+          <view class="btm-text  btm-text0">征收率（税率）</view>
+          <view class="btm-text">2</view>
+        </view>
+        <view class="td th9 lin">
+           <view class="btm-text  btm-text0">应征税（费）额</view>
+          <view class="btm-text">3=1*2</view>
+        </view>
+      </view>
+      <view class="tr " >
+        <view class="td th0">城市维护建设税</view>
+        <view class="td th1">
+          {{m1.moneyFormat(curr_payment_vat)}}
+        </view>
+        <view class="td th10">
+          {{m1.moneyFormatFixed0(city_construction_rate*100)}}%
+        </view>
+        <view class="td th9">
+          {{m1.moneyFormat(city_construction_tax)}}
+        </view>
+      </view>
+      <view class="tr " >
+        <view class="td th0">地方教育费附加</view>
+        <view class="td th1">
+          {{m1.moneyFormat(curr_payment_vat)}}
+        </view>
+        <view class="td th10">
+          {{m1.moneyFormatFixed0(local_education_supplementary_rate*100)}}%
+        </view>
+        <view class="td th9">
+          {{m1.moneyFormat(local_education_supplementary_tax)}}
+        </view>
+      </view>
+      <view class="tr " >
+        <view class="td th0">教育费附加</view>
+        <view class="td th1">
+          {{m1.moneyFormat(curr_payment_vat)}}
+        </view>
+        <view class="td th10">
+          {{m1.moneyFormatFixed0(education_supplementary_rate*100)}}%
+        </view>
+        <view class="td th9">
+          {{m1.moneyFormat(education_supplementary_tax)}}
+        </view>
+      </view>
+      <!-- 企业所得税-->
+      <block wx:if="{{is_qu=='Y'}}">
+        <view class="tr header bg-purple" >
+          <view class="th th0 ">税种</view>
+          <view class="th th1">企业所得税</view>
+        </view>
+        <view class="tr " >
+          <view class="th th0">项目</view>
+          <view class="th th11">利润总额</view>
+          <view class="th th3">弥补以前年度亏损</view>
+          <view class="th th4">实际已缴税</view>
+          <view class="th th9">本期应补(退)所得税额</view>
+        </view>
+        <view class="tr " >
+          <view class="td th0">金额</view>
+          <view class="td th11">{{m1.moneyFormat(curr_total_profit)}}</view>
+          <view class="td th3">{{m1.moneyFormat(prior_year_loss)}}</view>
+          <view class="td th4">{{m1.moneyFormat(curr_paid_income_tax)}}</view>
+          <view class="td th9">{{m1.moneyFormat(curr_income_tax)}}</view>
+        </view>
+      </block>
+      <!-- 总计税费-->
+      <block wx:if="{{is_more_deduct=='Y'}}">
+        <view class="tr header bg-purple" >
+          <view class="th th0 ">税种</view>
+          <view class="th th1">四业服务加计抵减</view>
+        </view>
+        <view class="tr tr2" >
+          <view class="td th0">项目</view>
+          <view class="td th1 lin">
+            <view class="btm-text  btm-text0">抵减比例</view>
+            <view class="btm-text">{{m1.moneyFormat(more_deduct_rate)}}</view>
+          </view>
+          <view class="td th2 lin">
+            <view class="btm-text  btm-text0">期初余额</view>
+            <view class="btm-text">{{m1.moneyFormat(last_more_deduct_remain)}}</view>
+          </view>
+          <view class="td th3 lin">
+            <view class="btm-text  btm-text0">本期发生额</view>
+            <view class="btm-text">{{m1.moneyFormat(curr_more_deduct_add)}}</view>
+          </view>
+          <view class="td th4 lin">
+            <view class="btm-text  btm-text0">本期调减额</view>
+            <view class="btm-text">{{m1.moneyFormat(curr_more_deduct_adjust==null?0:curr_more_deduct_adjust)}}</view>
+          </view>
+          <view class="td th5 lin">
+            <view class="btm-text  btm-text0">本期可抵减额</view>
+            <view class="btm-text">{{m1.moneyFormat(last_more_deduct_remain+curr_more_deduct_add-curr_more_deduct_adjust)}}</view>
+          </view>
+          <view class="td th6 lin">
+            <view class="btm-text  btm-text0">本期实际抵扣额</view>
+            <view class="btm-text">{{m1.moneyFormat(curr_more_deduct_use)}}</view>
+          </view>
+          <view class="td th7 lin">
+            <view class="btm-text  btm-text0">期末余额</view>
+            <view class="btm-text">{{m1.moneyFormat(curr_more_deduct_remain)}}</view>
+          </view>
+        </view>
+      </block>
+      
+      <view class="tr header" >
+        <view class="th th0 " >总计税费</view>
+        <view class="th th13 " ></view>
+        <view class="th th9">{{m1.moneyFormat(curr_output_goods_vat)}}</view>
+      </view>
+
+       <!-- 生产经营个税-->
+      <block wx:if="{{is_d_tax=='Y'}}">
+        <view class="tr header bg-purple" >
+          <view class="th th0 ">税种</view>
+          <view class="th th1">生产经营个税</view>
+        </view>
+        <view class="tr" >
+          <view class="th th0">股东</view>
+          <view class="th th1">收入总额</view>
+          <view class="th th2">应税所得率(%)</view>
+          <view class="th th8">合伙企业合伙人分配比例(%)</view>
+          <view class="th th5">应纳税所得额</view>
+          <view class="th th6">税率(%)</view>
+          <view class="th th7">应纳税额</view>
+        </view>
+        <block wx:for="{{dataIndividualTax}}" wx:key="index">
+          <view class="tr" >
+            <view class="td th0">{{item.stockhold_name }}</view>
+            <view class="td th1">{{m1.moneyFormat(item.declarer_income)}}</view>
+            <view class="td th2">{{item.profit_tax_rate*100}}</view>
+            <view class="td th8">{{item.profit_allocation_ratio*100}}</view>
+            <view class="td th5">{{m1.moneyFormat(item.profit_allocation_amount)}}</view>
+            <view class="td th6">{{item.tax_rate*100}}</view>
+            <view class="td th7">{{m1.moneyFormat(item.declarer_individual_act_tax)}}</view>
+          </view>
+        </block>
+      </block>
+  </view>
+
+
+
+

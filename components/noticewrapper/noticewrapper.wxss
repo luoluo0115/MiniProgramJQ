@@ -1,0 +1,33 @@
+@import '../../weui.wxss';
+@import '../../app.wxss';
+@import '../../icon.wxss';
+/*消息通知*/
+.notice-wrapper{
+	position: relative;
+}
+.van-notice-bar__content {
+	font-size: 24rpx!important;
+}
+.van-notice-bar{
+	height: 36rpx!important;
+	line-height: 36rpx!important;
+}
+.van-notice-bar__right-icon{
+top: 13px!important;
+font-size: 14px!important;
+}
+  .notice-num{
+	position: absolute;
+	top: 21rpx;
+	right: 28rpx;
+	width: 36rpx;
+	height: 36rpx;
+	line-height: 36rpx;
+	text-align: center;
+	font-size: 16rpx;
+	border-radius: 100%;
+	background-color: #f97268;
+	color: #fff;
+	display: inline-block;
+  }
+  

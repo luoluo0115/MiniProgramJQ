@@ -1,0 +1,107 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page" style="background:#fff">
+	<view class="page__bd page__bd_spacing">
+		<view class="upload-list">
+			<view class="border-bottom item">
+				<van-row>
+					<van-col span="8">付款方式</van-col>
+					<van-col span="16" custom-class="text-right">
+						<radio-group name="payCategory" bindchange="radioChange" custom-class="d-inline-block">
+							<label>
+								<radio value="个人垫付" checked />个人垫付 </label>
+							<label>
+								<radio value="公司转账" />公司转账 </label>
+						</radio-group>
+					</van-col>
+				</van-row>
+			</view>
+			<view class=" border-bottom item" wx:if="{{payCategory == '个人垫付'}}">
+				<picker bindchange="bindEmpNameChange" value="{{listEmp[empIndex].hr_employee_id}}" range-key="{{'emp_name'}}" range="{{listEmp}}">
+					<view class="picker">
+						<van-cell title="人员选择" value="{{listEmp[empIndex].emp_name}}" custom-class="picker-item" is-link arrow-direction="down" border="{{ false }}" />
+					</view>
+				</picker>
+			</view>
+			<!-- <view  class="text-left border-bottom item">{{expense_desc}}</view> -->
+			<view class=" border-bottom item">
+				<van-row>
+					<van-col span="8">费用说明</van-col>
+					<van-col span="16" custom-class="text-right">
+						{{expense_desc}}
+					</van-col>
+				</van-row>
+			</view>
+			<view class="border-bottom item" wx:if="{{expense_name == '差旅费'}}">
+				<van-row>
+					<van-col span="8">是否混贴</van-col>
+					<van-col span="16" custom-class="text-right">
+						<radio-group name="payCategory" bindchange="radioHTChange" custom-class="d-inline-block">
+							<label>
+								<radio value="2" />是</label>
+							<label>
+								<radio value="0" checked />否</label>
+						</radio-group>
+					</van-col>
+				</van-row>
+			</view>
+			<view class=" border-bottom item">
+				<van-row>
+					<van-col span="8">选择发票</van-col>
+					<van-col span="16" custom-class="text-right">
+						<!-- <van-uploader preview-full-image="true" preview-image="true" deletable="{{ true }}"  file-list="{{ fileList }}" bind:after-read="afterRead" max-count="2" /> -->
+						<van-button icon="upgrade" size="small" custom-class="top-btn" bind:click="chooseImg">拍票上传</van-button>
+						<van-button icon="upgrade" size="small" custom-class="top-btn" bind:click="chooseFile">发票上传(PDF)</van-button>
+					</van-col>
+				</van-row>
+			</view>
+			<!-- <view class="upload-btn JQbtn" bindtap="{{!buttonClicked?'upload':''}}">开始上传</view> -->
+		</view>
+	</view>
+</view>
+<view class="page" >
+    <view class="expend-list">
+            <block wx:if="{{expendFileList!=''}}">
+                <view class="expend-item" wx:for="{{expendFileList}}" wx:key="index">
+                    <!-- <view class="title">费用类型: {{expense_name}}</view> -->
+                    <view class="title">
+                        <van-row > 
+                            <van-col span="18" >
+                                 <text>垫付人/垫付公司:{{item.bill_pay_name}}</text>
+                            </van-col>
+                            <van-col span="6" wx:if="{{curr_status=='N'}}" custom-class="text-right">
+                                <van-button size="mini" color="#aaa" bindtap="deleteFile" data-item="{{item}}" data-id="{{item.process_recv_file_id}}" round plain>删除</van-button>
+                            </van-col>
+                        </van-row>
+                       
+                    </view>
+                    <view class="a-expend">
+                        <view class="img-box">
+                            <image src="{{FileOssUrl + item.upload_file_guid}}" data-list="{{FileOssUrl + item.upload_file_guid}}" data-src="{{FileOssUrl + item.upload_file_guid}}" bindtap="previewImage" class="img" />
+                        </view>
+                        <view class="text-box {{(filter.toFix(item.bill_non_tax_amt+item.bill_tax_amt)!=item.trans_amount ||(item.process_flag=='E')) ? 'color-red':''}}">
+                            <view class="arow arow01">
+                                <view class="label">开票日期:{{item.invoice_date==null?'':item.invoice_date}}</view>
+                                <view class="label-right">金额:{{(item.bill_non_tax_amt==null?'':item.bill_non_tax_amt)}}</view>
+                            </view>
+                            <view class="arow arow01">
+                                <view class="label">费用明细:{{item.file_small_category==null?'':item.file_small_category}}</view>
+                                <view class="label-right">税额:{{(item.bill_tax_amt==null?'':item.bill_tax_amt)}}</view>
+                            </view>
+                            <view class="arow arow01">
+                                <view class="label">发票类型:{{item.bill_type==null?'':item.bill_type}}</view>
+                                <view class="label-right">价税合计:{{item.trans_amount==null?'':(item.trans_amount)}}</view>
+                            </view>
+                            <view class="arow ">
+                                <view class="label">付款方式:{{item.bill_pay_category==null?'':item.bill_pay_category}}</view>
+                            </view>
+                        </view>
+
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="empty">{{msg}}</view>
+            </block>
+        </view>
+</view>
+<van-toast id="van-toast" />

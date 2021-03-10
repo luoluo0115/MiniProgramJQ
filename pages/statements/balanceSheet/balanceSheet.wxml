@@ -1,0 +1,26 @@
+<!--pages/statements/balanceSheet/balanceSheet.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="section">
+    <view class="weui-flex header-title" style="">
+        <view class="weui-flex__item">项目</view>
+        <view class="weui-flex__item center">年初余额</view>
+        <view class="weui-flex__item">期末余额</view>
+    </view>
+     <van-collapse value="{{ active2 }}" data-key="active2" accordion bind:change="onChange">
+          <block wx:for="{{balancesheetdata}}" wx:key wx:for-item="item" >
+              <block wx:if="{{item.item_type=='C'||item.item_type=='F'||item.item_type=='H'}}">
+                <van-collapse-item class="total" title="{{item.item_report_name}}" title2="{{item.item_report_name}}" label="{{filter.numberToFixed(item.year_begin)}}" value="{{filter.numberToFixed(item.year_end)}}"  >
+                </van-collapse-item>
+              </block>
+              <block wx:else>
+                <van-collapse-item title="{{item.item_report_name}}" title2="{{item.item_report_name}}" label="{{filter.numberToFixed(item.year_begin)}}" value="{{filter.numberToFixed(item.year_end)}}"  bindtap="btnclick"  data-item_type="{{item.item_type}}" data-index="0">
+                    <block wx:for="{{balancesheetdatadetail}}" wx:for-item="cell"  wx:key >
+                        <van-cell  title="{{cell.item_report_name}}" label="{{filter.numberToFixed(cell.year_begin)}}" value="{{filter.numberToFixed(cell.year_end)}}" />
+                    </block>
+                </van-collapse-item>
+              </block>
+            
+        </block>
+    </van-collapse>
+</view>
+

@@ -1,0 +1,151 @@
+.van-tabs__line {
+  background-color: #1e6ce8!important;
+}
+
+/*添加按钮*/
+.picker-date{
+  font-size:22rpx;
+  margin-top: 10rpx;
+  background-color: #1e6ce8;
+  width: 180rpx;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  padding: 0 15rpx;
+  border-radius:5rpx;
+  text-align: center;
+
+}
+.picker-date icon{
+  font-size: 36rpx;
+  padding-right: 12rpx;
+  position: relative;
+  margin-top: -5px;
+}
+.icon-fix-right{
+  position: fixed;
+  right: 15rpx;
+  bottom: 30rpx;
+  color: #1e6ce8;
+  border-radius: 100%;
+}
+.icon-fix-right .icon-article{
+ font-size: 64rpx;
+}
+  
+.btn{
+  margin: 0 auto;
+  padding: 20rpx 10rpx 25rpx 10rpx;
+  width: 410rpx;
+}
+.up-btn{
+  width: 182rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 15rpx;
+  color: #6988FE;
+  border: 1px solid rgb(85, 118, 248);
+  background: #fff;
+  text-align: center;
+  font-size: 22rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+}
+.choose-btn,.up-btn.blue{
+  width: 182rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  color: #fff;
+  background-color: #6988FE;
+  border: 1px solid rgb(115, 142, 252);
+  border-radius: 15rpx;
+  text-align: center;
+  font-size: 22rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+}
+
+
+.expend-list {
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.expend-item {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  border: 1px solid #eee;
+  border-radius:5rpx ;
+  color: #333;
+}
+
+.expend-list .list-title {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 25rpx 30rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.expend-list .a-expend {
+  display: flex;
+  padding: 15rpx 15rpx 15rpx 0;
+  border-bottom: 1px solid #eee;
+
+}
+.expend-list .a-expend .label{
+  font-size: 20rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.pay-btn {
+  border-radius: 20rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  font-size: 24rpx;
+  float: right;
+  color: #F0433D;
+  border: 1px solid #F0433D;
+  text-align: center;
+  padding: 0 20rpx;
+  margin: 10rpx 20rpx;
+  display: inline-block;
+}
+ 
+.van-tabs__line {
+  background-color: #647bfe !important;
+}
+
+.pay-btn.delete {
+  color: #999;
+  border: 1px solid #999;
+}
+.title {
+  width: 100%;
+  display: block;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 20rpx;
+  color: #666;
+  border-bottom: 1px solid #eee;
+  padding: 0 30rpx;
+}
+
+.num-wrapper{
+  padding: 30rpx;
+  overflow: hidden;
+  text-align: center;
+  background-color: #f9f9f9;
+  color: #999;
+  font-size: 20rpx;
+  border-bottom:1px solid #eee;
+}
+.num-wrapper .num{
+  font-size: 32rpx;
+}
+.btn-list{
+  margin: 20rpx 0 0;
+  text-align: right;
+  padding-bottom: 20rpx;
+}

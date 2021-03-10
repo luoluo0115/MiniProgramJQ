@@ -1,0 +1,215 @@
+/* pages/bill/taxation/taxation.wxss */
+.page__bd_spacing {
+    padding-left: 6px;
+    padding-left: 6px;
+  }
+  .salary-title{
+    font-size: 10px;
+  }
+  .btn-group{
+    margin:10px auto;
+  }
+  .scroll-view_H{
+    width: 100%;
+    white-space: nowrap;
+    font-size: 6px;
+  }
+  .table {
+    margin-top: 0px;
+    font-size: 6px;
+    /* width: 1670rpx; */
+  }
+  
+  .td,.th{
+    font-size:6px;
+    padding: 0 ;
+  
+  }
+  .td{
+    line-height: 25px;
+    height: auto;
+  }
+  .th{
+    line-height: 32px;
+  }
+  /* .th0{
+    width:140rpx;
+  }
+  .th1{
+    width:330rpx;
+  }
+  .th2{
+    width:400rpx;
+  }
+  .th3{
+    width:400rpx;
+  }
+  .th4{
+    width:400rpx;
+  } */
+  .th0{
+    width:4%;
+    writing-mode:horizontal-tb
+  }
+  .th1{
+    width:4%;
+    writing-mode:horizontal-tb
+  }
+  .th2{
+    width:4%;
+    writing-mode:horizontal-tb
+  }
+  .th3{
+    width:4%;
+    writing-mode:horizontal-tb
+  }
+  .th4{
+    width:21%;
+    writing-mode:horizontal-tb
+  }
+  .th5{
+    width:6%;
+    writing-mode:horizontal-tb
+  }
+  .th6{
+    width:6%;
+    writing-mode:horizontal-tb
+  }
+  .th7{
+    width:8%;
+    writing-mode:horizontal-tb
+  }
+  .th8{
+    width:9%;
+    writing-mode:horizontal-tb
+  } 
+  .th9{
+    width:24%;
+    writing-mode:horizontal-tb
+  }
+  .th10{
+    width:6%;
+    writing-mode:horizontal-tb
+  }
+
+  .th11{
+    width:4%;
+    writing-mode:horizontal-tb
+  }
+ 
+  .th.th0{
+    line-height: 50px;
+  }
+  .th.th1{
+  
+    line-height: 50px;
+  }
+  .th.th2{
+    line-height: 50px;
+  }
+  .th.th3{
+   
+    line-height: 50px;
+  }
+  .th.th4{
+    line-height: 50px;
+  }
+  .th.th5{
+   
+    line-height: 25px;
+  }
+  .th.th6{
+  
+    line-height: 50px;
+  }
+  .th.th7{
+    line-height: 50px;
+  }
+  .th.th8{
+   
+    line-height: 50px;
+  }
+  .th.th9{
+    line-height: 25px;
+  }
+  .th.th10{
+    line-height: 50px;
+  }
+  .th.th11{
+    line-height: 50px;
+  }
+  .btm{
+    border-top: 1px solid #eee;
+    display: flex;
+  }
+  .td .btm.nobor{
+    border-top:0;
+  }
+  .btm .btm-text{
+    flex: 1;
+    border-right: 1px solid #eee;
+  }
+  .btm .btm-text:last-child{
+    border-right: none;
+  }
+  .th-line{
+    line-height: 25px;
+  }
+  /*时间*/
+  .top-btn,.picker-date-wrapper{
+    display: inline-block;
+  }
+  
+  .picker-date{
+    font-size:22rpx;
+    background-color: #1e6ce8;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    padding: 0 30px;
+    border-radius:2px;
+    text-align: center;
+    display: inline-block;
+    margin-left: 6px;
+  }
+  .picker-date icon{
+  font-size: 12px;
+  position: relative;
+  margin-top: -20px;
+  margin-right: 10px;
+  }
+  .item-top{
+  display: -webkit-flex;
+  display: flex;
+  box-sizing: border-box;
+  position: relative;
+  padding: 20px 0;
+  font-size:12px ;
+  color: #666;
+  display: block;
+  }
+  .item-top .label, .picker-date .label{
+  flex: 1;
+  font-size: 12px;
+  }
+  .item-top .label-right, .picker-date .label-right{
+  flex: 2;
+  font-size: 12px;
+  }
+  .topnav{
+    position: fixed;
+    top: 85rpx;
+    z-index:99;
+    background: #fff;
+    width: 100%;
+  }
+  .c6{
+    padding-left: 5px;
+  }
+  .c8{
+    padding-left: 10px;
+  }
+  .c10{
+    padding-left: 15px;
+  }

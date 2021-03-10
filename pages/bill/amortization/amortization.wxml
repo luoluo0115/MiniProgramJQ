@@ -1,0 +1,34 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="长期待摊(查阅)">
+  <block wx:if="{{MonthlyAmortizationData!=''}}">
+    <van-collapse value="{{ activeNames }}" bind:change="onChangeFixedAssets">
+
+    <van-collapse-item title="{{item.amortization_name}}(原值:{{filter.numberToFixed(item.amortization_cost)}}  净值:{{filter.numberToFixed(item.remained_cost)}})" name="{{index}}" wx:for="{{MonthlyAmortizationData}}" wx:key="index">
+       <view class="item weui-flex"  >
+          <view class="weui-flex__item left">
+              <view class="time">起始摊销月份:{{item.amortization_month_from}}</view>
+              <view class="time">本月摊销费用:{{filter.numberToFixed(item.monthly_amortization_cost)}} </view>
+              <view class="time">已摊销月数:{{item.amortized_month}} </view>
+              <view class="time">摊销余额:{{filter.numberToFixed(item.remained_cost)}}</view>
+               
+          </view>
+          <view class="right">
+               <view class="time">原值:{{filter.numberToFixed(item.amortization_cost)}}</view>
+               <view class="time">摊销月数:{{item.amortization_month }}</view>
+               <view class="time">累计摊销金额:{{filter.numberToFixed(item.accumulated_cost)}}</view>
+          </view>
+      </view>
+    </van-collapse-item>
+  </van-collapse>
+  </block>
+  <block wx:else>
+      <view class="empty" >
+          <icon class="./iconfont/iconkong:before "></icon>
+      </view>
+  </block>
+        
+  </van-tab>
+  
+ 
+</van-tabs>

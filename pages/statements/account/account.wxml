@@ -1,0 +1,103 @@
+<!--pages/invoice/invoice/invoice.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="account">
+    <noticewrapper  class="noticewrapper" bindtap="onGoNoticeWrapper"></noticewrapper>
+    <topwrapper  class="top-wrapper" customerlist="{{customer_info_id_list}}" customerindex="{{index}}" pickerDate="{{pickerDate}}" wx:if="{{topwrapper==true}}"  bind:pickerdateevent="onPickerDateEvent"  bind:pickercompanyevent="onPickerCompanyEvent"></topwrapper>
+     <view class="section invoice-wrapper" >
+        <view class="page">
+            <view class="page__bd page__bd_spacing" >
+                <view class="account-wrapper sheet-top">
+                    <view class="weui-flex  item">
+                        <navigator url="../../statements/incomeAndIsByMonth/incomeAndIsByMonth?q_type=i&&title=每月收入明细" class="weui-flex__item">
+                            <strong>{{year_accumulated_income}}</strong>
+                            <text>收入总额</text>
+                        </navigator>
+                        
+                        <navigator url="../../statements/incomeAndIsByMonth/incomeAndIsByMonth?q_type=s&&title=每月利润明细" class="weui-flex__item">
+                            <strong>{{year_accumulated_is}}</strong>
+                            <text>利润总额</text>
+                        </navigator>
+                    </view>
+                    <view class="weui-flex item">
+                        <navigator url="../../statements/receivable/receivable" class="weui-flex__item">
+                            <strong>{{amt_end_Receivable}}</strong>
+                            <text>应收</text>
+                        </navigator>
+                        
+                        <navigator url="../../statements/pay/pay" class="weui-flex__item">
+                            <strong>{{amt_end_pay}}</strong>
+                            <text>应付</text>
+                        </navigator>
+                    </view>
+                    <view class="weui-flex item">
+                        <navigator url="../../statements/advanceAccountReceivable/advanceAccountReceivable" class="weui-flex__item">
+                            <strong>{{advanceAccountReceivable}}</strong>
+                            <text>预收</text>
+                        </navigator>
+                        
+                        <navigator url="../../statements/advanceAccountPayable/advanceAccountPayable" class="weui-flex__item">
+                            <strong>{{advanceAccountPayable}}</strong>
+                            <text>预付</text>
+                        </navigator>
+                    </view>
+                    <view class="weui-flex item">
+                        <navigator url="../../statements/bankCashDetail/bankCashDetail" class="weui-flex__item">
+                            <strong>{{bank_and_cash}}</strong>
+                            <text>货币资金</text>
+                        </navigator>
+                        
+                        <view class="weui-flex__item">
+                            <strong>{{paid_in_capital}}</strong>
+                            <text>实收资本</text>
+                        </view>
+                    </view>
+                    
+                </view>
+
+                <!--列表-->
+                <view class="weui-grids grids-wrapper">
+                    <navigator url="../../statements/balanceSheet/balanceSheet" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-01.png" />
+                        <view class="weui-grid__label">资产负债表</view>
+                    </navigator>
+                        <navigator url="../../statements/Balance/Balance" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-02.png" />
+                        <view class="weui-grid__label">余额表</view>
+                    </navigator>
+                    <navigator url="../../statements/incomeSheet/incomeSheet" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-03.png" />
+                        <view class="weui-grid__label">利润表</view>
+                    </navigator>
+                    <navigator url="../../statements/cashFlows/cashFlows" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-04.png" />
+                        <view class="weui-grid__label">现金流量表</view>
+                    </navigator>
+                    <navigator url="../../statements/receivableOther/receivableOther" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-05.png" />
+                        <view class="weui-grid__label">其他应收</view>
+                    </navigator>
+                    <navigator url="../../statements/payableOther/payableOther" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-06.png" />
+                        <view class="weui-grid__label">其他应付</view>
+                    </navigator>
+                    <navigator  class="weui-grid" hover-class="weui-grid_active" url="../../statements/accountingAnalysis/accountingAnalysis" >
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-08.png" />
+                        <view class="weui-grid__label">财务分析</view>
+                    </navigator>
+                    <navigator url="../../statements/downloadLog/downloadLog" class="weui-grid" hover-class="weui-grid_active">
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-10.png" />
+                        <view class="weui-grid__label">年度账册</view>
+                    </navigator>
+                    <navigator  class="weui-grid" hover-class="weui-grid_active" url="/pages/statements/voucherReport/voucherReport" >
+                        <image class="weui-grid__icon" src="../../../images/mini/icon-bill-09.png" />
+                        <view class="weui-grid__label">年度凭证</view>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+</view> 
+<view class="loadingWrapper">
+    <van-loading type="spinner" color="#1989fa" wx:if="{{showloading}}" />
+</view>
+<van-toast id="van-toast" />

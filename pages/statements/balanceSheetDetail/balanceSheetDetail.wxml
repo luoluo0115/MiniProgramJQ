@@ -1,0 +1,8 @@
+<!--pages/statements/balanceSheetDetail/balanceSheetDetail.wxml-->
+<view>
+    <van-cell-group>
+        <block wx:for="{{balancesheetdatadetail}}" wx:key>
+            <van-cell title="{{item.item_report_name}}" value="{{item.year_end}}" />
+        </block>
+  </van-cell-group>
+</view>

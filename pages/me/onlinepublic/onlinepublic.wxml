@@ -1,0 +1,94 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page">
+    <view class="page__bd page__bd_spacing" > 
+        <view class="pay-header">
+            <view class="weui-flex ">                
+                <view class="weui-flex__item left">
+                    <view class="title font-14">年度公示年份:</view>
+                </view>
+                <view class="right ">
+                    <picker mode="date" fields="year" value="{{account_year}}" start="2007" end="2050" bindchange="bindDateChange">
+                        <view class="picker-date">
+                            <icon class="./iconfont/iconrili:before"></icon>
+                            <text >{{account_year}}</text>
+                        </view>
+                    </picker>
+                </view>
+            </view>
+        </view>
+        <view class="pay-content" wx:if="{{onlinePublicList!=''}}">
+            <view class="pay-detail">
+                <van-cell-group>
+                    <van-cell  title="公示年份:" value="{{onlinePublicList.account_year}}" />
+                    <van-cell  title="完成标志:" value="" ><van-tag class="demo-margin-right" color="#7966FE" plain>{{onlinePublicList.confirm_flag_desc}}</van-tag></van-cell>         
+                    <van-cell  title="客户名称:" value="{{onlinePublicList.customer_name}}" />                    
+                    <view class="van-cell border-bottom m-info" >
+                         <view class="van-cell-text">资料文件:</view>
+                         <view class="van-cell__value text-right">
+                            <van-button type="info" size="mini" wx:for="{{cs_confirm_file_names}}" wx:key="index" bindtap="copyText" data-index="{{index}}" data-type="down" custom-class="ml-10">{{filter.toSubstr(item)}}</van-button>
+                        </view>
+                    </view>
+                    <van-switch-cell
+                        title="是否与去年一致"
+                        checked="{{ checked }}"
+                        bind:change="onChangeSwitch"
+                            border="true"
+                            active-color="#1e6ce8"
+                            name="is_contain_tax"
+                        />
+                    <van-cell  title="提交时间:" value="{{onlinePublicList.cs_confirm_time}}" />
+                    <van-cell  title="资料备注:" value="{{onlinePublicList.cs_confirm_remark}}" />                    
+                    <view class="van-cell border-bottom" wx:if="{{onlinePublicList.confirm_flag =='Y'}}">
+                         <view class="van-cell-text">完成文件:</view>
+                         <view class="van-cell__value text-right">
+                            <van-button type="info" size="mini" wx:for="{{confirm_file_name_guids}}" wx:key="index" data-list="{{FileOssUrl + item}}" data-src="{{FileOssUrl + item}}" bindtap="previewImage" custom-class="ml-10">查看</van-button>
+                        </view>
+                    </view>
+                    <van-cell wx:if="{{onlinePublicList.confirm_flag =='Y'}}" title="完成人员:" value="{{onlinePublicList.confirm_user_name_desc}}" />
+                    <van-cell wx:if="{{onlinePublicList.confirm_flag =='Y'}}" title="完成时间:" value="{{onlinePublicList.confirm_time}}" />
+                    <!-- <van-cell  title="操作记录:" value="{{onlinePublicList.cs_confirm_history}}" /> -->
+                    <van-cell wx:if="{{onlinePublicList.confirm_flag =='R'}}" title="公示退回人员:" value="{{onlinePublicList.fa_reject_user_name_desc}}" />
+                    <van-cell wx:if="{{onlinePublicList.confirm_flag =='R'}}" title="公示退回时间:" value="{{onlinePublicList.fa_reject_time}}" />                    
+                    <van-cell wx:if="{{onlinePublicList.confirm_flag =='R'}}" title="公示退回原因:" value="{{onlinePublicList.fa_reject_reason}}" />
+                </van-cell-group>
+            </view>
+            <view class="text-right mt-10">
+                <van-button  class="demo-margin-right" size="small" color="#1e6ce8" bindtap="copyText" data-type="excel" icon="down">模板下载</van-button>                 
+                <van-button class="demo-margin-right" size="small" wx:if="{{onlinePublicList.confirm_flag =='W' || onlinePublicList.confirm_flag =='R'}}" color="#1e6ce8" icon="upgrade" bindtap="showPopup" >上传文件</van-button>
+                <van-button class="demo-margin-right" size="small" wx:if="{{onlinePublicList.confirm_flag =='W' || onlinePublicList.confirm_flag =='R'}}" color="#1e6ce8" icon="passed" bindtap="ConfirmOnlinePublic" data-item="{{onlinePublicList}}">确认</van-button>
+            </view>
+        </view>
+        <view class="empty" wx:else>
+            <icon class="./iconfont/iconkong:before "></icon>
+        <view class="color-gray">{{NoData}}</view>
+    </view>
+    </view>    
+</view>
+
+<van-popup show="{{ show }}" bind:close="onClose" round custom-class="popWrapper">
+    <view>上传年度公示Excel文件</view>
+    <van-cell-group custom-class="mt-10">         
+        <van-cell  title="企业名称:" value="{{onlinePublicList.customer_name}}" />
+        <van-cell  title="公示年份:" value="{{onlinePublicList.account_year}}" />         
+        <van-cell >
+            <view slot="title">
+                <view class="van-cell-text">上传文件</view>
+            </view>
+            <van-uploader file-list="{{ fileList }}" accept="file" bind:delete="deleteImages" bind:after-read="afterRead" max-count="1"/>
+        </van-cell>
+        <van-field
+            value="{{ cs_confirm_remark }}"
+            label="备注信息"
+            clearable        
+            placeholder="请输入备注"
+            input-align="right"
+            type="text"                
+            data-fieldName="cs_confirm_remark"
+            bind:input="handleFieldChange"       
+        />  
+    </van-cell-group> 
+    <van-button round size="small" block color="#1e6ce8" custom-class="mt-10 " bindtap="uploadFile" data-item="{{onlinePublicList}}">保存</van-button>
+
+</van-popup>
+<van-toast id="van-toast" />
+

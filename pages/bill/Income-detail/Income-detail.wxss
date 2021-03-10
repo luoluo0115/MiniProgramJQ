@@ -1,0 +1,178 @@
+ /* 上传的按钮 */
+.btn-upload{
+  height: 35px;
+  background-color: #1e6ce8;
+  border: 1px solid #1e6ce8;
+  line-height: 35px;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  margin:20px auto;
+  border-radius: 100px;
+}
+ 
+/* 遮罩层 */
+ 
+/* 弹出层 */
+.popWrapper{
+  padding:20rpx 40rpx 40rpx;
+  width: 490rpx;
+}
+
+.bank-title{
+  font-size: 14px;
+  color: #666;
+  height: 64rpx;
+  line-height: 64rpx;
+}
+.btn{
+  margin: 0 auto;
+  width: 410rpx;
+}
+.up-btn{
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 15rpx;
+  color: #6988FE;
+  border: 1px solid rgb(85, 118, 248);
+  background: #fff;
+  text-align: center;
+  font-size: 22rpx;
+  display: block;
+}
+.choose-btn,.up-btn.blue{
+  height: 64rpx;
+  line-height: 64rpx;
+  color: #fff;
+  background-color: #6988FE;
+  border: 1px solid rgb(115, 142, 252);
+  border-radius: 15rpx;
+  text-align: center;
+  font-size: 22rpx;
+  display: block;
+}
+
+
+page {
+  background-color: #f9f9f9;
+}
+
+.expend-list {
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.expend-item {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.expend-list .list-title {
+  font-size: 28rpx;
+  color: #333;
+  padding: 30rpx 0 25rpx 30rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.expend-list .a-expend {
+  display: flex;
+  padding: 15rpx;
+  border-bottom: 1px solid #eee;
+
+}
+
+.expend-list .a-expend .img-box {
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-left: 30rpx;
+  background-color: #d8d8d8;
+  border-radius: 10rpx;
+}
+
+.expend-list .img-box .img {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.expend-list .a-expend .text-box {
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+}
+
+.a-expend .text-box .arow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a-expend .text-box .arow .label {
+  width: 330rpx;
+  font-size: 20rpx;
+  height: 40rpx;
+  color: #333;
+  line-height: 1.6;
+  overflow: hidden;
+}
+ 
+
+.a-expend .text-box .arow .label-right {
+  font-size: 20rpx;
+  color: #333;
+  align-self: flex-start;
+
+}
+
+.pay-btn {
+  border-radius: 20rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  font-size: 24rpx;
+  float: right;
+  color: #F0433D;
+  border: 1px solid #F0433D;
+  text-align: center;
+  padding: 0 20rpx;
+  margin: 20rpx 20rpx 20rpx 0;
+  display: inline-block;
+}
+ 
+.van-tabs__line {
+  background-color: #647bfe !important;
+}
+
+.pay-btn.delete {
+  color: #999;
+  border: 1px solid #999;
+}
+
+ 
+.title {
+  width: 100%;
+  display: block;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 20rpx;
+  color: #666;
+  border-bottom: 1px solid #eee;
+  padding: 0 30rpx;
+}
+.btn-list{
+  margin: 20rpx 0 0;
+  text-align: right;
+}
+.num-wrapper{
+  padding: 30rpx;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+  color: #999;
+  font-size: 20rpx;
+  border-bottom:1px solid #eee;
+}
+.num-wrapper .num{
+  font-size: 32rpx;
+}

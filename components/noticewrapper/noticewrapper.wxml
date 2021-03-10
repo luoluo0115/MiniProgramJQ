@@ -1,0 +1,7 @@
+<block wx:if="{{total>0}}">
+    <view class="notice-wrapper" wx:for="{{messageList}}" wx:key="index" wx:if="{{index==0}}" >
+        <van-notice-bar custom-class="notice-content" left-icon="volume-o" mode="link" text="{{item.message_content}}" />
+        <text class="notice-num">{{total}}</text>
+    </view>
+</block>
+

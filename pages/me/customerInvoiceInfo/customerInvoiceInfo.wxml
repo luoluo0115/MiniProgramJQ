@@ -1,0 +1,82 @@
+<wxs module="m1">
+	var dateFormatStr = function(dateStr) {
+		if (dateStr == null) {
+			return '';
+		}
+		return dateStr.replace('T', ' ')
+	}
+	var dateFormatDay = function(dateDay) {
+		if (dateDay == null) {
+			return '';
+		}
+		return dateDay.substring(0, 10)
+	}
+	var moneyFormat = function(money) {
+		return money.toFixed(2);
+	}
+
+	module.exports = {
+		dateFormatStr: dateFormatStr,
+		dateFormatDay: dateFormatDay,
+		moneyFormat: moneyFormat,
+
+	}
+</wxs>
+<view class="page area-container center-container">
+    <view class="invoice page__bd page__bd_spacing"> 
+        <van-search value="{{ value }}" placeholder="输入发票项目" use-action-slot bind:change="applyChange" bind:search="onSearch">
+            <view slot="action" bind:tap="goAddInvoiceApply">
+                <van-icon name="add-o" size="20px" color='#1e6ce8' />
+            </view>
+        </van-search>
+
+        <block wx:if="{{customerInvoiceApplyList!=''}}">
+            <van-row custom-class="grids-wrapper" wx:for="{{customerInvoiceApplyList}}" wx:key="index" data-index="{{index}}" data-item="{{item}}" >
+                <van-col span="20">
+                    <text>发票类型：</text>
+                    {{item.invoice_category}}
+                </van-col>
+                <van-col span="4">
+                    <van-tag mark type="success">{{item.invoice_status_desc}}</van-tag>
+                </van-col>
+                <van-col span="12">
+                    <text>发票项目：</text>
+                    {{item.invoice_item_name}} 
+                </van-col>
+                <van-col span="12">
+                    <text>申请人：</text>
+                    {{item.apply_user_name}}
+                </van-col>
+                <van-col span="12">
+                    <text>申请日期：</text>
+                    {{m1.dateFormatDay(item.creation_date)}}
+                </van-col>
+                <van-col span="12">
+                    <text>申请发票金额：</text>
+                    {{m1.moneyFormat(item.invoice_amount)}}
+                </van-col>
+                <van-col span="12">
+                    <text>税率：</text>
+                    {{item.invoice_rate_desc}}
+                </van-col>
+                <van-col span="12">
+                    <text>发票号码：</text>
+                    {{item.invoice_no}}
+                </van-col>
+                <van-col span="24" custom-class="card-bottom">
+                    <van-button round color="#1e6ce8" size="mini" data-item="{{item}}" bindtap="deleteApply" custom-class="detail-btn" wx:if="{{item.invoice_status=='N'}}">删除</van-button>
+                    <van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" data-item="{{item}}" data-type="Edit" bindtap="goEdit" wx:if="{{item.invoice_status=='N'}}">修改</van-button>
+                    <van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" data-item="{{item}}" bindtap="goDetail">详情</van-button>
+                    <van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" bindtap="InvoiceSubmit" data-item="{{item}}" wx:if="{{item.invoice_status=='N'}}">提交</van-button> 
+                    <van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" data-item="{{item}}" bindtap="goScarp"  wx:if="{{ (item.invoice_status=='C' || item.invoice_status=='T') && item.scrap_apply_status=='' }}">作废申请</van-button>
+                    <van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" bindtap="scrapSubmitBtn" data-item="{{item}}" wx:if="{{item.scrap_apply_status=='N'}}">作废提交</van-button> 
+
+                </van-col>
+            </van-row>
+        </block>
+        <block wx:else>
+            <view class="empty">{{msg}}</view>
+        </block>
+    </view>
+</view>
+<van-toast id="van-toast" />

@@ -1,0 +1,70 @@
+<!--pages/me/customerPaymentList/customerPayment.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ')
+}
+var dateFormatMonth = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.substring(0, 7)
+}
+var dateFormatDay = function (dateDay) {
+    if(dateDay == null){
+        return '';
+    }
+  return dateDay.substring(0, 10)
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  dateFormatMonth: dateFormatMonth,
+   dateFormatDay: dateFormatDay,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<view class="section">
+    <view class="page">
+        <!-- 支付成功-->
+        <view class="page__bd page__bd_spacing">
+            <view class="invoice-list">
+
+                <view class="item weui-flex" >
+                     <view class="weui-flex__item center ">
+                           <van-icon name="passed" custom-class="pay-icon"/>
+                    </view>
+                </view>
+                 <view class="item weui-flex" >
+                      <view class="weui-flex__item">
+                        <van-cell-group custom-class="pay-detail">
+                        <van-cell title="支付方式" value="微信支付" />
+                        <van-cell title="支付金额" value="28373.00" border="{{ false }}"/>
+                        </van-cell-group>
+                      </view>
+                </view>    
+            </view>
+            <van-button round type="info" size="large" custom-class="pay-btn-success">支付完成</van-button>
+        </view>
+        <!-- 支付失败 -->
+        <!-- <view class="page__bd page__bd_spacing">
+            <view class="invoice-list">
+
+                <view class="item weui-flex" >
+                     <view class="weui-flex__item center ">
+                           <van-icon name="close" custom-class="pay-icon-fail"/>
+                    </view>
+                </view>
+                   
+            </view>
+            <van-button round type="info" size="large" custom-class="pay-btn-fail">支付失败</van-button>
+        </view> -->
+    </view>
+</view>

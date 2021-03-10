@@ -1,0 +1,86 @@
+
+<view class="page area-container center-container">
+    <view class="invoice page__bd page__bd_spacing">
+        <view class="invoice-item"> 
+            <view class="invoice-info-list">  
+                <van-cell-group>
+                <picker bindchange="bindInvoiceTypeChange" value="{{invoiceTypeList[index].invoice_category}}" range-key="{{'invoice_category'}}" range="{{invoiceTypeList}}" >
+                    <view class="picker">
+                    <van-cell required title="发票分类" border="{{false}}" value="{{invoice_category}}" is-link />
+                    </view>
+                </picker>  
+                <picker bindchange="bindListInvoiceTaxChange" data-index="{{index}}" data-fieldName="invoice_rate" value="{{listInvoiceTax[index].tax_name}}" range-key="{{'tax_name'}}" range="{{listInvoiceTax}}" >
+                    <view class="picker">
+                    <van-cell required title="商品税目名称及税率"  value="{{tax_name}}"  is-link />
+                    </view>
+                </picker> 
+                <van-field
+                    name="remained_invoice_total"
+                    data-fieldName="remained_invoice_total"
+                    value="{{remained_invoice_total}}" 
+                    label="剩余可开金额" 
+                    disabled="false"
+                    placeholder="0"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item" 
+                />
+
+                <van-field
+                    name="invoice_amount"
+                    data-fieldName="invoice_amount"
+                    value="{{formData.invoice_amount}}"
+                    required
+                    label="申请开票金额"
+                    placeholder="0"
+                    input-align="right"
+                    border="{{false}}"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item" 
+                    bind:input="formDataChange"
+                /> 
+
+                <picker bindchange="bindInvoiceItemTypeChange" value="{{info.invoiceItemNameList[index].code_name}}" range-key="{{'code_name'}}" range="{{info.invoiceItemNameList}}" >
+                    <view class="picker">
+                    <van-cell required title="发票项目"  value="{{invoice_item_name}}" is-link />
+                    </view>
+                </picker>
+                
+                <!-- <van-field
+                    name="invoice_item_detail"
+                    data-fieldName="invoice_item_detail"
+                    value="{{formData.invoice_item_detail}}" 
+                    label="发票明细" 
+                    placeholder="发票明细"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item" 
+                    bind:input="formDataChange"
+                /> -->
+                <van-field
+                    name="invoice_remark"
+                    data-fieldName="invoice_remark"
+                    value="{{formData.invoice_remark}}" 
+                    label="发票备注" 
+                    placeholder="发票备注" 
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item" 
+                    bind:input="formDataChange"
+                /> 
+            </van-cell-group>
+            </view> 
+        </view>
+        <van-row custom-class="upload-btn " gutter="10">
+            <van-col span="24">
+				<van-button round type="info" size="small" block color="#1e6ce8" bindtap="bindSave">保存</van-button>
+			</van-col>
+        </van-row>
+    </view>
+</view>
+
+
+<van-popup show="{{ showAdress }}" position="bottom">
+    <van-area area-list="{{ areaList }}" bind:cancel="onCloseAddres" bind:confirm="onConfirm"/>
+</van-popup>
+<van-toast id="van-toast" />

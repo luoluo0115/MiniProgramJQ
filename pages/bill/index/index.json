@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "topwrapper": "../../../components/topwrapper/topwrapper",
+    "noticewrapper": "../../../components/noticewrapper/noticewrapper"
+  },
+  "navigationBarTitleText": "拍票中心",
+  "enablePullDownRefresh": true
+}

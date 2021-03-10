@@ -1,0 +1,82 @@
+.van-tabs__line {
+  background-color: #1e6ce8 !important;
+}
+.invoice {
+  padding-top: 8px ;
+}
+.invoice .invoice-item .area-title{
+  font-size: 24rpx;
+  padding: 10px 0 ;
+  overflow: hidden;
+
+}
+.invoice .invoice-item .area-title .area-text{
+  border-left:2px solid #1e6ce8;
+  padding-left:10px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  float:left;
+}
+.invoice-info-list{
+  border:1px solid #eee;
+  border-radius: 5rpx;
+}
+.upload-btn{
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+
+.invoice-list .item{
+  background:#fff;
+  margin-top: 4%;
+  border-radius:15px;
+  color: #666;
+  padding:15rpx 20rpx;
+  border: 1px solid #f8f8f8;
+  font-size: 12px;
+}
+.time{
+  color:#AAAAAA;
+  font-size: 20rpx;
+}
+.right{
+ text-align: right
+}
+.hr{
+  border-top: 1px solid #eee;
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+}
+.demo-margin-right{
+  margin-left: 10rpx;
+}
+ 
+/*弹窗*/
+.popWrapper{
+  padding: 10px 15px;
+  min-width: 300px;
+}
+.popWrapper .pop-title{
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+.popWrapper .pop-sub{
+  font-size: 20rpx;
+  font-weight:400;
+}
+.popWrapper  .invoice-info-item{
+  font-size: 12px;
+}
+.input-reason{
+  min-height: 150rpx!important;
+  line-height: 1 !important;  
+}
+.mt-10{
+  margin-top: 30rpx;
+}
+.mb-10{
+  margin-bottom: 30rpx;
+}

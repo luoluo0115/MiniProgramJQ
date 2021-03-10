@@ -1,0 +1,359 @@
+/* pages/bill/taxation/taxation.wxss */
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    white-space: nowrap;
+    background-color: white;
+    border-bottom: 1px solid #f8f8f8;
+    height: 30px;
+  }
+  page{
+    overflow-x: hidden;
+    width: 100%;
+  }
+  .topBox{
+    height: 100rpx;
+    float: right;
+  }
+  .topLeft{
+    width: 188rpx;
+    height: 100rpx;
+    float: left;
+  }
+  .topRight{
+    width: 133rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    display: inline-block;
+    vertical-align: middle;
+    border-left: 1px solid #D8D8D8;
+    font-size: 28rpx;
+  }
+  .type{
+    position: fixed;
+    top:100rpx;
+    z-index: 3;
+    font-size: 28rpx;
+    color: #555;
+    background: #F9F9F9;
+    width: 100%;
+    white-space: nowrap;
+  }
+  .item{
+    display: inline-block;
+    padding: 10rpx 20rpx;
+    background: #fff;
+    border: 1px solid #de5550;
+    border-radius: 4px;
+    margin-left: 15rpx;
+  }
+  .label{
+    font-weight: bold;
+    line-height: 100rpx;
+    padding: 0rpx 20rpx;
+    display: inline-block;
+  }
+  .marginLeft{
+    margin-left: 40rpx;
+  }
+  .cur{
+    padding: 10rpx 20rpx;
+    background: #fff;
+    border: 1px solid #de5550;
+    border-radius: 4px;
+    background-image: url("http://store.ddyc.com/xiaochengxu/cs/2018/0413/icon_bg_label_chosen%403x.png");
+    background-position: right bottom;
+    background-size: 30rpx 30rpx;
+    background-repeat: no-repeat;
+  }
+  .wrapper {
+    margin-top: 148rpx;
+    width: 750rpx;
+    overflow-x: hidden;
+    position: relative;
+    background-color: white;
+  }
+  
+  .left {
+    position: absolute;
+    width: 188rpx;
+    z-index: 2;
+    font-size: 24rpx;
+    background-color: white;
+  }
+  
+  .right {
+    margin-left: 188rpx;
+    width: 564rpx;
+    font-size: 24rpx;
+  }
+  
+  .right-wrapper {
+    overflow-x: auto;
+  }
+  
+  .line1 {
+    width: 188rpx;
+    height: 75rpx;
+    text-align: center;
+    line-height: 75rpx;
+  }
+  .Height2{
+    height: 150rpx;
+    line-height: 150rpx;
+  }
+  .border{
+    width: 188rpx;
+    height: 100%;
+    display: block;
+    border-bottom: 1rpx solid #eee;
+    border-right: 1rpx solid #eee;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .line2 {
+    white-space: nowrap;
+    height: 75rpx;
+  }
+  
+  .price {
+    width: 200rpx;
+    text-align: center;
+    height: 75rpx;
+    line-height: 75rpx;
+    display: inline-block;
+    border-bottom: 1rpx solid #eee;
+    border-right: 1rpx solid #eee;
+    position: relative;
+  }
+  .price.p-center{
+    border-bottom:none
+  }
+  .p-center text{
+    top: 40rpx;
+    position: relative;
+    background-color: #fff;
+    z-index: 999;
+
+  }
+  .price-all{
+    width: 1402rpx;
+  }
+  .price-2{
+    width: 401rpx;
+  }
+  .price-3{
+    width: 601rpx;
+  }
+  .price-4{
+    width: 801rpx;
+  }
+  .borderTopWhite{
+    border-top: 1rpx solid #fff;
+    color: #fff;
+  }
+  /* .price.numCenter {
+    position:absolute;
+    bottom: -30px;
+    z-index: 999;
+  } */
+  .minPrice{
+    width: 96rpx;
+    height: 80rpx;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.2;
+  }
+  .minPriceText{
+    width: 56rpx;
+    height: 56rpx;
+    font-size: 24rpx;
+    color: #de5550;
+    position: absolute;
+    top: -15rpx;
+    right: -10rpx;
+    transform: rotate(43deg);
+  }
+  .bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100rpx;
+    text-align: center;
+    z-index: 3;
+    white-space: nowrap;
+    background-color: white;
+    width: 100%;
+    border-top: 1rpx solid #d8d8d8;
+  }
+  .bottomLeft{
+    width: 148rpx;
+    height: 100rpx;
+    float: left;
+    border-left: 1rpx solid #d8d8d8;
+  }
+  .bottomBox{
+    width: 600rpx;
+    height: 100rpx;
+    float: left;
+  }
+  .bottomRight{
+    width: 200rpx;
+    height: 100rpx;
+    text-align: left;
+    display: inline-block;
+    border-left: 1rpx solid #d8d8d8;
+  }
+  .bottomBorder{
+    border-bottom: 1rpx solid #d8d8d8;
+  }
+  .icon{
+    width: 24rpx;
+    height: 24rpx;
+    float: right;
+    margin-right: 20rpx;
+    line-height: 100rpx;
+    margin-top: -5rpx;
+  }
+  .allCostText{
+    font-size: 24rpx;color: #999999;margin-left:30rpx;
+  }
+  .allCost{
+    font-size: 30rpx;color: #555555;margin-left:30rpx;font-weight:bold;
+  }
+  /*header-title*/
+  .header-title{
+    height: 36px;
+    line-height: 36px;
+    color: #666;
+    font-size: 10px;
+    padding:0 7px;
+  }
+  .header-thead{
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid #f8f8f8;
+    background-color: #f1f1f1;
+    color: #333;
+    font-size: 12px;
+    height: 36px;
+    line-height: 36px;
+    border-top: 1px solid #eee;
+  }
+  .bg-purple{
+      background-color: #f1f1f1;
+  }
+  .color-purple{
+      color: #f1f1f1;
+  }
+  .bg-gray{
+    background-color: #f8f8f8;
+}
+  .border-right{
+    border-right: 1px solid #eee;
+  }
+  .width-188{
+      width: 188px;
+  }
+  /*table*/
+  .table {
+    margin-top: 30px;
+    font-size: 10px;
+    /* width: 1670rpx; */
+  }
+  
+  .td,.th,.td{
+    font-size:10px;
+  
+  }
+  .td ,.th,.td{
+    height: 32px;
+    line-height: 32px;
+  }
+  .tr2 .td{
+    height: 64px;
+    line-height: 64px;
+  }
+  .th0{
+    width:15%;
+  }
+  .th1{
+    width:10%;
+  }
+  .th2{
+    width:15%;
+  }
+  .th3{
+    width:15%;
+  }
+  .th4{
+    width:10%;
+  }
+  .th5{
+    width:10%;
+  }
+  .th6{
+    width:15%;
+  }
+  .th7{
+    width:10%;
+  }
+  .th8{
+    width:25%;
+  }
+  .th9{
+    width:35%;
+  }
+  .th10{
+    width:40%;
+  }
+  .th11{
+    width:25%;
+  }
+  .th12{
+    width:65%;
+  }
+  .th13{
+    width:50%;
+  }
+  .header .th0{
+    width:15%;
+  }
+  .header .th1{
+    width:85%;
+  }
+
+.btm{
+  border-top: 1px solid #eee;
+  display: flex;
+}
+.td.btm{
+  line-height: 32px;
+}
+.td.btm{
+  border-top:0;
+}
+.btm .btm-text{
+  flex: 1;
+}
+.btm .btm-text:first-child{
+  border-right: 1px solid #eee;
+}
+.lin{
+  display: block;
+  line-height: 32px;
+}
+.lin .btm-text{
+  border-top:1px solid #eee;
+  line-height: 32px;
+  display: block;
+}
+.lin .btm-text.btm-text0{
+  border-top:0;
+}

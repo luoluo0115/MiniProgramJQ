@@ -1,0 +1,121 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="account">
+    <view class="section grids-content" >
+        <view class="page" >
+            <view class="page__bd page__bd_spacing">
+                <view class=" grids-wrapper"  bindtap="gotoUpload" data-type="发票明细">
+                    <van-row>
+                        <van-col span="18" custom-class="title">上传发票明细</van-col>
+                        <van-col span="6" custom-class="go-btn text-right">
+                            <van-button type="primary" size="small" color="#1e6ce8" >开始上传</van-button>
+                        </van-col>
+                        <van-col span="24" custom-class="price">
+                            <view class="table" >
+                                <view class="tr">
+                                    <view class="th th1">类型</view>
+                                    <view class="th th2">专票</view>
+                                    <view class="th th3">普票</view>
+                                </view>
+                                 <view class='tr top'>
+                                    <view class="td th1">金额</view>
+                                    <view class="td th2" >
+                                       {{filter.numberToFixed(ZAmount)}}
+                                    </view>
+                                    <view class="td th2" >
+                                       {{filter.numberToFixed(PAmount)}}
+                                    </view>
+                                </view>
+                                 <view class='tr top'>
+                                    <view class="td th1">税额</view>
+                                    <view class="td th2" >
+                                       {{filter.numberToFixed(ZtaxAmount)}}
+                                    </view>
+                                    <view class="td th2" >
+                                       {{filter.numberToFixed(PtaxAmount)}}
+                                    </view>
+                                </view>
+                                 <view class='tr top'>
+                                    <view class="td th1">价税合计</view>
+                                    <view class="td th2" >
+                                       {{filter.numberToFixed(ZtaxPrice)}}
+                                    </view>
+                                    <view class="td th2" >
+                                       {{filter.numberToFixed(PtaxPrice)}}
+                                    </view>
+                                </view>
+                                 <view class='tr top'>
+                                    <view class="td th1">上传数量</view>
+                                    <view class="td th2" >
+                                       {{ZQty}}
+                                    </view>
+                                    <view class="td th2" >
+                                       {{PQty}}
+                                    </view>
+                                </view>
+                                
+                                
+                            </view>
+                             <!-- <van-cell title="总额" value="{{InvoiceAmount}}" border="{{ false }}" /> -->
+                        </van-col>
+                        <!-- <van-col span="24" custom-class="tax">
+                             <van-cell title="税额" value="{{InvoiceTax}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24"  custom-class="num">
+                            <van-cell title="上传数量" value="{{InvoiceQty}}" border="{{ false }}" />
+                        </van-col> -->
+                    </van-row>
+                   
+                </view>
+                <view class=" grids-wrapper"  bindtap="gotoUploadHz" data-type="1">
+                    <van-row>
+                        <van-col span="18" custom-class="title" catchtap="helpTips">
+                            增值税专用发票汇总
+                            <van-icon name="question-o" color="#1e6ce8" />
+                        </van-col>
+                        <van-col span="6" custom-class="go-btn text-right">
+                            <van-button type="primary" size="small"  color="#1e6ce8" >开始上传</van-button>
+                        </van-col>
+                        <van-col span="24" custom-class="price">
+                             <van-cell title="金额" value="{{filter.numberToFixed(zInvoiceAmount)}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24" custom-class="tax">
+                             <van-cell title="税额" value="{{filter.numberToFixed(zInvoiceTax)}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24" custom-class="tax">
+                             <van-cell title="价税合计" value="{{filter.numberToFixed(zInvoiceTax+zInvoiceAmount)}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24"  custom-class="num">
+                            <van-cell title="发票数量" value="{{zInvoiceQty}}" border="{{ false }}" />
+                        </van-col>
+                    </van-row>
+                   
+                </view>
+                <view class=" grids-wrapper"  bindtap="gotoUploadHz" data-type="2">
+                    <van-row>
+                        <van-col span="18" custom-class="title" catchtap="helpTips">
+                            增值税普通发票汇总
+                            <van-icon name="question-o" color="#1e6ce8"/>
+                        </van-col>
+                        <van-col span="6" custom-class="go-btn text-right">
+                            <van-button type="primary" size="small" color="#1e6ce8" >开始上传</van-button>
+                        </van-col>
+                        <van-col span="24" custom-class="price">
+                             <van-cell title="金额" value="{{filter.numberToFixed(pInvoiceAmount)}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24" custom-class="tax">
+                             <van-cell title="税额" value="{{filter.numberToFixed(pInvoiceTax)}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24" custom-class="tax">
+                             <van-cell title="价税合计" value="{{filter.numberToFixed(pInvoiceAmount+pInvoiceTax)}}" border="{{ false }}" />
+                        </van-col>
+                        <van-col span="24"  custom-class="num">
+                            <van-cell title="发票数量" value="{{pInvoiceQty}}" border="{{ false }}" />
+                        </van-col>
+                    </van-row>
+                   
+                </view>
+            </view>
+        </view>
+    </view>
+</view>    
+<van-toast id="van-toast" />

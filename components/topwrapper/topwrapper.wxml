@@ -1,0 +1,58 @@
+<wxs module="filter" src="../../utils/money.wxs"></wxs>
+<view class="section top-wrapper">
+      <view class="page">
+          <view class="page__bd page__bd_spacing">
+            <block wx:if="{{customer_info_id_list.length>=10}}">
+              <van-row>
+                <van-col span="16"  >
+                    <view class="picket-company">
+                        <picker bindchange="bindCompanyChange" value="{{customerindex}}"  range-key="customer_name" range="{{customerlist}}">
+                            <icon wx:if="{{customerlist.length != 1}}"  class="./iconfont/iconqiehuanyonghu:before color-fff text-right kind-icon"></icon>
+                            <icon wx:if="{{customerlist.length == 1}}"  class="./iconfont/iconkehuguanli:before color-fff text-right kind-icon"></icon>
+                            <view class="picker companyText">
+                                {{customerlist[customerindex].customer_name}} 
+                            </view>
+                        </picker>
+                    </view>
+                </van-col>
+                <van-col span="3" custom-class="text-center" >
+                    <navigator url="/pages/search/searchCompany/searchCompany">
+                        <icon class="./iconfont/iconicon-search:before"></icon>
+                    </navigator>
+                </van-col>
+                <van-col span="5" custom-class="text-right"> 
+                    <picker mode="date" fields="month" value="{{pickerDate}}" start="2009-09" end="2030-09" bindchange="bindDateChange">
+                        <view class="picker-date">
+                            <icon class="./iconfont/iconrili:before"></icon>
+                            <text>{{pickerDate}}</text>
+                        </view>
+                    </picker>
+                </van-col>
+              </van-row>
+            </block>
+            <block wx:else>
+              <van-row>
+                <van-col span="18"  >
+                    <view class="picket-company">
+                        <picker bindchange="bindCompanyChange" value="{{customerindex}}"  range-key="customer_name" range="{{customerlist}}">
+                            <icon wx:if="{{customerlist.length != 1}}"  class="./iconfont/iconqiehuanyonghu:before color-fff text-right kind-icon"></icon>
+                            <icon wx:if="{{customerlist.length == 1}}"  class="./iconfont/iconkehuguanli:before color-fff text-right kind-icon"></icon>
+                            <view class="picker companyText">
+                                {{customerlist[customerindex].customer_name}} 
+                            </view>
+                        </picker>
+                    </view>
+                </van-col>
+                <van-col span="6" custom-class="text-right"> 
+                    <picker mode="date" fields="month" value="{{pickerDate}}" start="2009-09" end="2030-09" bindchange="bindDateChange">
+                        <view class="picker-date">
+                            <icon class="./iconfont/iconrili:before"></icon>
+                            <text>{{pickerDate}}</text>
+                        </view>
+                    </picker>
+                </van-col>
+              </van-row>
+            </block>
+          </view>
+      </view>
+  </view>

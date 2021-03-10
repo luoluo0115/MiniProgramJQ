@@ -1,0 +1,98 @@
+<!--pages/product/index/index.wxml-->
+<view>
+	<view class="page-section page-section-spacing swiper">
+		<swiper indicator-dots='{{indicationDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}'
+			circular='{{circular}}' indicator-active-color='#ffffff' current='0'>
+			<swiper-item class="swiper-item" wx:for="{{bannerList}}" wx:key="index">
+				<view>
+					<image src="{{item.picture_url}}" bindtap="goBanner" data-item="{{item}}" class="side-image" style="width:100%"></image>
+				</view>
+			</swiper-item>
+		</swiper>
+	</view>
+	<official-account></official-account>
+	<view class="page area-container center-container">
+		<view class="area-list page__bd page__bd_spacing">
+			<view class="area-item">
+				<view class="area-title ">
+					<view class="area-text">服务产品</view>
+				</view>
+				<view class="area-banner area-banner-list" wx:for="{{productList}}" wx:key="index">
+					<block wx:if="{{item.is_final=='Y'}}">						
+						<van-row custom-class="area-banner-item" bindtap='bindTapProductDetail' data-product_id="{{item.pre_product_id}}">
+							<van-col span="8">
+								<view class="img">
+									<van-image radius="5" width="180rpx" height="180rpx" src="{{item.backgroup_image}}" />
+								</view>
+							</van-col>
+							<van-col span="16">
+								<van-col span="24">
+									<view class="sub">{{item.product_summary}}</view>
+								</van-col>
+								<van-col span="24" custom-class="text-right ">
+									<van-col span="8">
+										<view class="price">￥{{item.product_price}}<span
+												class="font-12">{{item.is_price_impact=='Y' ? '起' : ''}}</span></view>
+									</van-col>
+									<van-col span="12">
+										<view class="userNum">{{item.puchase_qty}}人已付款</view>
+									</van-col>
+									<van-col span="4">
+										<view class="btn-right">
+											<van-button size="mini" custom-class="btn" round catchtap='bindTapProductDetail'
+												data-product_id="{{item.pre_product_id}}">购买</van-button>
+										</view>
+									</van-col>
+								</van-col>
+							</van-col>
+						</van-row>
+					</block>
+					<block wx:else>
+						<van-row custom-class="area-banner-item" bindtap='bindTapProductList' data-product_id="{{item.pre_product_id}}" data-item="{{item}}">
+							<van-col span="8">
+								<view class="img">
+									<van-image radius="5" width="180rpx" height="180rpx" src="{{item.backgroup_image}}" />
+								</view>
+							</van-col>
+							<van-col span="16">
+								<van-col span="24">
+									<view class="sub">{{item.product_summary}}</view>
+								</van-col>
+								<van-col span="24" custom-class="text-right ">
+									<van-col span="8">
+										<view class="price">￥{{item.product_price}}<span
+												class="font-12">{{item.is_price_impact=='Y' ? '起' : ''}}</span></view>
+									</van-col>
+									<van-col span="12">
+										<view class="userNum">{{item.puchase_qty}}人已付款</view>
+									</van-col>
+									<van-col span="4">
+										<view class="btn-right">
+											<van-button size="mini" custom-class="btn" round catchtap='bindTapProductDetail'
+												data-product_id="{{item.pre_product_id}}">购买</van-button>
+										</view>
+									</van-col>
+								</van-col>
+							</van-col>
+						</van-row>
+					</block>
+				</view>
+
+			</view>
+
+		</view>
+	</view>
+</view>
+<van-popup show="{{showofficial}}" bind:close="onOfficialClose" custom-class="pop-bg">
+	<view class="activity-bg official">
+		<image class="official-img" src="{{imgUrlsofficial}}" mode="widthFix" lazy-load="false" binderror="" bindload=""
+			bindtap="onOfficialGo">
+		</image>
+		<view class="official-close-btn" bindtap="onOfficialClose"></view>
+		<button class='official-go-btn' bindtap="followBtn" show-message-card plain>
+		</button>
+	</view>
+</van-popup>
+<navigator url="../../customer/customerService/customerService" class="customer-icon">
+	<icon class='./iconfont/iconkefu:before'></icon>
+</navigator>

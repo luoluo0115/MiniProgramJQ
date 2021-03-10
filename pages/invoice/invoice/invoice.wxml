@@ -1,0 +1,92 @@
+<!--pages/invoice/invoice/invoice.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="account">
+    <noticewrapper  class="noticewrapper" bindtap="onGoNoticeWrapper"></noticewrapper>
+    <topwrapper class="top-wrapper" customerlist="{{customer_info_id_list}}" customerindex="{{index}}" pickerDate="{{pickerDate}}" wx:if="{{topwrapper==true}}"  bind:pickerdateevent="onPickerDateEvent"  bind:pickercompanyevent="onPickerCompanyEvent"></topwrapper>
+     <view class="section invoice-wrapper" >
+        <view class="page">
+            <view class="page__bd page__bd_spacing" >
+                 <view class="account-wrapper">
+                    <view class="header-title ">
+                        <view class="text">发票</view>
+                    </view>
+                    <view class="weui-flex  item">
+                        <block wx:for="{{iminvoicestatdata}}" wx:key="index"  wx:if="{{item.invoice_type =='OUTCOME'}}">
+                            <view class="weui-flex__item">
+                                <view class="title">
+                                    进项<block wx:if="{{item.v_type == 'month'}}">月度</block><block wx:if="{{item.v_type == 'quarter'}}">季度</block>开票汇总
+                                </view>
+                                <view class="invoice-center">
+                                    <view class="weui-flex">
+                                        <view class="left">开票金额</view>
+                                        <view class="weui-flex__item right">{{filter.numberToFixed(item.total_invoice_amount)}}</view>
+                                    </view>
+                                    <view class="weui-flex">
+                                        <view class="left">开票税额</view>
+                                        <view class="weui-flex__item right">{{filter.numberToFixed(item.total_tax_amount)}}</view>
+                                    </view>
+                                </view>
+                            
+                            </view>
+                        
+                        </block>
+                    </view>
+                    <view class="weui-flex item" >
+                        <block wx:for="{{iminvoicestatdata}}" wx:key="index" wx:if="{{item.invoice_type =='INCOME'}}">
+                        <view class="weui-flex__item">
+                            <view class="title">
+                                销项<block wx:if="{{item.v_type == 'month'}}">月度</block><block wx:if="{{item.v_type == 'quarter'}}">季度</block>开票汇总
+                            </view>
+                            <view class="invoice-center">
+                                <view class="weui-flex">
+                                    <view class="left">开票金额</view>
+                                    <view class="weui-flex__item right">{{filter.numberToFixed(item.total_invoice_amount)}}</view>
+                                </view>
+                                <view class="weui-flex">
+                                    <view class="left">开票税额</view>
+                                    <view class="weui-flex__item right">{{filter.numberToFixed(item.total_tax_amount)}}</view>
+                                </view>
+                            </view>
+                        
+                        </view>
+                        </block>
+                    </view>
+                
+                </view>
+                        
+                    
+                <view class="weui-grids grids-wrapper">
+                    <block >
+                        <view  bindtap="goInvoice" class="weui-grid"  hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../../../images/mini/propery-icon.png" />
+                            <view class="weui-grid__label">开票申请</view>
+                        </view >
+                        <navigator url="/pages/invoice/ominvoice/ominvoice" class="weui-grid" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../../../images/mini/icon-change.png" />
+                            <view class="weui-grid__label">进项发票</view>
+                        </navigator>
+                        <navigator url="/pages/invoice/iminvoice/iminvoice" class="weui-grid" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../../../images/mini/icon-search.png" />
+                            <view class="weui-grid__label">销项发票</view>
+                        </navigator>
+                        <navigator url="/pages/invoice/invoiceAddrList/invoiceAddrList" class="weui-grid" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../../../images/mini/icon-local.png" />
+                            <view class="weui-grid__label">快递地址</view>
+                        </navigator>
+                        <navigator url="/pages/invoice/calculateTax/calculateTax" class="weui-grid" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../../../images/mini/icon-type.png" />
+                            <view class="weui-grid__label">税金计算器</view>
+                        </navigator>
+                        <navigator url="/pages/invoice/imInvoiceApprovedType/imInvoiceApprovedType" class="weui-grid" hover-class="weui-grid_active">
+                            <image class="weui-grid__icon" src="../../../images/mini/icon-tax.png" />
+                            <view class="weui-grid__label">核定税种</view>
+                        </navigator>
+                    
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+</view> 
+<van-dialog id="van-dialog" />
+<van-toast id="van-toast" />

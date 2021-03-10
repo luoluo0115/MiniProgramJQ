@@ -1,0 +1,159 @@
+.page{
+  background-color:#fff ;
+  padding-bottom: 4%;
+}
+.btn-list{
+  margin: 20rpx 0 ;
+  text-align: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #eee;
+}
+.van-tabs__line {
+  background-color: #1e6ce8!important;
+}
+.grids-wrapper{
+  background: #f9f9f9;
+  padding:0 20rpx 20rpx;
+  font-size: 24rpx;
+  color: #999;
+  border-radius: 8rpx;
+  margin-top:20rpx
+
+}
+.card-header{
+  color: #333;
+  font-size: 30rpx;
+  border-bottom: 1px solid #eee;
+  line-height: 70rpx;
+  height: 78rpx;
+  margin-bottom: 20rpx;
+  padding-bottom:20rpx
+}
+.card-header text{
+  display: inline-block;
+  position: relative;
+  top: 4rpx;
+  padding-left: 10rpx;
+}
+.detail-btn{
+  margin-right: 10rpx;
+}
+/*num-wrapper*/
+.num-wrapper{
+  padding: 30rpx;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+  color: #999;
+  font-size: 20rpx;
+  border-bottom:1px solid #eee;
+}
+.num-wrapper .num{
+  font-size: 28rpx;
+}
+
+
+/*上传*/
+.upload-list{
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+.upload-list .item{
+  padding: 30rpx 0;
+}
+.upload-list .title{
+  border-left:2px solid #1e6ce8;
+  padding-left:10px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.picker-item{
+  padding: 0!important;
+  font-size: 24rpx!important;
+}
+
+.expend-list {
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+.expend-item {
+  background-color: #fff;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+.expend-list .list-title {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 25rpx 30rpx;
+  border-bottom: 1px solid #eee;
+}
+.expend-list .a-expend {
+  display: flex;
+  padding: 15rpx 15rpx 15rpx 0;
+  border-bottom: 1px solid #eee;
+}
+.expend-list .a-expend .img-box {
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-left: 30rpx;
+  background-color: #d8d8d8;
+}
+.expend-list .img-box .img {
+  width: 160rpx;
+  height: 160rpx;
+}
+.expend-list .a-expend .text-box {
+  width: 510rpx;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+}
+.a-expend .text-box .arow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.a-expend .text-box .arow .label {
+  width: 330rpx;
+  font-size: 20rpx;
+  height: 40rpx;
+  /* color: #000; */
+  line-height: 1.6;
+  overflow: hidden;
+}
+.a-expend .text-box .arow .label-right {
+  font-size: 20rpx;
+  /* color: #000; */
+  align-self: flex-start;
+}
+.title {
+  width: 100%;
+  display: block;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 20rpx;
+  color: #666;
+  border-bottom: 1px solid #eee;
+}
+.title text{
+  padding-left: 30rpx;
+}
+.van-cell__title{
+  font-size: 26rpx;
+}
+.van-collapse-item__content {
+  padding:0 15px!important; 
+  padding: var(--collapse-item-content-padding,0 15px)!important;
+}
+.van-collapse-item__content .van-cell{
+  font-size: 10px!important;
+  font-size: var(--cell-font-size,10px)!important;
+  padding: 5px 16px!important;
+  padding: var(--cell-vertical-padding,5px) var(--cell-horizontal-padding,16px)!important;
+}

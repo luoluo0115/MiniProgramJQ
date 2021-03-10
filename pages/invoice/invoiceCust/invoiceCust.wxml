@@ -1,0 +1,107 @@
+<view class="page area-container center-container">
+	<view class="invoice page__bd page__bd_spacing">
+		<view class="invoice-item">
+			<view class="area-title ">
+				<view class="area-text">客户信息</view>
+			</view>
+			<view class="invoice-info-list">
+				<van-cell-group>
+                <van-field
+                    name="customer_name"
+                    data-fieldName="customer_name"
+                    value="{{invoiceCustList.customer_name}}"
+                    required
+                    label="客户名称"
+                    placeholder="请输入客户名称"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="customer_tax_code"
+                    data-fieldName="customer_tax_code"
+                    value="{{invoiceCustList.customer_tax_code}}"
+                    label="税务代码"
+                    required
+                    placeholder="请输入税务代码"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="customer_bank_name"
+                    data-fieldName="customer_bank_name"
+                    value="{{ invoiceCustList.customer_bank_name }}"
+                    label="开户银行"
+                    placeholder="请输入开户银行"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="customer_bank_account"
+                    data-fieldName="customer_bank_account"
+                    value="{{ invoiceCustList.customer_bank_account }}"
+                    label="银行账号"
+                    placeholder="请输入银行账号"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="customer_phone"
+                    data-fieldName="customer_phone"
+                    value="{{ invoiceCustList.customer_phone }}"
+                    label="电话"
+                    placeholder="请输入电话"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="customer_address"
+                    data-fieldName="customer_address"
+                    value="{{ invoiceCustList.customer_address }}"
+                    label="详细地址"
+                    placeholder="请输入详细地址"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="remark"
+                    data-fieldName="remark"
+                    value="{{ invoiceCustList.remark }}"
+                    label="备注"
+                    placeholder="请输入备注"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                    border="{{false}}"
+                />
+				</van-cell-group>
+			</view>
+		</view>
+		<van-row custom-class="upload-btn " gutter="10">
+			<van-col span="24">
+				<van-button round type="info" size="small" block color="#1e6ce8" bindtap="bindSave">保存</van-button>
+			</van-col>
+		</van-row>
+        <van-row custom-class="upload-btn " gutter="10" wx:if="{{fType != '1'}}">
+            <van-col span="24">
+				<van-button round type="info" size="small" block color="#1e6ce8" wx:if="{{invoiceCustList.im_cust_customer_id>0}}" bindtap="deleteCust">删除</van-button>
+			</van-col>
+		</van-row>
+	</view>
+</view>
+<van-popup show="{{ showAdress }}" position="bottom">
+	<van-area area-list="{{ areaList }}" bind:cancel="onClose" bind:confirm="onConfirm" />
+</van-popup>
+<van-toast id="van-toast" />

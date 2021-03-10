@@ -1,0 +1,48 @@
+/* pages/me/agreement/agreement.wxss */
+page{
+    background-color: #EDEDED;
+  }
+.invoice-list .item{
+    background:#fff;
+    margin-top: 4%;
+    border-radius:15px;
+    color: #666;
+    padding:5%;
+    border: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+.time{
+    color:#AAAAAA;
+}
+.right{
+   text-align: right
+}
+/*待支付*/
+
+.pay-title{
+    font-size: 14px;
+    font-weight:600
+}
+.pay-footer{
+    height:20px;
+    line-height: 20px;
+}
+.pay-total{
+   font-size: 14px;
+}
+.pay-arrow{
+    margin-top:15%
+}
+.invoice-list .invoice-pay{
+    background: #ff9913;
+    color:#ffffff;
+    border:1px solid #ff9913;
+   
+} 
+.invoice-list .invoice-pay-price{
+    padding: 5px 0
+}   
+.invoice-list .invoice-pay icon{
+   
+    font-size: 18px!important;
+}   

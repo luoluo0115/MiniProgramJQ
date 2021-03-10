@@ -1,0 +1,48 @@
+/* pages/statements/balanceSheet/balanceSheet.wxss */
+/* .balanceSheet-wrapper .van-cell{
+    font-size: 12px!important
+}
+.balanceSheet-wrapper .van-cell__value{
+    color: #6823FB
+} */
+
+.van-cell{
+    font-size: 12px!important
+}
+.van-cell__value{
+    color: #1e6ce8
+}
+
+.van-cell__value {
+    flex: 2!important;
+    -webkit-box-flex: 2!important;
+}
+.van-collapse-item__content{
+    padding:0 22px!important;
+}
+.van-cell__label{
+    position: absolute;
+    top: 10px;
+    left: 42%;
+    text-align: right;
+    width: 68px;
+
+  }
+  .header-title{
+    text-align:center;
+    background: #f8f8f8;
+    color: #666666;
+    font-size: 12px;
+    padding: 2% 0;
+  }
+  .header-title .center{
+    text-align:center;
+    margin-left:3%
+    
+  }
+  .total .van-cell{
+    background: #f9f9f9
+}
+  .total .van-cell__right-icon-wrap {
+    opacity: 0;
+}

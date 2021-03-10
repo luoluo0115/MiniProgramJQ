@@ -1,0 +1,162 @@
+.iphone {
+  /*margin-bottom: 54px;*/
+  padding-bottom: 60rpx
+}
+
+.center-container {
+  top: -60px;
+  background: #f9f9f9;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 6;
+  position: relative;
+  height: 100%;
+  min-height: 300px;
+
+
+}
+.user-list {
+  top: 130rpx;
+  position: relative;
+  font-size: 14px;
+
+}
+
+.userinfo-list .item icon {
+  position: relative;
+  top: -5rpx;
+}
+
+.userinfo-list .item icon,
+.userinfo-list .item-text,
+.userinfo-list .item-zc,
+.item-wechart .score-icon-left,
+.item-wechart .item-text {
+  display: inline-block;
+
+}
+
+.userinfo-list .item-text,
+.item-wechart .item-text {
+  font-size: 28rpx;
+  padding-left: 5rpx;
+}
+
+.userContent {
+  z-index: 7;
+  top: -80px;
+
+}
+
+.user-list .title {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 80rpx;
+  padding-left: 10rpx;
+
+}
+
+.user-list-wrapper {
+  background-color: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+
+.save-btn {
+  width: 100% !important;
+  background: #677CFB;
+  color: #fff;
+  margin: 40rpx auto;
+  border-radius: 42rpx;
+  text-align: center;
+
+}
+
+.form-box {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.row-wrap {
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-left: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  font-size: 24rpx;
+  /*justify-content: space-between;*/
+}
+
+.row-wrap .label {
+  width: 200rpx;
+  color: #000;
+  font-size: 28rpx;
+}
+
+.row-wrap .label-right {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: right;
+}
+
+.row-wrap .label-right input,.row-wrap .label-right .input {
+  height: 100%;
+  font-size: 26rpx;
+  padding-right: 60rpx;
+  text-align: right;
+}
+
+.row-wrap .right-box {
+  margin-right: 30rpx;
+}
+
+.arrow-right {
+  width: 15rpx;
+  height: 28rpx;
+}
+
+.picker {
+  min-width: 20rpx;
+  height: 100%;
+  margin-right: 20rpx;
+}
+
+.switch
+{
+  zoom:.8;
+}
+
+.van-button--small {
+  min-width: 50px !important;
+  padding: 0 8px !important;
+  font-size: 12px !important;
+  line-height: 34px !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  background: #0C30DF !important;
+  color: #fff !important;
+  border-radius: 25px !important;
+  width: 124px !important;
+  border: 0 !important;
+  font-weight: 600;
+
+}
+
+.divLine {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 10px;
+  line-height: 15px;
+  border-left: 5px solid #009688;
+  border-radius: 0 2px 2px 0;
+  background-color: #f2f2f2;
+}
+.icon-Q{
+  font-size: 16px;
+  top: 3px;
+  position: relative;
+  color: #666;
+}

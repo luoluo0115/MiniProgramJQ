@@ -1,0 +1,77 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="account ">
+    <view class="top-wrapper"></view>
+    <view class="section " >
+        <view class="page">
+            <view class="page__bd page__bd_spacing">
+                <view class="account-wrapper">
+                    <view class="sub">余额(元)</view>
+                    <view class="title">{{filter.numberToFixed(balance_amt)}}</view>
+                    <view class="goRecord" bindtap="goRecord" >交易记录</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--列表-->
+    <view class="section grids-content">
+        <view class="page">
+            <view class="page__bd page__bd_spacing">
+                <view class="grids-wrapper">
+                    <view class="title ">
+                        <text class="text d-inline-block">账户充值</text>
+                        <text wx:if="{{customer_name!=''}}" class="d-inline-block color-blue">({{customer_name}})</text>
+                        
+                    </view>
+                    <view class="setMeal-list">
+                        <van-row >
+                            <van-col span="12" wx:for="{{setMealList}}" wx:key="index" bindtap='bindTapSetMeal' data-id="{{index}}" data-deposit_amt="{{item.deposit_amt}}" data-cust_deposit_prod_id="{{item.cust_deposit_prod_id}}" data-account_amt="{{item.account_amt}}" data-product_name="{{item.product_name}}">
+                                <block wx:if="{{item.product_name !='其它金额'}}">
+                                <view class="itembg {{index===activeId?'active':''}}"   >
+                                    <image class="img" src="{{item.product_file}}" mode="aspectFill" class="img-bg"/>
+                                    <!-- <view class="title">{{item.product_name}}</view>
+                                    <view class="price">到账<text>{{item.account_amt}}</text></view> -->
+                                </view>
+                                </block>
+                                <block wx:else>
+                                <view class="itembg minH {{index===activeId?'active':''}}">
+                                    <image class="img" src="{{item.product_file}}" mode="aspectFill" class="img-bg"/>
+                                    <van-field
+                                            value="{{ custom_amt }}"
+                                            type="digit"
+                                            placeholder="输入金额"
+                                            border="{{ false }}"
+                                            error-message="{{amountMessage}}"
+                                            bind:change='amountChange'
+                                            class="otherInput"
+                                        />
+                                    <!-- <view class="price" >自定义充值金额</view> -->
+                                </view>
+                                </block>
+                            </van-col>
+                             
+                        </van-row>
+                        <view class="checkout-list">
+                            <view class="d-inline-block">
+                                <van-checkbox value="{{ checked }}" shape="square" bind:change="onChange" custom-class="checkout-item d-inline-block">
+                                </van-checkbox>
+                            </view>
+                            <view class="payinfo d-inline-block" bindtap="goRule" data-type="active-rule">充值协议</view>
+                        </view>
+                        
+                        <view class="payment-btn" bindtap="goRecharge">马上充值:{{deposit_amt}}元</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- <van-submit-bar
+        price="{{total}}"
+        button-text="马上充值"
+        bind:submit="onSubmit"
+        price-class="priceBar"
+        button-class="btnBar"
+        decimal-length="2"
+        /> -->
+
+</view>    
+<van-toast id="van-toast" />

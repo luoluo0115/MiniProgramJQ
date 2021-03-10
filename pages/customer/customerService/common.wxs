@@ -1,0 +1,18 @@
+var common = {
+  splitContent: function (data, i) {
+    var arr = data.split('|');
+    if (arr.length > i) {
+      return arr[i];
+    }
+    else {
+      return "出错了，超过索引的范围！";
+    }
+
+
+  }
+}
+
+
+module.exports = {
+  splitContent: common.splitContent
+} 

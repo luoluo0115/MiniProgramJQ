@@ -1,0 +1,61 @@
+
+<view class="page area-container center-container">
+    <view class="invoice page__bd page__bd_spacing">
+        <view class="invoice-item"> 
+            <view class="invoice-info-list">  
+                <van-cell-group>
+                
+                <van-field
+                    name="invoice_category"
+                    data-fieldName="invoice_category"
+                    value="{{invoice_category}}" 
+                    label="发票类型" 
+                    disabled="false"
+                    placeholder=""
+                    disabled="false"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"  
+                />
+                <van-field
+                    name="scrap_category"
+                    data-fieldName="scrap_category"
+                    value="{{scrap_category}}" 
+                    label="作废分类" 
+                    disabled="false"
+                    placeholder=""
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item" 
+                />
+                <van-field
+                    name="scrap_apply_reason"
+                    data-fieldName="scrap_apply_reason"
+                    value="{{formData.scrap_apply_reason}}" 
+                    label="作废理由" 
+                    placeholder="作废理由" 
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item" 
+                    bind:input="formDataChange"
+                />
+               
+            </van-cell-group>
+            </view> 
+        </view>
+        <van-row custom-class="upload-btn " gutter="10">
+            <van-col span="12">
+                <van-button round plain hairline type="info" size="normal" block color="#1e6ce8" bindtap="postDataTemp">保存</van-button>
+            </van-col>
+            <van-col span="12">
+                <van-button round type="info" size="normal" block color="#1e6ce8" bindtap="postData">保存提交</van-button>
+            </van-col>
+        </van-row>
+    </view>
+</view>
+
+
+<van-popup show="{{ showAdress }}" position="bottom">
+    <van-area area-list="{{ areaList }}" bind:cancel="onCloseAddres" bind:confirm="onConfirm"/>
+</van-popup>
+<van-toast id="van-toast" />

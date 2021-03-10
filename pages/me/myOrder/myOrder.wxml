@@ -1,0 +1,158 @@
+<!--pages/me/myOrder/myOrder.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="myOrder">
+    <van-tabs active="{{ active }}" bind:change="onChange" >
+        <van-tab title="未支付" >
+            <view class="goods-list">
+                <block wx:if="{{orderList!=''}}">
+                    <view class="goods-item" wx:for="{{orderList}}" wx:key="index">
+                        <view class="a-goods"  bindtap='bindTapProductDetail' data-item_id="{{item.pre_product_id}}">
+                            <view class="img-box">
+                                <image src="{{item.product_image}}" class="img" />
+                            </view>
+                            <view class="text-box">
+                                <view class="arow arow01">
+                                    <view class="goods-name">{{item.product_name}}</view>
+                                    <view class="goods-price">¥ {{filter.numberToFixed(item.need_pay_amount)}}</view>
+                                </view>
+                                <view class="arow">
+                                    <view class="goods-label">{{item.pre_product_price_value}}</view>
+                                </view>
+                                <view class="arow bottom-time">
+                                    下单时间:{{item.sbumit_time}}
+                                </view>
+                            </view>
+
+                        </view>
+                        <view class="remark" wx:if="{{item.remark!=''}}">备注: {{item.remark}}</view>
+                        <van-row > 
+                            <van-col span="24" custom-class="bottom-wrapper">
+                            <block wx:if="{{item.status=='A'}}">
+                                <view class="pay-btn " bindtap="goPayWay" data-item="{{item}}">去支付</view>
+                            </block>
+                            <view class="pay-btn cancel" bindtap="onCancel" data-pre_order_id="{{item.pre_order_id}}">取消</view>
+                            </van-col>
+                        </van-row>
+                       
+                        
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="empty">{{msg}}</view>
+                </block>
+            </view>
+        </van-tab>
+        <van-tab title="已付款" >
+             <view class="goods-list">
+                <block wx:if="{{orderList!=''}}">
+                    <view class="goods-item" wx:for="{{orderList}}" wx:key="index">
+                        
+                        <view class="a-goods" bindtap='bindTapProductDetail' data-item_id="{{item.pre_product_id}}">
+                            <view class="img-box">
+                                <image src="{{item.product_image}}" class="img" />
+                            </view>
+                            <view class="text-box">
+                                <view class="arow arow01">
+                                    <view class="goods-name">{{item.product_name}}</view>
+                                    <view class="goods-price">¥ {{filter.numberToFixed(item.need_pay_amount)}}</view>
+                                </view>
+                                <view class="arow">
+                                    <view class="goods-label">{{item.pre_product_price_value}}</view>
+                                </view>
+                                <view class="arow bottom-time">
+                                    <van-row > 
+                                        <van-col span="12" >
+                                            下单时间:{{item.sbumit_time}}
+                                        </van-col>
+                                        <van-col span="12" >
+                                            付款时间:{{item.full_paid_time}}
+                                        </van-col>
+                                    </van-row>
+                                   
+                                </view>
+                            </view>
+                        </view>
+                        <view class="remark" wx:if="{{item.remark!=''}}">备注: {{item.remark}}</view>
+                         <van-row > 
+                            <van-col span="24" custom-class="bottom-wrapper">
+                               <block wx:if="{{item.status=='R'}}">
+                                    <view class="pay-btn {{item.status==S?'':'purple'}}">{{item.status_desc}}</view>
+                                </block>
+                                <block wx:if="{{item.status=='B'}}">
+                                   <view class="pay-btn cancel">{{item.status_desc}}</view>
+                                </block>
+                            </van-col>
+                        </van-row>
+                       
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="empty">{{msg}}</view>
+                </block>
+            </view>
+        </van-tab>
+        <!-- <van-tab title="已完成" >
+             <view class="goods-list">
+                <block wx:if="{{orderList!=''}}">
+                    <view class="goods-item" wx:for="{{orderList}}" wx:key="index">
+                        
+                        <view class="a-goods" bindtap='bindTapProductDetail' data-item_id="{{item.pre_product_id}}">
+                            <view class="img-box">
+                                <image src="{{item.product_image}}" class="img" />
+                            </view>
+                            <view class="text-box">
+                                <view class="arow arow01">
+                                    <view class="goods-name">{{item.product_name}}</view>
+                                    <view class="goods-price">¥ {{filter.numberToFixed(item.need_pay_amount)}}</view>
+                                </view>
+                                <view class="arow">
+                                    <view class="goods-label">{{item.pre_product_price_value}}</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="remark" wx:if="{{item.remark!=''}}">备注: {{item.remark}}</view>
+                        <van-row > 
+                            <van-col span="24" custom-class="bottom-wrapper">
+                                <block wx:if="{{item.status=='C'}}">
+                                    <view class="pay-btn {{item.status==S?'':'purple'}}">{{item.status_desc}}</view>
+                                </block>
+                                <block wx:if="{{item.status=='B'}}">
+                                   <view class="pay-btn cancel">{{item.status_desc}}</view>
+                                </block>
+                            </van-col>
+                        </van-row>
+                        
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="empty">{{msg}}</view>
+                </block>
+            </view>
+        </van-tab> -->
+    </van-tabs>
+    
+</view>
+<van-toast id="van-toast" />
+<van-popup show="{{ showPayWay }}" bind:close="onClose" position="bottom" custom-class="showPayWay" closeable >
+    <view class="peisong-way">
+        <view class="pay-way">支付方式</view>
+        <van-radio-group value="{{ radioPay }}" bind:change="onPayChange">
+            <van-cell-group>
+                <van-cell title="微信支付" clickable data-name="1" bind:click="onClick">
+                <van-radio slot="right-icon" name="1" />
+                </van-cell>
+                <van-cell title="余额支付" label="{{customer_name}}" clickable data-name="2" bind:click="onClick">(可用余额:￥{{filter.numberToFixed(available_balance)}})
+                <van-radio slot="right-icon" name="2" />
+                </van-cell>
+                <van-cell title="代理支付" label="{{par_customer_name}}" wx:if="{{agent_pay}}" clickable data-name="3"  border="{{ false }}" bind:click="onClick">(可用余额:￥{{filter.numberToFixed(par_available_balance)}})
+                <van-radio slot="right-icon" name="3" />
+                </van-cell>
+            </van-cell-group>
+        </van-radio-group>
+    </view>
+    <van-cell title="应付金额" value="￥{{filter.numberToFixed(pay_amount)}}"/>
+    <view class="pop-pay-btn">
+        <van-button color="#1e6ce8"  block bindtap="toPayTap">立即支付</van-button>
+    </view>
+</van-popup>
+

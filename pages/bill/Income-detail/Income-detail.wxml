@@ -1,0 +1,67 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<!-- <view bindtap="addUpload" class="btn-upload" block>上传汇总表</view> -->
+ <van-row custom-class="num-wrapper">
+    <van-col span="8">
+        <view class="num"><text class="color-red">{{zInvoiceQty}}</text></view>
+        <text class="num-title">上传数量</text>
+    </van-col>
+        <van-col span="8">
+        <view class="num"><text class="color-red">{{filter.numberToFixed(zInvoiceTax)}}</text></view>
+        <text class="num-title">税额</text>
+    </van-col>
+    <van-col span="8">
+        <view class="num"><text class="color-red">{{filter.numberToFixed(zInvoiceTax+zInvoiceAmount)}}</text></view>
+        <text class="num-title">价税合计</text>
+    </van-col>
+</van-row>
+<view class="page__bd page__bd_spacing">
+        <view class="btn-list">
+            <van-button icon="upgrade" size="small" custom-class="top-btn" wx:if="{{curr_status=='N'}}" bind:click="chooseFile">文件上传</van-button>
+            <van-button icon="upgrade" size="small" custom-class="top-btn" wx:if="{{curr_status=='N'}}" bind:click="deleteFileData">清除数据</van-button>
+        </view>
+            <!-- 弹出层 -->
+            <van-popup show="{{ showModal }}" bind:close="close" round custom-class="popWrapper" closeable="true">
+                <view  class="text-left bank-title">上传发票汇总表</view>
+                <view  class="text-left bank-title" wx:if="{{fileName!=''}}">{{fileName}}</view>
+                <van-row gutter="10">
+                    <van-col span="12">
+                            <view class="choose-btn" bindtap="chooseFile">选择文件</view>
+                    </van-col>
+                    <van-col span="12">
+                            <view class="up-btn {{is_up=='true'?'blue':''}}" bindtap="uploadFile">开始上传</view>
+                    </van-col>
+                </van-row>
+            </van-popup>
+    </view>
+ <view class="page" >
+    <view class="expend-list">
+            <block wx:if="{{invoiceFileList!=''}}">
+                <view class="expend-item" wx:for="{{invoiceFileList}}" wx:key="index">
+                    <view class="title">发票类型: {{type_desc}}</view>
+                    <view class="a-expend">
+                         
+                        <view class="text-box">
+                            <view class="arow arow01">
+                                <view class="label">购买方:{{item.buyer_name}}</view>
+                                <view class="label-right">金额:{{filter.numberToFixed(item.total_amount)}}</view>
+                            </view>
+                            <view class="arow arow01">
+                                <view class="label">发票号码:{{item.invoice_no}}</view>
+                                <view class="label-right">税额:{{filter.numberToFixed(item.tax_amount)}}</view>
+                            </view>
+                            <view class="arow arow01">
+                                <view class="label">开票日期:{{filter.formatTime(item.invoice_date,'yyyy-MM-dd')}}</view>
+                                <view class="label-right">价税合计:{{filter.numberToFixed((item.total_amount+item.tax_amount))}}</view>
+                            </view>
+                        </view>
+
+                    </view>
+
+                </view>
+            </block>
+            <block wx:else>
+                <view class="empty">{{msg}}</view>
+            </block>
+        </view>
+</view>
+<van-toast id="van-toast" />

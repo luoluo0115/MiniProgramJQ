@@ -1,0 +1,175 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page center-container">
+    <view class="page__bd page__bd_spacing userContent">
+         
+          
+        <view class="user-list  {{iphone}}">
+            
+            <form bindsubmit="bindSave">
+                <view class="user-list-wrapper" >
+                    <view class="form-box">
+                            <view class="divLine">基本信息</view>
+                             <view class="row-wrap">
+                                <view class="label">员工姓名</view>
+                                <view class="label-right">
+                                    <input name="emp_name" class="input" type="text" placeholder="请输入员工姓名" value="{{empList.emp_name}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                              <view class="label"><text class="color-red" >入职日期</text><van-icon name="question-o" custom-class="icon-Q" bindtap="goQuestion"/></view>
+                               <view class="label-right">
+                                <picker custom="d-inline-block" mode="date" value="{{filter.formatTime(ArdDate,'yyyy-MM-dd')}}" start="1970-01-01" end="2080-01-01" bindchange="changeArdDate">
+                                    <text class="input">{{filter.formatTime(ArdDate,'yyyy-MM-dd')}}</text>
+                                </picker>
+                               </view>
+                            </view>
+                            <picker bindchange="bindIdentificationTypeChange" value="{{info.identityList[index].code_name}}" range-key="{{'code_name'}}"  range="{{info.identityList}}" >
+                                <view class="picker">
+                                  <van-cell title="证件类型"  value="{{identification_type}}" is-link arrow-direction="down" />
+                                </view>
+                            </picker>
+                            <view class="row-wrap">
+                                <view class="label">身份证号</view>
+                                <view class="label-right">
+                                    <input name="identification_number" class="input" type="idcard" maxlength="18" placeholder="请输入身份证号" value="{{empList.identification_number}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">手机号码</view>
+                                <view class="label-right">
+                                    <input name="mobile_phone" class="input" type="number" maxlength="11" placeholder="请输入手机号码" value="{{empList.mobile_phone}}" />
+                                </view>
+                            </view>
+ 
+                            <!-- <picker bindchange="bindPayMethodChange" value="{{info.salaryPayMethodList[index].code_name}}" range-key="{{'code_name'}}"  range="{{info.salaryPayMethodList}}" >
+                                <view class="picker">
+                                  <van-cell title="薪资发放方式"  value="{{salary_pay_method}}" is-link arrow-direction="down" />
+                                </view>
+                            </picker> -->
+                            <view class="row-wrap">
+                                <view class="label">基本工资</view>
+                                <view class="label-right">
+                                    <input name="base_salary" class="input" type="digit" placeholder="请输入基本工资" value="{{empList.base_salary}}" bindinput="baseSalaryChange" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">岗位工资</view>
+                                <view class="label-right">
+                                    <input name="job_salary" class="input" type="digit" placeholder="请输入岗位工资" value="{{empList.job_salary}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap" wx:if="{{isEdit =='edit'}}">
+                             <view class="label">离职日期</view>
+                              <view class="label-right">
+                                <picker mode="date" value="{{resign_date}}" start="1970-01-01" end="2080-01-01" bindchange="changeResignDate">
+                                    <input value='{{resign_date}}' name="resign_date" placeholder='选择离职日期' class="input"/>
+                                </picker>
+                               </view>
+                            </view>
+                            <view class="row-wrap" wx:if="{{isEdit =='edit'}}">
+                                <view class="label">是否有效</view>
+                                <view class="label-right">
+                                    <view class="input">
+                                     <switch class="switch" color="#007aff" checked="{{enabled}}" bindchange="changeEnabled"/>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">备注</view>
+                                <view class="label-right">
+                                    <input name="remark" class="input" type="text" placeholder="请输入备注" value="{{empList.remark}}" />
+                                </view>
+                            </view>
+
+                            <view class="divLine">专项扣除</view>
+                            <view class="row-wrap">
+                                <view class="label">社保基数</view>
+                                <view class="label-right">
+                                    <input name="social_insurance_base_amount" class="input" type="digit" placeholder="请输入社保基数" value="{{empList.social_insurance_base_amount}}" bindinput="insuranceChange"/>
+                                </view>
+                            </view>
+
+                            <view class="row-wrap">
+                                <view class="label">个人医疗保险</view>
+                                <view class="label-right">
+                                    <input name="personal_medical_insurance" class="input" type="digit" placeholder="请输入个人医疗保险" value="{{empList.personal_medical_insurance}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">个人失业保险</view>
+                                <view class="label-right">
+                                    <input name="personal_unemployment_insurance" class="input" type="digit" placeholder="请输入个人失业保险" value="{{empList.personal_unemployment_insurance}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">个人养老保险</view>
+                                <view class="label-right">
+                                    <input name="personal_pension_insurance" class="input" type="digit" placeholder="请输入个人养老保险" value="{{empList.personal_pension_insurance}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">公积金基数</view>
+                                <view class="label-right">
+                                    <input name="housing_fund_base_amount" class="input" type="digit" placeholder="请输入公积金基数" value="{{empList.housing_fund_base_amount}}" bindinput="housingChange"/>
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">个人公积金</view>
+                                <view class="label-right">
+                                    <input name="personal_housing_fund" class="input" type="digit" placeholder="请输入个人公积金" value="{{empList.personal_housing_fund}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">个税抵扣额</view>
+                                <view class="label-right">
+                                    <input name="tax_deduct_amount" disabled='true' class="input" type="digit" placeholder="请输入个税抵扣额" value="{{empList.tax_deduct_amount}}" />
+                                </view>
+                            </view>
+                             
+
+                            <view class="divLine">专项附加扣除</view>
+                            <view class="row-wrap">
+                                <view class="label">子女教育</view>
+                                <view class="label-right">
+                                    <input name="children_edu_deduct_amount" class="input" type="digit" placeholder="请输入子女教育抵扣额" value="{{empList.children_edu_deduct_amount}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">租房租金</view>
+                                <view class="label-right">
+                                    <input name="housing_rent_deduct_amount" class="input" type="digit" placeholder="请输入租房租金抵扣额" value="{{empList.housing_rent_deduct_amount}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">住房贷款</view>
+                                <view class="label-right">
+                                    <input name="loan_interest_deduct_amount" class="input" type="digit" placeholder="请输入住房贷款抵扣额" value="{{empList.loan_interest_deduct_amount}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">赡养老人</view>
+                                <view class="label-right">
+                                    <input name="support_elder_deduct_amount" class="input" type="digit" placeholder="请输入赡养老人抵扣额" value="{{empList.support_elder_deduct_amount}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">学历教育</view>
+                                <view class="label-right">
+                                    <input name="diploma_edu_deduct_amount" class="input" type="digit" placeholder="请输入学历教育抵扣额" value="{{empList.diploma_edu_deduct_amount}}" />
+                                </view>
+                            </view>
+                            <view class="row-wrap">
+                                <view class="label">职业教育</view>
+                                <view class="label-right">
+                                    <input name="vocational_edu_deduct_amount" class="input" type="digit" placeholder="请输入职业教育抵扣额" value="{{empList.vocational_edu_deduct_amount}}" />
+                                </view>
+                            </view>
+                            
+                    </view>
+                </view>
+                <button class="save-btn" formType="submit" size="large" >保存</button>
+            </form>
+        </view>
+    </view>
+</view>
+<van-toast id="van-toast" />

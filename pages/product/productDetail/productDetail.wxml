@@ -1,0 +1,87 @@
+<!--goods.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+
+<view class="page">
+    <view  class="banner">
+        <image src="{{productList.product_image}}" class="img" mode="widthFix" ></image>
+    </view>
+    
+    <view class=" page detail-wrapper"> 
+        <van-row >
+            <van-col span="24">
+                <view class="product_price"><text>¥ {{productList.product_price}}</text>{{productList.is_param=='Y'?'起':''}} </view>
+                <view class="product_name">{{productList.product_name}}</view>
+            </van-col>
+
+        </van-row>
+        
+    </view>
+       
+    <view class="hr"></view>
+    <view class="page ">
+        <view class="page__bd page__bd_spacing content-wrapper">
+            <import src="../../../wxParse/wxParse.wxml"/>
+            <template is="wxParse" data="{{wxParseData:product_desc.nodes}}"/>
+        </view>
+    </view>
+    <van-row custom-class="goods-action">
+        <van-col span="4" custom-class="goods-action-icon__content  {{iphone}}"> 
+            <button open-type="contact" class="goods-action-btn" send-message-title="{{productList.product_name}}" send-message-img="{{productList.product_image}}" show-message-card="true" send-message-path="/pages/product/good/good?spread_id={{pre_product_id}}&user_id={{user_id}}&type=C"  show-message-card plain>
+                 <icon class="./iconfont/iconzi_xun:before" ></icon> 
+                 <view>咨询</view>
+            </button>
+        </van-col>
+        <van-col span="20" custom-class=" goods-action-button  {{iphone}}" bindtap="tobuy"> 我要下单</van-col>
+    </van-row>
+    <view class="show-popup" hidden="{{hideShopPopup}}">
+            <view class="popup-mask" bindtap="closePopupTap"></view>
+            <view class="popup-contents">
+                 <form bindsubmit="buyNow">
+                    <view class="pop-goods-info">
+                        <view class="pop-img-box">
+                        <image src="{{productList.product_image}}" class="goods-thumbnail" />
+                        </view>
+                        <view class="pop-goods-des">
+                            <view class="pop-goods-title">{{productList.product_name}}</view>
+                            <view class="pop-goods-price" wx:if="{{productPrice==''}}">¥ {{filter.numberToFixed(productList.product_price)}}</view>
+                            <view class="pop-goods-price" wx:else>
+                                ¥ {{filter.numberToFixed(productPrice)}}
+                            </view>
+                            
+                        </view>
+                        <view class="pop-goods-close" bindtap="closePopupTap"></view>
+                    </view>
+                    <view class="size-label-box">
+                        <view class="size-label-box-item" wx:for="{{productParamsList}}" wx:for-item="property" wx:for-index="idx" wx:key="id"> 
+                            <view class="label">{{property.param_name}}</view>
+                            <block wx:if="{{property.param_type=='S'}}">
+                                <view class="label-item-box" >
+                                        <view  class="label-item {{item.active?'active' : '' }}" wx:for="{{property.paramDataList}}" wx:key="id"   bindtap="labelItemTap" data-propertyindex="{{idx}}" data-propertyid="{{property.pre_product_params_id}}" data-propertyname="{{property.param_name}}" data-propertychildindex="{{index}}"
+                                        data-propertychildid="{{item.id}}" data-propertychildname="{{item.paramData}}" >
+                                        {{item.paramData}} 
+                                        </view>
+                                </view>
+                            </block>
+                            <block wx:if="{{property.param_type=='E'}}">
+                                <view class="label-item-box" >
+                                    <input  bindinput="getFillInInf" data-index="{{idx}}" name="paramname{{property.pre_product_params_id}}" class="input" type="text" placeholder="请输入{{property.param_name}}" value="{{property.param_data}}" />
+                                </view>
+                            </block>
+                        
+                        </view>
+                        
+                    </view>
+                    <view class="">
+                        <button class="popup-join-btn  {{iphone}}" formType="submit" size="large" >提交订单</button>
+                    </view>
+                </form>
+            </view>
+    </view>
+   
+</view>
+<view class="loadingWrapper">
+    <van-loading type="spinner" color="#1989fa" wx:if="{{showloading}}" />
+</view>
+<van-toast id="van-toast" zIndex="1000"/>
+<van-dialog id="van-dialog" />
+

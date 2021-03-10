@@ -1,0 +1,326 @@
+/* pages/customer/customerService/customerService.wxss */
+.customer-wrapper{
+    background-image: linear-gradient(to bottom,#1e6ce8, #5b99fb);
+    text-align: center;
+    padding: 5% 5% 6% 5%;
+    color: #fff;
+    overflow: hidden;
+}
+.customer-wrapper .img{
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border:3px solid #fff;
+}
+.btn{
+  width: 100%!important;
+  min-height: 32px!important;
+  height: 32px!important;
+  line-height: 32px!important;
+  border-radius: 25px!important;
+  font-weight: 400;
+
+}
+.customer-wrapper  .item{
+    margin-top: 5%
+}
+.customer-text{
+    margin-top: 6px;
+}
+.title,.sub-title{
+    font-size: 14px;
+    line-height: 2
+}
+.btn-group{
+  margin: 15rpx auto;
+}
+ /*弹出层*/
+ .pop-bg{
+  background: none!important;
+  position: relative;
+}
+.active-close-btn{
+  position: absolute;
+  bottom: 0;
+  width: 100px;
+  text-align: center;
+  height: 45px;
+  left:50%;
+  margin-left: -50px;
+
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** 聊天窗口样式
+ * 54px为回复框高度，js同
+ */
+
+/*聊天记录*/
+
+.message-list {
+  /*margin-bottom: 54px;*/
+  background: #f9f9f9
+}
+
+/*单元行*/
+
+.row {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30rpx;
+}
+
+/*日期*/
+
+.datetime {
+  font-size: 10px;
+  padding: 10px 0;
+  color: #999;
+  text-align: center;
+}
+
+.send {
+  font-size: 15px;
+  padding-right: 10px;
+  color: #999;
+  text-align: center;
+}
+
+.add {
+  font-size: 25px;
+  padding-right: 10px;
+  color: #999;
+  text-align: center;
+  margin-right:5px;
+}
+
+/*主体*/
+
+.body {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+/*头像容器*/
+
+.body.avatar-container {
+  width: 20%;
+}
+
+/*头像*/
+
+.body .avatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  /* margin: 0 20rpx; */
+}
+.body .chatimage
+{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  margin: 0 20rpx;
+}
+
+/*文本消息*/
+
+.body .content {
+  font-size: 14px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  line-height: 20px;
+  margin: 0 10px;
+}
+
+/* 三角箭头 */
+
+.body .triangle {
+  background: white;
+  width: 20rpx;
+  height: 20rpx;
+  margin-top: 26rpx;
+  transform: rotate(45deg);
+  position: absolute;
+}
+.body .triangle.tr-mr-l{
+  left: 112rpx;
+}
+.body .triangle.tr-mr-r{
+  right: 112rpx; 
+  background: #7ECB4B
+}
+.body .msg-bg{
+  background: #7ECB4B
+}
+/*图片消息*/
+
+.picture {
+  width: 160px;
+}
+
+/*回复框*/
+
+.reply {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 54px;
+  border-top: 1px solid rgb(215, 215, 215);
+  background: rgb(245, 245, 245);
+}
+
+.reply .voice-image {
+  width: 25px;
+  height: 25px;
+  margin-left: 3%;
+}
+
+/*文本输入或语音录入*/
+
+.reply .opration-area {
+  flex: 1;
+  padding: 8px;
+}
+
+/*回复文本框*/
+
+.reply input {
+  background: rgb(252, 252, 252);
+  height: 36px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 6px;
+  padding-left: 3px;
+}
+
+/*选取图片*/
+
+.reply .choose-image {
+  width: 25px;
+  height: 25px;
+  margin-right: 3%;
+}
+
+/*按住说话button*/
+
+.voice-button {
+  height: 36px;
+  color: #818181;
+  font-size: 14px;
+  line-height: 36px;
+}
+
+/*悬浮提示框*/
+
+.hud-container {
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  left: 50%;
+  top: 50%;
+  margin-left: -75px;
+  margin-top: -75px;
+}
+
+/*背景层*/
+
+.hud-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #999;
+  opacity: 0.8;
+  z-index: 11;
+  border-radius: 10px;
+}
+
+/*悬浮框主体*/
+
+.hud-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 19;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*图标*/
+
+.hud-body image {
+  margin-top: 20px;
+  width: 80px;
+  height: 80px;
+}
+
+/*文字*/
+
+.hud-body .tip {
+  color: #fff;
+  text-align: center;
+  width: 90%;
+  line-height: 34px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.hud-body .warning {
+  background: #c33;
+  border-radius: 5px;
+}
+.wechart-wrapper{
+  position: relative;
+}
+.scroll{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom:255px ;
+}
+
+/* add by woody 20200310 */
+.anv-button {
+ 
+  margin-top:10px;
+  color: #000;
+  font-size: 14px;
+  line-height: 36px;
+}
+.switchtab {
+  margin-top:10px;
+  color:#6F93FF;
+  font-size: 14px;
+  line-height: 36px;
+}

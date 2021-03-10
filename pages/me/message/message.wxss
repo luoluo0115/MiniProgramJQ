@@ -1,0 +1,31 @@
+page {
+  background-color: #f9f9f9;
+}
+.van-tabs__line {
+  background-color: #647bfe !important;
+}
+
+.message-list {
+  width: 100%;
+}
+
+.message-item {
+  background-color: #fff;
+  margin-top: 20rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  padding: 15rpx;
+}
+.message-list .list-title {
+  font-size: 22rpx;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+.message-list   .list-content{
+  padding: 20rpx 0;
+}
+.message-list  .label{
+  font-size: 20rpx;
+  color: #666;
+  line-height: 1.6;
+}

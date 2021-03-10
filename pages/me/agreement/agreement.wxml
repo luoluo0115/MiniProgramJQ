@@ -1,0 +1,105 @@
+<!--pages/me/agreement/agreement.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ')
+}
+var dateFormatMonth = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.substring(0, 7)
+}
+var dateFormatDay = function (dateDay) {
+    if(dateDay == null){
+        return '';
+    }
+  return dateDay.substring(0, 10)
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  dateFormatMonth: dateFormatMonth,
+   dateFormatDay: dateFormatDay,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<view class="section">
+    <view class="page">
+        <view class="page__bd page__bd_spacing">
+           
+            <view class="invoice-list">
+                <!-- <block wx:if="{{customerpayList!=''}}"> -->
+                <block wx:for="{{customerPayList}}" wx:key>
+                    
+                        <view class="item invoice-pay">
+                           
+                            <van-row >
+                               <navigator url="../customerPaymentListDetail/customerPaymentListDetail?depute_service_master_id={{item.depute_service_master_id}}" >
+                                <van-col span="20" custom-class="light">
+                                    <view class="pay-title">待支付 </view>
+                                    <view class="invoice-pay-price">
+                                    <text>{{item.service_content}}</text>
+                                    </view>
+                                </van-col>
+                                <van-col span="4" custom-class="light pay-arrow right">
+                                    <van-icon name="arrow" />
+                                </van-col>
+                                </navigator>
+                                
+                            </van-row>   
+                            <van-row custom-class="pay-footer">
+                               
+                                 <van-col span="12" custom-class="dark left ">
+                                   合计: <text class=" pay-total">{{filter.numberToFixed(item.total_income)}} 元</text>
+                                </van-col>
+                                 <van-col span="12" custom-class="dark right">
+                                   <!-- <navigator   url="../customerPayment/customerPayment"> -->
+                                    <van-button type="default" size="mini"  bindtap='goPay'  >去支付</van-button>
+                                    <!--</navigator>-->
+                                </van-col>
+                            </van-row>   
+                        </view>
+                  
+                    
+                </block>
+                    
+                    <!--<van-button type="default" size="mini"  bindtap='goPay'  >去支付</van-button>-->
+                <!-- </block> -->
+                
+                <view class="item weui-flex" wx:for="{{customerList}}" wx:key >
+                    <view class="weui-flex__item left">
+                        <view class="name">{{item.service_category}}:{{item.service_name}}</view>
+                        <view class="time">开始月份:<block wx:if="{{item.service_month_from != null}}">{{m1.dateFormatMonth(item.service_month_from)}}</block></view>
+                        <view class="time">服务价格:<block wx:if="{{item.calc_prices == '--'}}">{{item.calc_prices}}</block><block wx:else>{{filter.numberToFixed(item.calc_prices)}}</block></view>
+                        <view class="time">本次付款服务到期月份:{{m1.dateFormatMonth(item.curr_payment_month)}}</view>
+                        <view class="time" wx:if="{{(item.actual_service_limit_to != null)&&(item.actual_service_limit_to != 0)}}">限定{{item.service_limit_category}}:{{item.actual_service_limit_to}}</view>
+                   
+                   </view>
+                    <view class="right">
+                       
+                         <block wx:if="{{item.service_status== '服务'}}">
+                             <van-tag class="demo-margin-right"  color="#7966FE" plain> {{item.service_status}}</van-tag>
+                        </block>
+                        <block wx:else >
+                            <van-tag class="demo-margin-right"  color="#AAAAAA" plain>{{item.service_status}}</van-tag>
+                        </block>
+                         <view class="time">结束月份:<block wx:if="{{item.service_month_to != null}}">{{m1.dateFormatMonth(item.service_month_to)}}</block><block wx:else >--</block></view>
+                       
+                        <view class="time">付款周期:{{item.payment_period}} </view>
+                        <view class="time"></view>
+                    </view>
+                </view>
+                
+            </view>
+        </view>
+    </view>
+</view>
+

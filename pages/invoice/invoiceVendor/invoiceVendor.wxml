@@ -1,0 +1,99 @@
+<view class="page area-container center-container">
+	<view class="invoice page__bd page__bd_spacing">
+		<view class="invoice-item">
+			<view class="area-title ">
+				<view class="area-text">销方信息</view>
+			</view>
+			<view class="invoice-info-list">
+        <van-cell-group>
+                <van-field
+                    name="vendor_name"
+                    data-fieldName="vendor_name"
+                    value="{{CustVendorList.vendor_name}}"
+                    label="销方名称"
+                    readonly
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="vendor_tax_code"
+                    data-fieldName="vendor_tax_code"
+                    value="{{CustVendorList.vendor_tax_code}}"
+                    label="销方税务代码"
+                    readonly
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="vendor_bank_name"
+                    data-fieldName="vendor_bank_name"
+                    value="{{ CustVendorList.vendor_bank_name }}"
+                    label="销方开户银行"
+                    readonly
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="vendor_bank_account"
+                    data-fieldName="vendor_bank_account"
+                    value="{{ CustVendorList.vendor_bank_account }}"
+                    label="销方银行账号"
+                    readonly
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="vendor_phone"
+                    data-fieldName="vendor_phone"
+                    value="{{ CustVendorList.vendor_phone }}"
+                    label="销方电话"
+                    placeholder="请输入销方电话"
+                    required
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="vendor_address"
+                    data-fieldName="vendor_address"
+                    value="{{ CustVendorList.vendor_address }}"
+                    label="详细地址"
+                    placeholder="请输入详细地址"
+                    required
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="remark"
+                    data-fieldName="remark"
+                    value="{{ CustVendorList.remark }}"
+                    label="备注"
+                    placeholder="请输入备注"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                    border="{{false}}"
+                />
+				</van-cell-group>
+			</view>
+		</view>
+		<van-row custom-class="upload-btn " gutter="10">
+			<van-col span="24">
+				<van-button round type="info" size="small" block color="#1e6ce8" bindtap="bindSave">保存</van-button>
+			</van-col>
+		</van-row>
+	</view>
+</view>
+<van-toast id="van-toast" />

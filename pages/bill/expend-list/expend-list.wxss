@@ -1,0 +1,85 @@
+page {
+  background-color: #f9f9f9;
+}
+
+.expend-list {
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.expend-item {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.expend-list .list-title {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 25rpx 30rpx;
+  border-bottom: 1px solid #eee;
+}
+
+.expend-list .a-expend {
+  display: flex;
+  padding: 15rpx 15rpx 15rpx 0;
+  border-bottom: 1px solid #eee;
+
+}
+
+.expend-list .a-expend .img-box {
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  margin-left: 30rpx;
+  background-color: #d8d8d8;
+}
+
+.expend-list .img-box .img {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.expend-list .a-expend .text-box {
+  width: 510rpx;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+}
+
+.a-expend .text-box .arow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a-expend .text-box .arow .label {
+  width: 330rpx;
+  font-size: 20rpx;
+  height: 40rpx;
+  /* color: #000; */
+  line-height: 1.6;
+  overflow: hidden;
+}
+ 
+
+.a-expend .text-box .arow .label-right {
+  font-size: 20rpx;
+  /* color: #000; */
+  align-self: flex-start;
+
+}
+
+ 
+.title {
+  width: 100%;
+  display: block;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 20rpx;
+  color: #666;
+  border-bottom: 1px solid #eee;
+}
+.title text{
+  padding-left: 30rpx;
+}

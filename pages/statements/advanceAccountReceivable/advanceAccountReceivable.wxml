@@ -1,0 +1,49 @@
+<!--pages/statements/advanceAccountReceivable/advanceAccountReceivable.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ').substring(0,dateStr.indexOf('.'))
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<view class="page">
+    <view class="page__bd page__bd_spacing">
+        <view class="pay-header">
+            <view class="weui-flex ">
+                <view class="weui-flex__item left">
+                    <view class="title">预收</view>
+                    <view class="price">{{amt_end}}</view>
+                </view>
+                <view class="right ">
+                    {{date}}
+                </view>
+            </view>
+        </view>
+        <view class="pay-content">
+            <view class="pay-title">预收明细</view>
+            <view class="pay-detail">
+                <van-cell-group>
+                    <block  wx:for="{{arData}}" wx:key>
+                        <block wx:if="{{item.total != null}}">
+                        <van-cell  title="{{item.customer_name}}" value="{{filter.numberToFixed(item.total)}}" />
+                            
+                        </block>
+                    </block>
+                </van-cell-group>
+            </view>
+
+        </view>
+    </view>
+</view>
+

@@ -1,0 +1,320 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page area-container center-container">
+    <view class="invoice page__bd page__bd_spacing">
+        <view class="invoice-item">
+            <view class="area-title ">
+                <view class="area-text">购方信息</view>
+                <view class="text-right">
+                        <van-button custom-class="text-right pur-btn" size="mini" color="#1e63e8" plain hairline round bindtap="goEditInvoiceCust" data-item='{{custCustomerList}}'>编辑</van-button>
+                </view>
+            </view>
+            <view class="invoice-info-list">
+                <van-cell title="单位名称"  value="{{custCustomerList.customer_name}}"  custom-class="invoice-info-item"/>
+                <van-cell title="税号" value="{{custCustomerList.customer_tax_code}}"  custom-class="invoice-info-item"/>
+                <van-cell title="单位地址" wx:if="{{isShowMore}}"  value="{{custCustomerList.customer_address}}"  custom-class="invoice-info-item"/>
+                <van-cell title="单位电话" wx:if="{{isShowMore}}"  value="{{custCustomerList.customer_phone}}"  custom-class="invoice-info-item"/>
+                <van-cell title="开户银行" wx:if="{{isShowMore}}"  value="{{custCustomerList.customer_bank_name}}"  custom-class="invoice-info-item"/>
+                <van-cell title="银行账号" wx:if="{{isShowMore}}"  value="{{custCustomerList.customer_bank_account}}"  border="{{false}}"custom-class="invoice-info-item"/>
+            </view>
+            <view class="upload-btn">
+                <van-button color="#1e6ce8" round plain size="small"  bind:click="moreChange" >{{isShowMore?'收起更多':'查看更多'}}<van-icon name="{{isShowMore?'arrow-up':'arrow-down'}}" /></van-button>
+            </view>
+            <view class="area-title ">
+                <view class="area-text">开票信息</view>
+            </view>
+            <view class="invoice-info-list">
+                <view>
+                    <van-cell title="企业类型" link value="{{enterprise_type}}"  custom-class="invoice-info-item" />
+                </view>                
+                <picker bindchange="bindInvoiceItemTypeChange" value="{{listInvoiceItemType[index].invoice_item_type}}" range-key="{{'invoice_item_type'}}" range="{{listInvoiceItemType}}" >
+                    <view class="picker">
+                    <van-cell required title="项目类型"  value="{{invoice_item_type}}" is-link />
+                    </view>
+                </picker>
+                <picker bindchange="bindInvoiceTypeChange" value="{{invoiceTypeList[index].invoice_category}}" range-key="{{'invoice_category'}}" range="{{invoiceTypeList}}" >
+                    <view class="picker">
+                    <van-cell required title="发票类型" border="{{false}}" value="{{invoice_type}}" is-link />
+                    </view>
+                </picker>
+            </view>
+             
+            <block wx:for="{{detailForm}}" wx:key="index">
+                <view class="area-title ">
+                    <view wx:if="{{index == 0}}">
+                        <view class="area-text">发票项目</view>
+                    </view>
+                    <view wx:else>
+                        <view class="area-text">发票项目({{index}})</view>
+                        <view class="text-right">
+                        <van-button custom-class="text-right pur-btn" size="mini" color="#1e63e8" plain hairline round bindtap="removeItem" data-id='{{index}}'>删除</van-button>
+                    </view>
+                </view>
+                </view>
+                <view class="invoice-info-list">
+                    <picker bindchange="bindItemTaxRateChange" data-index="{{index}}" data-fieldName="item_tax_rate" value="{{detailForm[index].taxindex}}" range-key="{{'tax_name'}}" range="{{listCustomer_tax}}" >
+                        <view class="picker">
+                        <van-cell required title="商品税目名称及税率"  title-class="van-cell__title_tax" value="{{detailForm[index].tax_name}}"  is-link />
+                        </view>
+                    </picker>
+                    <van-field
+                        value="{{ detailForm[index].item_name }}"
+                        label="项目名称"
+                        required
+                        placeholder="请输入项目名称"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"                        
+                        data-fieldName="item_name"
+                        data-index="{{index}}"
+                        bind:input="handleFieldChange"
+                    />
+                    <van-field
+                        value="{{ detailForm[index].item_spec }}"
+                        label="规格型号"
+                        placeholder="请输入规格型号"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        data-fieldName="item_spec"
+                        data-index="{{index}}"
+                        bind:input="handleFieldChange"
+                    />
+                    <van-field
+                        value="{{ detailForm[index].item_qty }}"
+                        label="数量"
+                        required
+                        readonly="{{invoice_item_type=='服务' ? true : false}}"
+                        type="digit"
+                        placeholder="请输入数量"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        data-fieldName="item_qty"
+                        data-index="{{index}}"
+                        bind:input="handleFieldChange"
+                    />
+                    <picker bindchange="bindItemUnitChange" data-idx="{{index}}" value="{{info.listUnit[index].code_name}}" range-key="{{'code_name'}}" range="{{info.listUnit}}" >
+                        <view class="picker">
+                        <van-cell title="单位"  value="{{detailForm[index].item_unit}}" is-link />
+                        </view>
+                    </picker>
+                    <van-field
+                        value="{{ detailForm[index].item_price }}"
+                        label="单价(不含税)"
+                        required
+                        clearable
+                        type="digit"
+                        placeholder="请输入单价(不含税)"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        data-fieldName="item_price"
+                        data-index="{{index}}"
+                        bind:input="handleFieldChange"
+                    />                    
+                    <van-field
+                        value="{{ detailForm[index].item_tax_price }}"
+                        label="单价(含税)"
+                        type="digit"
+                        clearable
+                        placeholder="请输入单价(含税)"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        data-fieldName="item_tax_price"
+                        data-index="{{index}}"
+                        bind:input="handleFieldChange"
+                    />
+                    <van-field
+                        value="{{ detailForm[index].item_total_amt }}"
+                        label="含税金额"
+                        required
+                        clearable
+                        type="digit"
+                        placeholder="请输入含税金额"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        data-fieldName="item_total_amt"
+                        data-index="{{index}}"
+                        bind:input="handleFieldChange"
+                        border="{{false}}"
+                    />
+                </view>
+            </block>
+            <view class="upload-btn">
+                <van-button color="#1e6ce8" round plain size="small" bindtap="addItem">添加其他项目</van-button>
+            </view>
+            <view class="area-title ">
+                <view class="area-text">销方信息</view>
+                <view class="text-right">
+                        <van-button custom-class="text-right pur-btn" size="mini" color="#1e63e8" plain hairline round bindtap="goEditInvoiceVendor" data-item='{{CustVendorList}}'>编辑</van-button>
+                </view>
+            </view>
+            <view class="invoice-info-list">
+                <van-cell title="名称"  value="{{CustVendorList.vendor_name}}"  custom-class="invoice-info-item"/>
+                <van-cell title="纳税人识别号" value="{{CustVendorList.vendor_tax_code}}"  custom-class="invoice-info-item"/>
+                <van-cell title="地 址 、电 话"   value="{{CustVendorList.vendor_address}} {{CustVendorList.vendor_phone}}"  custom-class="invoice-info-item"/>
+                <van-cell title="开户行及账号"  value="{{CustVendorList.vendor_bank_name}} {{CustVendorList.vendor_bank_account}}"  border="{{false}}"custom-class="invoice-info-item"/>
+            </view>
+            <block wx:if="{{invoice_type !='增值税电子普通发票'}}">
+                <view class="area-title ">
+                    <text class="area-text">快递地址</text>
+                    <view class="text-right">
+                        <block wx:for="{{invoiceTakeMethodList}}" wx:key="index">
+                            <van-button custom-class="text-right pur-btn" size="mini" color="{{item.checked==true?'#1e63e8':'#aaa'}}" plain hairline round data-id='{{item.code_name}}' bindtap='radioTakeMethodTap'>{{item.code_name}}</van-button>
+                        </block>
+                    </view>
+                </view>
+                <view class="invoice-info-list" wx:if="{{isTakeExpress}}">
+                <van-cell-group>
+                    <van-field
+                        value="{{ custCustomerList.customer_name }}"
+                        label="收件单位"
+                        type="text"
+                        placeholder="快递收件单位名称"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        input-align="right"
+                    />
+                    <van-field
+                        value="{{ formData.express_address }}"
+                        center
+                        clearable
+                        label="收件地址"
+                        placeholder="请从地址簿选择收件地址"
+                        required
+                        readonly
+                        use-button-slot
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                    >
+                        <van-button slot="button" size="mini" color="#1e6ce8"  plain bindtap="goAddInvoiceAddr"
+                        >地址簿</van-button
+                        >
+                    </van-field>
+                    <van-field
+                        value="{{ formData.express_contact_name }}"
+                        label="收件人姓名"
+                        placeholder="收件人姓名"
+                        required
+                        readonly
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                    />
+                    <van-field
+                        value="{{ formData.express_contact_phone }}"
+                        label="收件人电话"
+                        required
+                        readonly
+                        placeholder="收件人电话"
+                        input-align="right"
+                        label-class="invoice-info-item"
+                        input-class="invoice-info-item"
+                        border="{{false}}"
+                    />
+                    </van-cell-group>
+                </view>       
+            </block>
+            <block wx:else>
+                <view class="area-title ">
+                    <view class="area-text" >电子发票发送邮件地址：{{to_email}}</view>
+                </view>
+            </block>
+            <view class="area-title ">
+                <view class="area-text" >备注</view>
+            </view>
+            <view class="invoice-info-list">
+                <van-field
+                    value="{{ formData.remark }}"
+                    label="备注"
+                    type="textarea"
+                    placeholder="请输入备注"
+                    autosize
+                    border="{{ false }}"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    input-align="right"
+                    data-fieldName="remark"
+                    bind:input="formDataChange"
+                />
+            </view>
+            
+        </view>
+        <van-row custom-class="upload-btn " gutter="10">
+            <van-col span="12">
+                <van-button round plain hairline type="info" size="normal" block color="#1e6ce8" bindtap="postDataTemp">临时保存</van-button>
+            </van-col>
+            <van-col span="12">
+                <van-button round type="info" size="normal" block color="#1e6ce8" bindtap="postData">提交开票</van-button>
+            </van-col>
+        </van-row>
+    </view>
+</view>
+
+<!-- 付款页面 -->
+<van-popup show="{{ showModal }}" bind:close="close" round custom-class="popWrapper" closeable="true" close-on-click-overlay="{{false}}">
+	<van-row>
+		<van-col span="24" custom-class="pop-title">发票付款</van-col>
+		<van-col wx:if="{{is_service_fee}}" span="24" custom-class="pop-sub color-red">按次付费服务需在每次提交申请前支付服务费</van-col>
+	</van-row>
+	<van-cell-group>		
+		<van-cell title="服务方式:" value="{{service_type}}" custom-class="invoice-info-item" />
+		<van-cell title="购买方:" value="{{customer_name}}" custom-class="invoice-info-item" />
+		<van-cell title="价税合计:" value="{{total_amount}}" custom-class="invoice-info-item" />
+		<van-cell title="税额:" value="{{total_tax_amt}}" custom-class="invoice-info-item" />
+		<van-cell wx:if="{{is_service_fee}}" title="开票服务费:" value="{{invoice_service_fee}}" custom-class="invoice-info-item" />
+		<van-cell title="快递服务费:" value="{{express_expense}}" custom-class="invoice-info-item" />
+		<view class="peisong-way" wx:if="{{couponLength>0}}">
+			<van-cell custom-class="invoice-info-item" title="优惠券:" wx:if="{{coupon_amount=='0'}}" is-link value="{{couponLength}}张可用" bindtap="goCoupon" />
+			<van-cell custom-class="invoice-info-item" title="优惠券:" wx:else is-link value="-{{filter.numberToFixed(coupon_amount)}}" bindtap="goCoupon" />
+		</view>
+		<van-cell title="服务费总计:" value="{{((invoice_service_fee-coupon_amount>0?invoice_service_fee-coupon_amount:0)+express_expense)}}"   custom-class="invoice-info-item" />
+		<van-cell title="账户余额({{balance_amt}})支付:" value="{{balancepayment}}"   custom-class="invoice-info-item" />
+		<van-cell wx:if="{{!isbalance_amt}}" title="立即支付:" value="{{codepayment}}" custom-class="invoice-info-item" />
+		<van-cell wx:if="{{agentpay_show}}" title="{{pay_customer_name}}余额({{pay_balance_amt}})代付:" value="{{agentpayment}}" border="{{false}}" custom-class="invoice-info-item" />
+		<van-button round size="small" block color="#1e6ce8" custom-class="{{payDisabled?'gray-bg':''}}" bindtap="{{!payDisabled?'AffirmPay':''}}">{{isbalance_amt?'确认付款':'立即付款'}}</van-button>
+	</van-cell-group>
+</van-popup>
+<!-- 优惠券页面 -->
+<van-popup show="{{ showCoupon }}" bind:close="onClose" position="bottom" custom-class="showCoupon">
+	<form bindsubmit="userCoupon">
+		<view class="page">
+			<view class="page__bd page__bd_spacing">
+				<view class="nouserCoupon" bindtap='noCoupon'>
+					暂不使用优惠券
+				</view>
+				<van-radio-group value="{{ radio }}" bind:change="onChange">
+					<view class="coupons-item " wx:for="{{couponUseList}}" wx:key="index" style="background-image:url('{{item.wait_image_path}}');">
+						<view class="coupons-item-box">
+							<block wx:if="{{item.coupon_category=='减免'}}">
+								<view class="money-left"> <text class="free-txt">免</text>
+								</view>
+							</block>
+							<block wx:else>
+								<view class="money-left"> <text>¥</text>{{item.coupon_amount}}
+								</view>
+							</block>
+							<view class="money-right">
+								<view class="money-hold">{{item.coupon_desc}}</view>
+								<view class="money-data">有效期: {{item.get_time}} - {{item.end_date}}</view>
+							</view>
+							<view class="money-home">
+								<van-radio name="{{index}}" />
+							</view>
+						</view>
+					</view>
+				</van-radio-group>
+				<button class="user-btn" formType="submit">立即使用</button>
+			</view>
+		</view>
+	</form>
+</van-popup>
+
+<van-popup show="{{ showAdress }}" position="bottom">
+    <van-area area-list="{{ areaList }}" bind:cancel="onCloseAddres" bind:confirm="onConfirm"/>
+</van-popup>
+<van-toast id="van-toast" />
+

@@ -1,0 +1,23 @@
+ <view class="page">
+    <view class="page__bd page__bd_spacing">
+        <view  class="text-left bank-title">导入每月薪资:{{filenameV1}}</view>
+        <view class="btn">
+             <view class="choose-btn" bindtap="uploadAction" data-num="1">选择文件</view>
+             <view class="up-btn {{is_upV1=='true'?'blue':''}}" bindtap="uploadFile" data-num="1">上传工资</view>
+        </view>
+       
+        <view  class="text-left bank-title">导入劳务工资:{{filenameV2}}</view>
+        <view class="btn">
+             <view class="choose-btn" bindtap="uploadAction" data-num="2">选择文件</view>
+             <view class="up-btn {{is_upV2=='true'?'blue':''}}" bindtap="uploadFile" data-num="2">上传劳务</view>
+        </view>
+
+        <view  class="text-left bank-title">导入年终奖金:{{filenameV2}}</view>
+        <view class="btn">
+             <view class="choose-btn" bindtap="uploadAction" data-num="3">选择文件</view>
+             <view class="up-btn {{is_upV2=='true'?'blue':''}}" bindtap="uploadFile" data-num="3">上传年终奖</view>
+        </view>
+    </view>
+       
+ </view>
+ <van-toast id="van-toast" />

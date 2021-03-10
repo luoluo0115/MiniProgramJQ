@@ -1,0 +1,177 @@
+/* 上传的按钮 */
+.btn-upload{
+    height: 35px;
+    background-color: #1e6ce8;
+    border: 1px solid #1e6ce8;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+    margin:20px auto;
+    border-radius: 100px;
+  }
+   
+   
+  /* 弹出层 */
+  .popWrapper{
+    padding:20rpx 40rpx 40rpx;
+  }
+  
+  
+  /* 弹出层里面的按钮 */
+  .close{
+    width: 80px;
+    height: 35px;
+    background: #6988FE;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    font-size: 15px;
+    margin:20px auto;
+    border-radius: 100px;
+  }
+   
+  
+  .bank-title{
+    font-size: 14px;
+    color: #666;
+    height: 64rpx;
+    line-height: 64rpx;
+  }
+  .fileImg{
+    width: 410rpx;
+    height: 300rpx;
+    border: 1px solid #ddd;
+    color: #ddd;
+    margin:20rpx auto;
+    border-radius: 10rpx;
+    overflow: hidden;
+  }
+  .image-card{
+    width: 100%;
+    height: 100%;
+    
+  }
+  .fileImg .bank-icon{
+    font-size: 96rpx;
+    color: #ddd;
+    height: 300rpx;
+    text-align: center;
+    line-height: 300rpx;
+    display: block;
+  }
+  .btn{
+    margin: 0 auto;
+    width: 410rpx;
+  }
+  .up-btn{
+    height: 64rpx;
+    line-height: 64rpx;
+    border-radius: 15rpx;
+    color: #6988FE;
+    border: 1px solid rgb(85, 118, 248);
+    background: #fff;
+    text-align: center;
+    font-size: 22rpx;
+    display:block;
+  }
+  .choose-btn,.up-btn.blue{
+    height: 64rpx;
+    line-height: 64rpx;
+    color: #fff;
+    background-color: #6988FE;
+    border: 1px solid rgb(115, 142, 252);
+    border-radius: 15rpx;
+    text-align: center;
+    font-size: 22rpx;
+    display:block;
+  }
+  
+  
+  page {
+    background-color: #f9f9f9;
+  }
+  
+  .expend-list {
+    width: 100%;
+    margin-bottom: 20rpx;
+  }
+  
+  .expend-item {
+    background-color: #fff;
+    margin-bottom: 20rpx;
+    overflow: hidden;
+  }
+  
+  .expend-list .list-title {
+    font-size: 28rpx;
+    color: #333;
+    padding: 30rpx 0 25rpx 30rpx;
+    margin-bottom: 20rpx;
+    border-bottom: 1px solid #eee;
+  }
+  .a-expend{
+      padding: 10rpx 20rpx;
+      color: #666;
+  }
+  .a-expend .label {
+    font-size: 20rpx;
+    line-height: 1.6;
+    overflow: hidden;
+  }
+  .color-label {
+    color: #666;
+  }
+  .btn-list{
+    margin: 20rpx 0 0;
+    text-align: right;
+  }
+  
+   
+  
+  .pay-btn {
+    border-radius: 20rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    font-size: 24rpx;
+    color: #F0433D;
+    border: 1px solid #F0433D;
+    padding: 0 20rpx;
+    margin: 10rpx 10rpx 10rpx 35rpx;
+    display: inline-block;
+  
+  }
+   
+  .van-tabs__line {
+    background-color: #647bfe !important;
+  }
+  
+  .pay-btn.delete {
+    color: #999;
+    border: 1px solid #eee;
+  }
+  
+   
+  .title {
+    width: 100%;
+    display: block;
+    height: 64rpx;
+    line-height: 64rpx;
+    font-size: 20rpx;
+    color: #666;
+    border-bottom: 1px solid #eee;
+    padding: 0 30rpx;
+  }
+  .num-wrapper{
+    padding: 30rpx;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    color: #999;
+    font-size: 20rpx;
+    border-bottom:1px solid #eee;
+  }
+  .num-wrapper .num{
+    font-size: 32rpx;
+  }
+  

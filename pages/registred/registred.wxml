@@ -1,0 +1,59 @@
+<!--pages/registred/registred.wxml-->
+<view class="registed">
+     <view class="page__bd page__bd_spacing">
+        <view class="weui-flex">
+            <view class="weui-flex__item text-center title"><view class="placeholder">巧记账</view></view>
+        </view>
+    </view>
+    <view class="page__bd page__bd_spacing">
+     <van-cell-group>
+        <van-field
+          name="userName"
+          label="用户名"
+          placeholder="请输入用户名"
+          left-icon="contact"
+          border="{{ false }}"
+          bindinput="nameInput"
+        />
+      </van-cell-group>
+       <van-cell-group>
+        <van-field
+          name="userPhone"
+          label="手机号"
+          placeholder="请输入手机号"
+          left-icon="phone-o"
+          border="{{ false }}"
+          bindinput="phoneInput"
+        />
+      </van-cell-group>
+     
+      <van-cell-group>
+        <van-field
+          name="code"
+          center
+          clearable
+          label="验证码"
+          bindinput="codeInput"
+          placeholder="请输入短信验证码"
+          use-button-slot
+          border="{{ false }}"
+          left-icon="records"
+        >
+         <van-button slot="button" size="small"  custom-class="button"   bindtap="{{isClick?'':'getCode'}}"  color="#1e6ce8" disabled="{{isClick}}" > {{btntext}} </van-button>
+        </van-field>
+      </van-cell-group>
+      
+        <van-button color="#1e6ce8" class="register-btn" size="large"  bindtap='goTo' >注册</van-button>
+      
+    </view>
+  </view>
+  <van-toast id="van-toast" />
+ <van-popup
+  show="{{ sh }}"
+ close-on-click-overlay="{{true}}"
+  overlay="{{ true }}"
+  safe-area-inset-top="{{true}}"
+  bind:close="onClose"
+>
+  {{content}}
+</van-popup>

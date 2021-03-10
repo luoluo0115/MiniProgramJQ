@@ -1,0 +1,7 @@
+/* pages/me/userinfo/userinfo.wxss */
+.van-dialog__header {
+    text-align: center;
+    padding-top: 14px!important;
+    padding-top: var(--dialog-header-padding-top,14px)!important;
+   
+}

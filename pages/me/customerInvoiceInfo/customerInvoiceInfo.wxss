@@ -1,0 +1,96 @@
+ 
+.van-tabs__line {
+    background-color: #1e6ce8 !important;
+}
+
+.invoice {
+    padding-top: 8px;
+}
+
+.invoice .invoice-item .area-title {
+    font-size: 24rpx;
+    padding: 10px 0;
+    overflow: hidden;
+
+}
+
+.invoice .invoice-item .area-title .area-text {
+    border-left: 2px solid #1e6ce8;
+    padding-left: 10px;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    float: left;
+
+}
+
+.invoice-info-list {
+    border: 1px solid #eee;
+    border-radius: 5rpx;
+
+}
+
+.invoice-header-list {
+    padding: 10px 16px;
+    margin-bottom: 20rpx;
+    border-radius: 5rpx;
+    border: 1px solid #eee;
+}
+
+.invoice-header-list .title {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.invoice-header-list .sub {
+    font-size: 22rpx;
+    margin-top: 10rpx;
+    color: #999;
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.invoice-header-list .price {
+    font-size: 36rpx;
+    color: #1e6ce8;
+}
+
+.invoice-header-list .btn {
+    background-color: #1e6ce8;
+    color: #fff;
+    border: none;
+    margin-top: 10rpx;
+}
+
+.grids-wrapper {
+    background: #f9f9f9;
+    padding: 20rpx;
+    font-size: 24rpx;
+    color: #999;
+    border-radius: 15rpx;
+    margin-top: 20rpx
+}
+
+.card-bottom {
+    text-align: right;
+    border-top: 1px solid #eee;
+    margin-top: 10rpx;
+    padding-top: 10rpx;
+}
+
+.detail-btn {
+    margin-right: 10rpx;
+}
+.van-icon-add-o{
+    position: relative;
+    top: 10rpx;
+  }
+
+
+
+ 

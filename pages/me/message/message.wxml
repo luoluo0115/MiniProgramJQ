@@ -1,0 +1,31 @@
+ <wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page">
+	<van-tabs active="{{ active }}" bind:change="onChange">
+		<van-tab title="{{item.code_name}}" wx:for="{{dataSourceList}}" wx:key="index">
+			<view class="page__bd page__bd_spacing">
+				<view class="message-list">
+					<block wx:if="{{MessageList!=''}}">
+						<view class="message-item" wx:for="{{MessageList}}" wx:key="index" bindtap="{{item.is_read==false ?'readMessage':''}}" data-message_user_id="{{item.message_user_id}}">
+							<view class="list-title"> 消息标题: {{item.message_title}}</view>
+							<van-row custom-class="list-content">
+								<van-col span="12" custom-class="label">消息来源:{{item.message_source}}</van-col>
+								<van-col span="12" custom-class="label">消息类型:{{item.message_type}}</van-col>
+								<van-col span="24" custom-class="label">消息内容:{{item.message_content}}</van-col>
+								<van-col span="12" custom-class="label">推送时间:{{filter.formatTime(item.creation_date,'yyyy-MM-dd')}}</van-col>
+								<van-col span="12" custom-class="label">是否阅读:<van-tag round type="success" wx:if="{{item.is_read==true}}">已读</van-tag><van-tag round type="warning" wx:if="{{item.is_read==false}}">未读</van-tag></van-col>
+								<van-col span="12" custom-class="label">阅读时间:{{filter.formatTime(item.read_time,'yyyy-MM-dd')}}</van-col>
+							</van-row>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="empty">
+							<icon class="./iconfont/iconkong:before "></icon>
+							<view class="color-gray">{{msg}}</view>
+						</view>
+					</block>
+				</view>
+			</view>
+		</van-tab>
+	</van-tabs>
+</view>
+<van-toast id="van-toast" />

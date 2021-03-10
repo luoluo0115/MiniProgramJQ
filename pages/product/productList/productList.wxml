@@ -1,0 +1,50 @@
+<!--pages/product/index/index.wxml-->
+<van-search
+  value="{{ serachvalue }}"
+  shape="round"
+  placeholder="请输入搜索关键词"
+  bind:search="onSearch"
+/>
+<van-row custom-class="bor-t">
+  <van-col span="4">
+    <scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">
+      <view class="tab-bar-item {{currentTab==index ? 'active' : ''}}" wx:for="{{productBigCatList}}" wx:key="index" data-current="{{index}}" catchtap="swichNav">
+        <text class="icon-text">{{item.product_category}}</text>
+      </view>
+    </scroll-view>
+  </van-col>
+  <van-col span="20" >
+    <view class="porductList">
+      <scroll-view  style='height: 100%;' scroll-y >
+        <view class="area-banner area-banner-list" wx:for="{{productList}}" wx:key="index"
+          bindtap='bindTapProductDetail' data-product_id="{{item.pre_product_id}}">
+          <view class="area-banner-item">
+            <van-row gutter="10">
+              <van-col span="8" >
+                <view class="img text-center">
+                  <van-image radius="5" width="164rpx" height="164rpx" src="{{item.product_image}}" />
+                </view>
+              </van-col>
+              <van-col span="15">
+                <van-col span="24">
+                  <view class="sub ">{{item.product_summary}}</view>
+                </van-col>
+                <van-col span="24" custom-class="text-right ">
+                  <van-col span="12">
+                    <view class="price">￥{{item.product_price}}<span
+                        class="font-12">{{item.is_price_impact=='Y' ? '起' : ''}}</span></view>
+                  </van-col>
+                  <van-col span="12">
+                    <view class="userNum text-right">{{item.puchase_qty}}人已付款</view>
+                  </van-col>
+                </van-col>
+              </van-col>
+            </van-row>
+          </view>
+         
+        </view>
+    </scroll-view>
+    </view>
+    
+  </van-col>
+</van-row>

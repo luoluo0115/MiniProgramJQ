@@ -1,0 +1,51 @@
+<view class="page">
+  <view class="page__bd page__bd_spacing">
+    <view  class="certification">
+      <camera  device-position="front" flash="off" binderror="error"  class="camera"></camera>
+    </view>
+    
+    <van-cell-group>
+      <van-field
+        value="{{ username }}"
+        required
+        clearable
+        readonly
+        label="姓名"
+        placeholder="请输入姓名"
+        bind:change="nameInput"
+        
+      />
+
+      <van-field
+        value="{{ IDCard }}"
+        type="idcard"
+        label="身份证号"
+        placeholder="请输入身份证号"
+        required
+        readonly
+        border="{{ false }}"
+        bind:change="NumberInput"
+      />
+    </van-cell-group>
+    <view class="hr"></view>
+    <view class="content">
+      <view class="title">
+      温馨提示：
+      </view>
+      <view class="sub">
+      1.请将脸放在指定范围内,点击「开始认证」
+      </view>
+      <view class="sub">
+      2.请保持正对手机，光线明亮
+      </view>
+      <view class="sub">
+      3.请保持良好的网络环境
+      </view>
+    </view>
+    <view class="JQbtn" bindtap="goFaceVerifiy" style='color:{{color}}; border-color: {{color}};background-color:#FFF;' 
+disabled="{{disabled}}">{{getTxt}}</view>
+  </view> 
+</view>
+
+<van-toast id="van-toast" />
+

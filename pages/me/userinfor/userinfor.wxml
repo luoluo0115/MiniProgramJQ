@@ -1,0 +1,62 @@
+<!--pages/me/userinfor/userinfor.wxml-->
+
+<wxs module="m1">
+	var dateFormatStr = function(dateStr) {
+		if (dateStr == null) {
+			return '';
+		}
+		return dateStr.replace('T', ' ')
+	}
+	var dateFormatDay = function(dateDay) {
+		if (dateDay == null) {
+			return '';
+		}
+		return dateDay.substring(0, 10)
+	}
+	var moneyFormat = function(money) {
+		return money.toFixed(2);
+	}
+
+	module.exports = {
+		dateFormatStr: dateFormatStr,
+		dateFormatDay: dateFormatDay,
+		moneyFormat: moneyFormat,
+
+	}
+</wxs>
+<view>
+	<van-cell-group class="userinfor">
+		<van-cell title="公司" value="{{customerList.customer_name}}" />
+		<van-cell title="税号" value="{{customerList.tax_code}}" />
+		<van-cell title="企业类型" value="{{customerList.enterprise_type}}" />
+		<van-cell title="基本税种" value="{{customerList.tax_type}}" />
+		<van-cell title="征收方式" value="{{customerList.tax_levy_method}}" />
+		<van-cell title="法人" value="{{customerList.legal_person}}" />
+		<van-cell title="注册日期" value="{{m1.dateFormatDay(customerList.register_date)}}" />
+		<van-cell title="注册资金" value="{{customerList.register_amount}}万" />
+		<van-cell title="注册地址" value="{{customerList.register_addr}}" />
+		<van-cell title="实际经营地址" value="{{customerList.actual_addr}}" />
+		<van-cell title="税局" value="{{customerList.tax_bureau}}" />
+		<van-cell title="专管员" value="{{customerList.tax_contact}}" />
+		<van-cell title="专管员电话" value="{{customerList.tax_phone}}" />
+		<van-cell title="账务资料上传截止日期" value="每月{{customerList.material_schedule==null?5:customerList.material_schedule}}日之前,节假日顺延" />
+	</van-cell-group>
+</view>
+<view class="table" wx-if="{{custContactList !=''}}">
+	<view class="tr">
+		<view class="th th0">操作</view>
+		<view class="th th1">姓名</view>
+		<view class="th th2">电话</view>
+		<view class="th th3">授权时间</view>
+	</view>
+	<view class='tr' wx:for="{{custContactList}}" wx:key="index">
+		<view class="th th0" bindtap="CancelAuth">
+      <van-button size="mini" color="#1e6ce8" custom-class="see-btn" data-item="{{item}}" bindtap="CancelAuth">取消授权</van-button>
+			<!-- <icon class="./iconfont/icondelete:before icon-btn" data-item="{{item}}" bindtap="CancelAuth"></icon> -->
+		</view>
+		<view class="td th1">{{item.name}}</view>
+		<view class="td th2">{{item.mp}}</view>
+		<view class="td th3">{{m1.dateFormatDay(customerList.creation_date)}}</view>
+	</view>
+</view>
+<van-toast id="van-toast" />

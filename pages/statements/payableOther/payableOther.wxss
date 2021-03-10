@@ -1,0 +1,53 @@
+/* pages/statements/payableOther/payableOther.wxss */
+.van-cell__title {
+    flex: 2!important;
+    -webkit-box-flex: 2!important;
+}
+.van-cell__value{
+    color: #1e6ce8
+}
+.van-cell__value {
+    flex: 1!important;
+    -webkit-box-flex: 1!important;
+}
+    
+.van-cell{
+    font-size: 12px!important
+}
+  
+
+.pay-header{
+    margin-top:5%;
+    background: #1e6ce8;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5%;
+    font-size: 12px;
+}
+.pay-header .title{
+   color: #f8f8f8
+}
+.pay-header .price{
+    font-size: 24px;
+    line-height: 40px
+   
+ }
+ .pay-header .right{
+    color: #f8f8f8
+   
+ }
+.pay-content{
+    margin-top:5%;
+    font-size: 12px;
+}
+.pay-content .pay-title{
+    padding:2% 5%;
+    background: #f8f8f8;
+    color: #666666
+}
+.van-cell__title{
+    color: #333333!important;
+}
+.van-cell{
+    font-size: 12px!important;
+}

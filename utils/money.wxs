@@ -1,0 +1,130 @@
+// 支持es4语法
+//三位数字加逗号，取两位小数
+var filter = {
+  numberToFixed: function (val) {
+    if (val >= 0) {
+      var str = (val * 100 / 100).toFixed(2) + '';
+      var intSum = str.substring(0, str.indexOf("."));
+      var intSum = (intSum || 0).toString();
+      var resultIntSum = '';
+
+      while (intSum.length > 3) {
+        resultIntSum = ',' + intSum.slice(-3) + resultIntSum;
+        intSum = intSum.slice(0, intSum.length - 3);
+      }
+      if (intSum) {
+        resultIntSum = intSum + resultIntSum;
+      }
+      var dot = str.substring(str.length, str.indexOf(".")) //取到小数部分搜索
+      var ret = resultIntSum + dot;
+      return ret;
+    } else {
+      var price = Math.abs(val);
+      var str = (price * 100 / 100).toFixed(2) + '';
+      var intSum = str.substring(0, str.indexOf("."));
+      var intSum = (intSum || 0).toString();
+      var resultIntSum = '';
+
+      while (intSum.length > 3) {
+        resultIntSum = ',' + intSum.slice(-3) + resultIntSum;
+        intSum = intSum.slice(0, intSum.length - 3);
+
+      }
+      if (intSum) {
+        resultIntSum = intSum + resultIntSum;
+      }
+      var dot = str.substring(str.length, str.indexOf(".")) //取到小数部分搜索
+      var ret = '-' + (resultIntSum + dot);
+
+      return ret;
+    }
+
+
+
+  },
+  toFix: function (val) {
+    return val.toFixed(2) //保留两位小数
+  },
+  formatDate: function (date) {
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+
+    return [year, month].map(formatNumber).join('-') + ' '
+  },
+  formatMinute: function (strDate, format = "yyyy-MM-dd hh:mm") {
+    // 解决ios出现NaN问题
+    if (strDate == "" || strDate == null) {
+      return '';
+    }
+    var realDate = strDate ? getDate(strDate.replace(getRegExp('-', 'g'), '/')) : getDate();
+    var regYear = getRegExp("(y+)", "i");
+    var date = [
+      ["M+", realDate.getMonth() + 1],
+      ["d+", realDate.getDate()],
+      ["h+", realDate.getHours()],
+      ["m+", realDate.getMinutes()],
+      ["s+", realDate.getSeconds()],
+      ["q+", Math.floor((realDate.getMonth() + 3) / 3)],
+      ["S+", realDate.getMilliseconds()],
+    ];
+    var reg1 = regYear.exec(format);
+    if (reg1) {
+      format = format.replace(reg1[1], (realDate.getFullYear() + '').substring(4 - reg1[1].length));
+    }
+    for (var i = 0; i < date.length; i++) {
+      var reg2 = getRegExp("(" + date[i][0] + ")").exec(format);
+      if (reg2) {
+        format = format.replace(reg2[1], reg2[1].length == 1 ? v : ("00" + date[i][1]).substring(("" + date[i][1]).length));
+      }
+    }
+    return format;
+  },
+  formatTime: function (strDate, format = "yyyy-MM-dd hh:mm:ss") {
+    // 解决ios出现NaN问题
+    if (strDate == "" || strDate == null) {
+      return '';
+    }
+    var realDate = strDate ? getDate(strDate.replace(getRegExp('-', 'g'), '/')) : getDate();
+    var regYear = getRegExp("(y+)", "i");
+    var date = [
+      ["M+", realDate.getMonth() + 1],
+      ["d+", realDate.getDate()],
+      ["h+", realDate.getHours()],
+      ["m+", realDate.getMinutes()],
+      ["s+", realDate.getSeconds()],
+      ["q+", Math.floor((realDate.getMonth() + 3) / 3)],
+      ["S+", realDate.getMilliseconds()],
+    ];
+    var reg1 = regYear.exec(format);
+    if (reg1) {
+      format = format.replace(reg1[1], (realDate.getFullYear() + '').substring(4 - reg1[1].length));
+    }
+    for (var i = 0; i < date.length; i++) {
+      var reg2 = getRegExp("(" + date[i][0] + ")").exec(format);
+      if (reg2) {
+        format = format.replace(reg2[1], reg2[1].length == 1 ? v : ("00" + date[i][1]).substring(("" + date[i][1]).length));
+      }
+    }
+    return format;
+  },
+  toSubstr: function (val) {
+    if (val.length == 0 || val == undefined) {
+      return;
+    }
+    if (val.length > 35) {
+      return "..." + val.substring(val.length - 35);
+    } else {
+      return val;
+    }
+    //var filename  = val.substring(val.lastIndexOf('/')+1);     
+  },
+}
+// 导出对外暴露的属性
+module.exports = {
+  numberToFixed: filter.numberToFixed,
+  toFix: filter.toFix,
+  formatDate: filter.formatDate,
+  formatTime: filter.formatTime,
+  formatMinute: filter.formatMinute,
+  toSubstr: filter.toSubstr,
+}

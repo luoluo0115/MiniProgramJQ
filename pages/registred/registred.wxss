@@ -1,0 +1,21 @@
+/* pages/registred/registred.wxss */
+.registed{
+    margin-top: 30%;
+}
+.registed .title{
+    margin-bottom: 5%
+}
+.registed .van-cell__title{
+    min-width: 60px!important;
+    max-width: 60px!important;
+
+}
+.register-btn{
+    margin-top: 20%;
+    display: block;
+    
+}
+.register-btn button{
+    background: #1e6ce8;
+    color:#fff
+}

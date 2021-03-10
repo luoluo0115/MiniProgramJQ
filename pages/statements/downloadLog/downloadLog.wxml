@@ -1,0 +1,43 @@
+ <wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page ">
+    <view class="page__bd page__bd_spacing text-center btn-group">
+        <van-row>
+            <van-col span="12" >
+                <picker mode="date" fields="year" value="{{account_year}}" start="2009" end="2040" bindchange="bindDateChange">
+                    <view class="picker-date">
+                        <view class="label">年份:{{account_year}} </view>
+                    </view>
+                </picker>
+            </van-col>
+            <van-col span="12" >
+                <van-button size="small" color="#1e6ce8" custom-class="top-btn " bind:click="btnPDF">生成电子账册</van-button>
+            </van-col>
+            <!-- <van-col span="8" >
+                <van-button size="small" color="#1e6ce8" custom-class="top-btn " bind:click="goYearSaleReport">预览</van-button>
+            </van-col> -->
+        </van-row>
+    </view>
+    <view class="table">
+        <view class="tr">
+            <view class="th th0">操作</view>
+            <view class="th th1">文件名称</view>
+            <view class="th th2">时间</view>
+            <view class="th th3">操作人员</view>
+        </view>
+        <view class='tr' wx:for="{{LogList}}" wx:key="index" wx:if="{{LogList.length>0}}">
+            <view wx:if="{{item.file_time !=null}}" class="td th0 color-blue" bindtap="DownPDF" data-item="{{item}}" data-account_data_download_log_id="{{item.account_data_download_log_id}}">
+                下载
+            </view>
+            <view wx:if="{{item.file_time ==null}}" class="td th0 color-blue">
+                待生成
+            </view>
+            <view class="td th1">{{item.file_name}}</view>
+            <view class="td th2">{{filter.formatTime(item.file_time)}}</view>
+            <view class="td th3">{{item.created_by}}</view>
+        </view>
+    </view>
+    <view class="loadingWrapper">
+        <van-loading type="spinner" color="#1989fa" wx:if="{{showloading}}" />
+    </view>  
+</view>
+<van-toast id="van-toast" />

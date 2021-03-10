@@ -1,0 +1,84 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="section">
+  <view class="page">
+    <view class="page__bd page__bd_spacing">
+      <view class="invoice-list">
+        <block wx:if="{{invoiceScrapList!=''}}">
+          <view class="item" wx:for="{{invoiceScrapList}}" wx:key="index">
+            <van-row>
+              <van-col span="16">单位名称:{{item.customer_name}}</van-col>
+              <van-col span="8" custom-class="text-right">
+                <van-tag class="demo-margin-right" color="#7966FE" plain>{{item.invoice_status_desc}}</van-tag>
+              </van-col>
+              <van-col span="12" custom-class="time">发票类型:{{item.invoice_type}}</van-col>
+              <van-col span="12" custom-class="time">项目类型:{{item.invoice_item_type}}</van-col>
+              <van-col span="12" custom-class="time">申请日期:{{item.reqeust_date}}</van-col>
+              <van-col span="12" custom-class="time">开票金额:{{filter.numberToFixed(item.invoice_amount)}}</van-col>
+              <van-col span="12" custom-class="time">发票号码:{{item.invoice_no}}</van-col>
+              <van-col span="12" custom-class="time">发票代码:{{item.invoice_code}}</van-col>
+              <van-col span="24" custom-class="time">发票日期:{{item.invoice_date}}</van-col>
+              <block wx:if="{{item.im_cust_req_scrap_id > 0}}">
+                <van-col span="12" custom-class="time hr">作废类型:<van-tag wx:if="{{item.scrap_category !=''}}" color="#f2826a" plain>{{item.scrap_category}}</van-tag></van-col>
+                <van-col span="12" custom-class="time hr">作废状态:<van-tag wx:if="{{item.s_ststus_desc !=''}}" color="#7966FE" plain>{{item.s_ststus_desc}}</van-tag></van-col>
+                <van-col span="24" custom-class="time">作废原因:{{item.scrap_reason}}</van-col>
+                <van-col span="12" custom-class="time">作废提交时间:{{item.scrap_submit_date==null?'':item.scrap_submit_date}}</van-col>
+              </block>              
+              <van-col span="24" custom-class="text-right hr">
+                <van-tag wx:if="{{item.is_downfile=='Y'}}" class="demo-margin-right" size="small" color="#1e6ce8" bindtap="downInvoiceFile" data-item="{{item}}">下载发票</van-tag>
+                <block wx:if="{{item.s_ststus=='S'}}">
+                  <van-tag class="demo-margin-right" size="small" color="#1e6ce8" bindtap="scrapApplyCancel" data-item="{{item}}">
+                    取消作废</van-tag>
+                </block>
+                <block wx:if="{{item.s_ststus=='N' || item.s_ststus=='X'}}">
+                  <van-tag class="demo-margin-right" size="small" color="#1e6ce8" bindtap="scrapApplyDiv" data-item="{{item}}"
+                    data-im_cust_inv_info_id="{{item.im_cust_inv_info_id}}">申请作废</van-tag>
+                </block>
+              </van-col>
+            </van-row>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="empty">
+            <icon class="./iconfont/iconkong:before "></icon>
+            <view class="color-gray">{{msg}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+<van-popup show="{{ showScrap }}" bind:close="closeScrap" round custom-class="popWrapper" closeable="true">
+  <view class="pop-title">发票作废/红冲申请</view>   
+  <van-cell-group custom-class="mt-10">
+    <picker bindchange="bindScrapCategoryChange" data-idx="{{index}}" value="{{scrapCategoryList[index].name}}" range-key="{{'name'}}" range="{{scrapCategoryList}}" >
+        <view class="picker">
+        <van-cell required title="作废类型"  value="{{scrap_category}}" is-link />
+        </view>
+    </picker>    
+    <van-field
+      value="{{ scrap_reason }}"
+      label="作废理由"
+      type="textarea"
+      clearable
+      required
+      placeholder="请输入作废理由"
+      autosize
+      input-align="right"      
+      input-class="input-reason"      
+      data-fieldName="scrap_reason"
+      bind:input="handleFieldChange"   
+    /> 
+    <van-field
+        value="{{ remark }}"
+        label="备注信息"
+        clearable        
+        placeholder="请输入备注"
+        input-align="right"
+        type="text"                
+        data-fieldName="remark"
+        bind:input="handleFieldChange"       
+    />    
+    <van-button round size="small" block color="#1e6ce8" custom-class="mt-10 {{btnDisabled?'gray-bg':''}}" bindtap="{{!btnDisabled?'postScrapApply':''}}">提交</van-button>
+	</van-cell-group>  
+</van-popup>
+<van-toast id="van-toast" />

@@ -1,0 +1,42 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="section">
+	<view class="page">
+		<view class="page__bd page__bd_spacing">
+			<view class="invoice-list">
+				<view class="item" wx:for="{{contractList}}" wx:key="index">
+					<van-row>
+						<van-col span="16">合约名称:{{item.contract_name}}</van-col>
+						<van-col span="8" custom-class="text-right">
+							<block wx:if="{{item.status=='Q'}}">
+								<van-tag class="demo-margin-right" color="#7966FE" plain> {{item.status=='Q'?'完成':'待签'}}</van-tag>
+							</block>
+							<block wx:else>
+								<van-tag class="demo-margin-right" color="#AAAAAA" plain>{{item.status=='Q'?'完成':'待签'}}</van-tag>
+							</block>
+						</van-col>
+						<van-col span="12" custom-class="time">合约编号:{{item.contract_no}}</van-col>
+						<van-col span="12" custom-class="time text-right">合约类型:{{item.contract_type}}</van-col>
+						<van-col span="24" custom-class="time">甲方:{{item.customer_name}}</van-col>
+						<van-col span="12" custom-class="time">甲方联系人:{{item.contact_person}}</van-col>
+						<van-col span="12" custom-class="time text-right">甲方法人:{{item.legal_perosn}}</van-col>
+						<van-col span="12" custom-class="time">签约方式:{{item.sign_method}}</van-col>
+						<van-col span="24" custom-class="time">乙方:{{item.contract_corp_name}} </van-col>
+						<van-col span="24" custom-class="text-right hr">
+							<block wx:if="{{item.status=='Q'}}">
+								<van-tag class="demo-margin-right" size="large" color="#1e6ce8" plain bindtap="archiveFile" data-item="{{item}}">查看</van-tag>
+							</block>
+							<block wx:if="{{item.status=='A'}}">
+								<van-tag class="demo-margin-right" size="large" color="#1e6ce8" bindtap="see" data-item="{{item}}">查看</van-tag>
+							</block>
+							<block wx:if="{{item.status=='A'}}">
+								<van-tag class="demo-margin-right" size="large" color="#1e6ce8" bindtap="sign" data-item="{{item}}" data-pre_contract_info_id="{{item.pre_contract_info_id}}">签约</van-tag>
+							</block>
+						</van-col>
+					</van-row>
+				</view>
+
+			</view>
+		</view>
+	</view>
+</view>
+<van-toast id="van-toast" />

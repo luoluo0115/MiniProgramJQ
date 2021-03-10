@@ -1,0 +1,346 @@
+.page{
+  background-color: #fff;
+}
+.iphone {
+padding-bottom:20rpx!important
+}
+.banner{
+  width: 100%;
+  max-width: 100%;
+}
+.banner .img{
+  width: 100%;
+  max-width: 100%;
+}
+.detail-wrapper{
+  padding-bottom: 10px;
+}
+.product_price{
+  color: #1e6ce8;
+  font-size: 14px;
+  padding-left: 15px;
+}
+.product_price text{
+  font-size: 20px;
+}
+.product_name{
+  font-size: 18px;
+  color: #333;
+  padding-left: 15px;
+}
+.icon-share{
+  background: #eee;
+  border-top-left-radius: 25rpx;
+  border-bottom-left-radius: 25rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-top: 28rpx;
+  color: #333;
+  font-size: 12px;
+  text-align: center;
+}
+.icon-share icon{
+  font-size: 16px;
+  margin-top:-8rpx
+  
+}
+.hr{
+  height: 20rpx;
+  background: #f6f6f6;
+  width: 100%;
+}
+.content-wrapper{
+  padding: 15px 15px 60px 15px;
+}
+.content-wrapper image{
+width: 100%!important;
+
+}
+
+.goods-action {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: #fff;
+  text-align: center;
+ border-top:  1px solid #eee;
+  
+}
+.goods-action-icon__content {
+ 
+  height: 100%;
+  font-size: 12px;
+  line-height: 1;
+  color: #333;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+  
+}
+.goods-action-btn{
+  height: 50px;
+  line-height: 20px;
+  padding: 0;
+  font-weight: 200;
+  font-size: 12px;
+  background: #fff;
+  border: 0!important;
+  color:#666
+}
+
+.goods-action-icon__content icon{
+  margin-bottom: 4px;
+  font-size: 36rpx;
+  
+  
+}
+.goods-action-button{
+  width: 100%;
+  line-height: 96rpx;
+  height: 100rpx;
+  background: #1e6ce8;
+  color: #fff;
+
+}
+.goods-action-button.iphone{
+height: 116rpx;
+background: #1e6ce8;
+color: #fff;
+
+}
+
+/*弹出层*/
+
+.show-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+.popup-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.popup-contents {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 6;
+}
+
+.pop-goods-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  padding: 30rpx 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.pop-img-box {
+  width: 120rpx;
+  height: 120rpx;
+  overflow: hidden;
+  margin-right: 26rpx;
+}
+
+.pop-img-box .goods-thumbnail {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.pop-goods-title {
+  width: 484rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 26rpx;
+  color: #000;
+}
+
+.pop-goods-price {
+  font-size: 26rpx;
+  color: #1e6ce8;
+  margin-top: 20rpx;
+}
+
+.pop-goods-close {
+  width: 36rpx;
+  height: 36rpx;
+  flex: 1;
+  background: url("https://cdn.it120.cc/images/weappshop/popup-close.png") no-repeat center center;
+  background-size: 36rpx auto;
+  align-self: flex-start;
+  margin-top: -10rpx;
+}
+
+.size-label-box  .label {
+  font-size: 24rpx;
+  color: #000;
+  padding-left: 30rpx;
+  padding: 15rpx 0 12rpx 30rpx;
+}
+.input{
+  border: 1px solid #ddd;
+  border-radius: 6rpx;
+  width: 100%;
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  margin: 0 20rpx 16rpx 0;
+
+}
+.size-label-box .label-item-box {
+  display: flex;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.size-label-box .label-item {
+  font-size: 24rpx;
+  color: #000;
+  padding: 10rpx 20rpx;
+  border: 1px solid #ddd;
+  border-radius: 6rpx;
+  margin: 0 20rpx 16rpx 0;
+
+}
+
+.size-label-box .label-item.active {
+  color: #1e6ce8;
+  border: 1px solid #1e6ce8;
+}
+
+.buy-num-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 30rpx 48rpx 0;
+  margin-left: 30rpx;
+  border-top: 1px solid #f5f5f5;
+  margin-top: 30rpx;
+  align-items: center;
+}
+
+.num-label {
+  font-size: 26rpx;
+  color: #000;
+}
+
+.buy-num-box .num-box {
+  display: flex;
+}
+
+.buy-num-box .num-box .num-jian, .buy-num-box .num-box .num-input,
+.buy-num-box .num-box .num-jia {
+  width: 80rpx;
+  height: 64rpx;
+  line-height: 62rpx;
+  text-align: center;
+  border: 1px solid #eee;
+}
+
+.buy-num-box .num-box .num-input {
+  font-size: 28rpx;
+}
+
+.buy-num-box .num-box .num-input input {
+  height: 100%;
+}
+
+.popup-join-btn {
+  width: 100%!important;
+  height: 89rpx!important;
+  text-align: center;
+  line-height: 89rpx!important;
+  font-size: 34rpx;
+  color: #fff;
+  background-color: #1e6ce8;
+  margin-top: 10px;
+  padding: 0 !important;
+  font-weight: 400;
+  
+}
+.popup-join-btn.iphone {
+  height: 116rpx!important;
+  line-height: 89rpx!important;
+  
+}
+
+.buy-num-box .num-box .hui {
+  background-color: #f5f5f9;
+}
+
+/*弹出*/
+.popup-wrapper .weixin,.popup-wrapper .bill {
+text-align: center;
+font-size: 14px;
+color: #999;
+
+}
+.popup-wrapper .weixin icon{
+font-size: 36px;
+color: #51b674;
+
+}
+.popup-wrapper .bill icon{
+font-size: 36px;
+color:#1e6ce8;
+
+}
+.share-btn{
+border: none;
+background: none;
+top: 0;
+display: block;
+margin-left: auto!important;
+margin-right: auto!important;
+padding-left: 14px!important;
+padding-right: 14px!important;
+box-sizing: border-box!important;
+font-size: 18px!important;
+text-align: center!important;
+text-decoration: none!important;
+line-height: 1.2!important;
+font-weight: 300!important;
+font-weight: 200;
+padding: 14rpx 24px;
+
+}
+.van-button--small {
+min-width: 50px!important;
+padding: 0 8px!important;
+font-size: 12px!important;
+line-height: 34px!important;
+height: 34px!important;
+min-height: 34px!important;
+background: #1e6ce8!important;
+color: #fff!important;
+border-radius: 25px!important;
+width: 124px!important;
+border: 0!important;
+font-weight: 600;
+
+
+}
+
+.bill-article{
+background: #ebe9e9;
+}
+  
+  
+  

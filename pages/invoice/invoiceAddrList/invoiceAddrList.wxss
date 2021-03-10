@@ -1,0 +1,37 @@
+.grids-wrapper{
+  background: #f9f9f9;
+  padding: 12rpx;
+  font-size: 24rpx;
+  color: #999;
+  border-radius: 15rpx;
+  margin-top:20rpx
+
+}
+.card-bottom{
+  text-align: right;
+  border-top: 1px solid #eee;
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+}
+.detail-btn{
+  margin-right: 10rpx;
+  
+}
+.upload-btn{
+  margin-top: 20rpx;
+  text-align: center;
+}
+.invoice .invoice-item .area-title{
+  font-size: 24rpx;
+  padding: 10px 0 ;
+  overflow: hidden;
+
+}
+.invoice .invoice-item .area-title .area-text{
+  border-left:2px solid #1e6ce8;
+  padding-left:10px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  float:left;
+}

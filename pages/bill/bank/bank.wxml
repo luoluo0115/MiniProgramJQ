@@ -1,0 +1,46 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="account page">
+    <view class="page__bd page__bd_spacing">
+        <view class="area-title ">
+            <view class="area-text">请点击下面银行账户上传回单跟对账单</view>
+        </view>
+        <!--列表-->
+        <block wx:for="{{bankList}}" wx:key="index">
+        <view class="list_view" bindtap="gotoBankDetail" data-index="{{index}}" data-item="{{item}}" id="{{index}}">
+            <van-row>
+                <van-col span="4">
+                    <van-image width="36" height="36" src="{{bankImage[0].img}}" wx:if="{{item.bank_name=='建设银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[1].img}}" wx:if="{{item.bank_name=='农业银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[2].img}}" wx:if="{{item.bank_name=='浦发银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[3].img}}" wx:if="{{item.bank_name=='中国银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[4].img}}" wx:if="{{item.bank_name=='华夏银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[5].img}}" wx:if="{{item.bank_name=='交通银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[6].img}}" wx:if="{{item.bank_name=='招商银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[7].img}}" wx:if="{{item.bank_name=='中信银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[8].img}}" wx:if="{{item.bank_name=='工商银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[9].img}}" wx:if="{{item.bank_name=='兴业银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[10].img}}" wx:if="{{item.bank_name=='光大银行'}}"/>
+                    <van-image width="36" height="36" src="{{bankImage[11].img}}" wx:if="{{item.bank_name=='上海银行'}}"/>
+                </van-col>
+                <van-col span="14">
+                    <view class="d-block title color-gray"><text>{{item.bank_name}}</text><text class="third">({{item.bank_account_name}})</text></view>
+                </van-col>
+                <van-col span="6" custom-class="text-right">
+                    <van-button type="default" size="small" round catchtap='bindIntro' data-item="{{item}}">操作介绍</van-button>
+                </van-col>
+                <van-col span="24" custom-class="text-left">
+                        <text class="price">¥{{filter.numberToFixed(list[index])}}</text>
+                </van-col>
+                
+                <van-col span="24">
+                    <text class="four">{{item.bank_account_number}}</text>
+                     <view class="d-block sub color-gray">{{item.bank_branch_name}}</view>
+                </van-col>
+            </van-row>
+        </view>
+        </block>
+    </view>
+     
+</view>    
+<van-toast id="van-toast" />
+

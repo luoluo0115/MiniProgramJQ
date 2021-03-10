@@ -1,0 +1,106 @@
+/* pages/me/authorization/authorization.wxss */
+.company-info {
+  border-radius: 8rpx;
+  border: 1px solid #eee;
+  color: #999999;
+  padding: 20rpx;
+  margin-top: 30rpx;
+}
+
+.company-info .item {
+  line-height: 36rpx;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+
+}
+
+.upload-btn {
+  margin: 20rpx 0;
+}
+
+.upload-content {
+  margin: 20rpx
+}
+
+.upload-content .JQbtn {
+  margin: 40rpx auto;
+  width: 300rpx;
+  font-size: 24rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 1px solid #ff473a;
+  background-color: #ff473a;
+  border-radius: 30rpx;
+}
+
+.send-btn {
+  background-color: #1e6ce8 !important;
+  color: #fff !important;
+}
+
+/*表格*/
+.table {
+  border: 1px solid #eee;
+  border-right: 0;
+  border-bottom: 0;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.th,
+.td {
+  height: 64rpx;
+  line-height: 64rpx;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #eee;
+  text-align: center;
+  width: 100%;
+  font-size: 20rpx;
+}
+
+.td {
+  height: auto;
+  line-height:1.8;
+  font-size: 20rpx;
+}
+.th {
+  font-weight: 400;
+  background-color: #f9f9f9;
+}
+
+.th0 {
+  width: 10%;
+
+}
+.th1 {
+  width: 45%;
+
+}
+
+.th2 {
+  width: 30%;
+}
+
+.th3 {
+  width: 25%;
+}
+
+.rowColor {
+  background-color: #f9f9f9;
+}
+.van-cell {
+    padding: 10px 0!important;
+    padding: var(--cell-vertical-padding,10px) var(--cell-horizontal-padding,0)!important;
+}
+.border-bottom{
+  border-bottom: 1px solid #eee;
+}
+.pt-5{
+  padding-top: 5px;
+}

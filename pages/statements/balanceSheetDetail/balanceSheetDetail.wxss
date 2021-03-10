@@ -1,0 +1,4 @@
+/* pages/statements/balanceSheetDetail/balanceSheetDetail.wxss */
+.van-cell{
+    font-size: 12px!important
+}

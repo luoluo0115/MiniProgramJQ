@@ -1,0 +1,22 @@
+/* pages/invoice/invoiceCust/invoiceCust.wxss */
+.invoice {
+  padding-top: 8px ;
+}
+.invoice .invoice-item .area-title{
+  font-size: 24rpx;
+  padding: 10px 0 ;
+  overflow: hidden;
+
+}
+.invoice .invoice-item .area-title .area-text{
+  border-left:2px solid #1e6ce8;
+  padding-left:10px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  float:left;
+}
+.upload-btn{
+  margin-top: 20rpx;
+  text-align: center;
+}

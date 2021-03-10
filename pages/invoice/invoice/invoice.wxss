@@ -1,0 +1,200 @@
+/* pages/invoice/invoice/invoice.wxss */
+page{
+    background-color: #EDEDED;
+  }
+.top-wrapper{
+    background: #1e6ce8;
+    color: #fff;
+    padding: 40px 0rpx;
+}
+  
+.picket-company{
+    background: #7966FE;
+    border-radius:25px;
+    text-align: center;
+    position: relative;
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px
+}
+.companyText{
+   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+.kind-list__img{
+    margin: 4px 12px 4px 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+}
+.picker-date{
+    text-align: center;
+    margin-top:4%;
+}
+.picker-date .picker,.picker-date text{
+    line-height: 28px;
+    height: 28px;
+    font-size: 16px;
+}
+.picker-date  icon{
+    font-size: 18px;
+    padding-right: 5px;
+    margin-top: -5px;
+}
+
+.account-wrapper{
+    margin-top: -13%;
+    clear: both;
+    background: #fff;
+    border-radius: 15px;
+    padding: 0 5% 0 5%;
+    margin-bottom:4% 
+}
+.account-wrapper .header-title{
+    font-size: 14px;
+    padding: 10px 0;
+    overflow: hidden;
+}
+.account-wrapper .header-title .text{
+    border-left:2px solid #1e6ce8;
+    padding-left:10px;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    color: #333;
+}
+.account-wrapper .item {
+   padding-bottom:15rpx
+}
+
+.account-wrapper  strong,.account-wrapper text{
+    display: block;
+    line-height: 2;
+}
+.account-wrapper strong{
+    color: #1e6ce8;
+    font-size: 18px
+}
+.account-wrapper text{
+    color:#AAAAAA ;
+    font-size: 14px
+}
+.account-wrapper .weui-flex__item{
+    text-align: center;
+}
+
+  .grids-content{
+    position: relative;
+}
+.grids-wrapper{
+    background: #fff;
+    border-radius: 15px;
+    margin-bottom: 4%;
+
+}
+.grids-wrapper .weui-grid__label{
+    font-size: 12px;
+    color: #AAAAAA;
+    margin-top: 5px
+
+}
+
+.title{
+    text-align: left;
+    font-size: 12px;
+    color:#666
+}
+/* .title::before{
+    background-color: #1e6ce8;
+    border-radius: 100%;
+    content: "";
+    padding: 6rpx;
+    display: inline-block;
+} */
+.invoice-center{
+   padding: 3% 0 0 0;
+    font-size:12px;
+    padding-left: 7px;
+    line-height: 3;
+}
+.invoice-center .left{
+    color:#AAAAAA;
+}
+
+.invoice-center .right{
+    color:#1e6ce8;
+    text-align: left;
+    padding-left: 5px;
+
+}
+/* .weui-grid {
+    
+    width: 50%;
+  
+} */
+.stockInventory{
+    color:#1e6ce8;
+    height: 28px;
+
+}
+    
+/*搜索*/
+
+.search{
+    background: #7966FE;
+    border-radius: 25px;
+    text-align: center;
+    position: relative;
+    line-height: 40px;
+    height: 40px;
+    font-size: 14px;
+    width:40px;
+    margin-left: 5px
+    
+}
+.search icon{
+    font-size: 18px;
+    
+}
+/*tab列表*/
+.top-tab{
+    margin-top: -13%;
+    clear: both;
+    background: #fff;
+    border-radius: 15px;
+    padding:20rpx 5%;
+    text-align: center;
+    margin-bottom:4% ;
+    color:#fff
+}
+.top-tab .tab-btn .item{
+    background-image: linear-gradient(to bottom right, #4a92fe , #1e6ce8);
+    border-radius: 15rpx;
+    padding: 20rpx 0;
+    margin: 10rpx;
+}
+.top-tab .tab-btn.noActive .item{
+    background-image: linear-gradient(to bottom right, #f1f1f1 , #dddddd);
+    border-radius: 15rpx;
+    padding: 20rpx 0;
+    margin: 10rpx;
+    color: #666;
+}
+.top-tab .tab-btn .item text{
+    font-size: 28rpx;
+    padding-left: 10rpx;
+}
+
+/*sheet-top*/
+.sheet-top .item{
+    padding: 3% 0
+}
+.sheet-top .item:first-child,.sheet-top .item:nth-child(2),.sheet-top .item:nth-child(3){ 
+    border-bottom:1px dashed #EAE7E7; 
+
+}

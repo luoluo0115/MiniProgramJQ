@@ -1,0 +1,56 @@
+
+
+.account-wrapper{
+  background: #fff;
+  border-radius: 15px;
+  margin-top: -11%;
+  padding: 15rpx 0;
+}
+
+.grids-content{
+  position: relative;
+}
+.grids-wrapper{
+  border-radius: 15px;
+  padding: 30rpx 30rpx;
+  margin-top: 30rpx;
+  background: #f7f8fc;
+}
+
+
+.grids-content .title{
+  font-size:32rpx;
+  color: #333;
+  line-height: 1.8;
+}
+.grids-content .num,.grids-content .tax,.grids-content .price{
+  font-size:24rpx;
+  color: #999;
+}
+.grids-content .sub{
+  font-size:24rpx;
+  color: #666;
+}
+
+.grids-content .van-cell {
+  padding: 10rpx 10rpx 0!important;
+  font-size: 24rpx;
+  background:none!important;
+}
+.table {
+  border: 1px solid #eee;
+  border-right: 0;
+  border-bottom: 0;
+  width: 100%;
+  margin-top: 10rpx;
+  color: #333;
+}
+.th1 {
+  width: 30%;
+}
+.th2 {
+  width: 35%;
+}
+.th3 {
+  width: 35%;
+}

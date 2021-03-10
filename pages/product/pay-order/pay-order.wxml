@@ -1,0 +1,128 @@
+<!--pages/product/pay-order/pay-order.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="container">
+     <form bindsubmit="createOrder" report-submit="true">
+        <view class="goods-list">
+            <view class="list-title">产品列表</view>
+            <view class="a-goods" wx:for-items="{{goodsList}}" wx:key="index">
+                <view class="img-box">
+                    <image src="{{item.pic}}" class="img" />
+                </view>
+                <view class="text-box">
+                    <view class="arow arow01">
+                        <view class="goods-name">{{item.name}}</view>
+                        <view class="goods-price">¥ {{filter.numberToFixed(item.price)}}</view>
+                    </view>
+                    <view class="arow">
+                        <view class="goods-label">{{item.label}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="peisong-way">
+            <view class="row-box">
+                <view class="row-label">推荐码</view>
+                <view class="right-text">
+                    <input name="referral_code" type="input" value="{{referral_code}}" class="liuyan" placeholder="请输入推荐码(6位数字)" />
+                </view>
+            </view>
+        </view>
+        <view class="peisong-way">
+            <view class="row-box">
+                <view class="row-label">备注</view>
+                <view class="right-text">
+                    <input name="remark" type="text" class="liuyan" placeholder="如需备注请输入" />
+                </view>
+            </view>
+        </view>
+        <view class="peisong-way" wx:if="{{couponLength>0}}">
+           <van-cell title="优惠券" wx:if="{{coupon_amount=='0'}}" is-link value="{{couponLength}}张可用" bindtap="goCoupon"/>
+           <van-cell title="优惠券" wx:else is-link value="{{filter.numberToFixed(coupon_amount)}}" bindtap="goCoupon"/>
+        </view>
+        <view class="peisong-way">
+            <view class="pay-way">支付方式</view>
+            <van-radio-group value="{{ radioPay }}" bind:change="onPayChange">
+                <van-cell-group>
+                    <van-cell title="微信支付" clickable data-name="1" bind:click="onClick">
+                    <van-radio slot="right-icon" name="1" />
+                    </van-cell>
+                    <van-cell title="余额支付" label="{{customer_name}}" clickable data-name="2" bind:click="onClick">(可用余额:￥{{filter.numberToFixed(available_balance)}})
+                    <van-radio slot="right-icon" name="2" />
+                    </van-cell>
+                     <van-cell title="代理支付" label="{{par_customer_name}}" wx:if="{{agent_pay}}" clickable data-name="3" bind:click="onClick">(可用余额:￥{{filter.numberToFixed(par_available_balance)}})
+                    <van-radio slot="right-icon" name="3" />
+                    </van-cell>
+                </van-cell-group>
+            </van-radio-group>
+        </view>
+        
+        <view class="jiesuan-box {{iphone}}">
+            <view class="left-price ">
+                <view class="total" wx:if="{{coupon_amount==0}}">合计：¥ {{filter.numberToFixed(goodPrice)}}</view>
+                <view class="total" wx:else>合计：¥ {{filter.numberToFixed(last_amount)}}</view>
+            </view>
+            <button class="to-pay-btn" formType="submit">提交订单</button>
+        </view> 
+    </form>
+</view>
+<van-popup show="{{ showCoupon }}" bind:close="onClose" position="bottom" custom-class="showCoupon" >
+    <form bindsubmit="userCoupon">
+        <view class="page">
+            <view class="page__bd page__bd_spacing">
+                <view class="nouserCoupon" bindtap='noCoupon'>
+                    暂不使用优惠券
+                </view>
+                <!-- <van-checkbox-group value="{{ result }}" bind:change="onChange1"  max="{{ 1 }}">
+                    <view class="coupons-item " wx:for="{{couponUseList1}}"  wx:key="index"  data-index="{{ index }}"
+      bindtap="toggle"  style="background-image:url('{{item.wait_image_path}}');"> 
+                        <view class="coupons-item-box">
+                            <view class="money-left"> <text>¥</text>{{item.coupon_amount}}
+                            </view>
+                            <view class="money-right">
+                                <view class="money-hold">{{item.coupon_desc}}</view>
+                                <view class="money-data">有效期: {{item.get_time}} - {{item.end_date}}</view>
+                            </view>
+                            <view class="money-home" >
+                                <van-checkbox catch:tap="noop" class="checkboxes-{{ index }}" name="{{ index }}" />
+                            </view>
+                        </view>
+                    </view>
+                </van-checkbox-group> -->
+                <!-- <van-checkbox-group value="{{radio}}}" bind:change="onChange">
+                    <view class="coupons-item " wx:for="{{couponUseList1}}"  wx:key="index"  data-index="{{ index }}"
+                    bind:click="toggle"  style="background-image:url('{{item.wait_image_path}}');"> 
+                        <view class="coupons-item-box">
+                            <view class="money-left"> <text>¥</text>{{item.coupon_amount}}
+                            </view>
+                            <view class="money-right">
+                                <view class="money-hold">{{item.coupon_desc}}</view>
+                                <view class="money-data">有效期: {{item.get_time}} - {{item.end_date}}</view>
+                            </view>
+                            <view class="money-home" >
+                                <van-checkbox catch:tap="noop" class="checkboxes-{{ index }}" name="{{ item }}" />
+                                
+                            </view>
+                        </view>
+                    </view>
+                </van-checkbox-group> -->
+                <van-radio-group value="{{ radio }}" bind:change="onChange">
+                    <view class="coupons-item " wx:for="{{couponUseList1}}"  wx:key="index"   style="background-image:url('{{item.wait_image_path}}');"> 
+                        <view class="coupons-item-box">
+                            <view class="money-left"> <text>¥</text>{{item.coupon_amount}}
+                            </view>
+                            <view class="money-right">
+                                <view class="money-hold">{{item.coupon_desc}}</view>
+                                <view class="money-data">有效期: {{item.get_time}} - {{item.end_date}}</view>
+                            </view>
+                            <view class="money-home" >
+                                <van-radio name="{{index}}" />
+                            </view>
+                        </view>
+                    </view>
+                </van-radio-group>
+                <button class="user-btn" formType="submit">立即使用</button>
+            </view>
+        </view>
+    </form>          
+</van-popup>
+<van-toast id="van-toast"/>

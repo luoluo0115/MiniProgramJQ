@@ -1,0 +1,151 @@
+/* pages/bill/taxation/taxation.wxss */
+.page__bd_spacing {
+  padding-left: 6px;
+  padding-left: 6px;
+}
+.btn-group{
+  margin:10px auto;
+}
+.scroll-view_H{
+  width: 100%;
+  white-space: nowrap;
+  font-size: 10px;
+}
+.table {
+  margin-top: 0px;
+  font-size: 10px;
+  /* width: 1670rpx; */
+}
+
+.td,.th{
+  font-size:10px;
+  padding: 0 10rpx;
+
+}
+.td ,.th{
+  height: 32px;
+  line-height: 32px;
+}
+/* .th0{
+  width:140rpx;
+}
+.th1{
+  width:330rpx;
+}
+.th2{
+  width:400rpx;
+}
+.th3{
+  width:400rpx;
+}
+.th4{
+  width:400rpx;
+} */
+.th0{
+  width:12%;
+}
+.th1{
+  width:22%;
+}
+.th2{
+  width:22%;
+}
+.th3{
+  width:22%;
+}
+.th4{
+  width:22%;
+}
+.th.th0{
+ 
+  height: 50px;
+  line-height: 50px;
+}
+.th.th1{
+
+  height: 50px;
+  line-height: 50px;
+}
+.th.th2{
+  height: 50px;
+  line-height: 25px;
+}
+.th.th3{
+  height: 50px;
+  line-height: 25px;
+}
+.th.th4{
+  height: 50px;
+  line-height: 25px;
+}
+.btm{
+  border-top: 1px solid #eee;
+  display: flex;
+}
+.td .btm{
+  border-top:0;
+}
+.btm .btm-text{
+  flex: 1;
+}
+.btm .btm-text:first-child{
+  border-right: 1px solid #eee;
+}
+/*时间*/
+.top-btn,.picker-date-wrapper{
+  display: inline-block;
+}
+
+.picker-date{
+  font-size:22rpx;
+  background-color: #1e6ce8;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  padding: 0 30px;
+  border-radius:2px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 6px;
+}
+.picker-date icon{
+font-size: 12px;
+position: relative;
+margin-top: -20px;
+margin-right: 10px;
+}
+.item-top{
+display: -webkit-flex;
+display: flex;
+box-sizing: border-box;
+position: relative;
+padding: 20px 0;
+font-size:12px ;
+color: #666;
+display: block;
+}
+.item-top .label, .picker-date .label{
+flex: 1;
+font-size: 12px;
+}
+.item-top .label-right, .picker-date .label-right{
+flex: 2;
+font-size: 12px;
+}
+.topnav{
+  position: fixed;
+  top: 85rpx;
+  z-index:99;
+  background: #fff;
+  width: 100%;
+}
+.c6{
+  padding-left: 5px;
+}
+.c8{
+  padding-left: 10px;
+}
+.c10{
+  padding-left: 15px;
+}

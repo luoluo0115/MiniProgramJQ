@@ -1,0 +1,90 @@
+<!--pages/me/personal/personal.wxml-->
+<view class="personal">
+	<view class="page">
+		<view class="page__bd">
+			<view class=" personal-header">
+				<view class="personal-wrapper">
+					<view class="weui-cell ">
+						<view class="weui-cell__hd img">
+							<open-data type="userAvatarUrl" class="image"></open-data>
+						</view>
+						<view class="weui-cell__bd infor">
+							<view class="title">{{customerList.customer_name}}</view>
+							<view class="subtext">{{customerList.enterprise_type}}
+								<van-tag class="demo-margin-right" color="#7966FE" plain>{{customerList.tax_levy_method}} </van-tag>
+							</view>
+							<view class="subtext">{{customerList.tax_type}} </view>
+						</view>
+					</view>
+				</view>
+
+			</view>
+			<van-cell icon="manager-o" is-link url="../userinfor/userinfor">
+				<view slot="title">
+					<view class="title">公司信息</view>
+				</view>
+			</van-cell>
+			<van-cell icon="user-o" is-link url="../userinfo/userinfo">
+				<view slot="title">
+					<view class="title">个人信息</view>
+				</view>
+			</van-cell>
+			<van-cell icon="bill-o" is-link url="../authorization/authorization">
+				<view slot="title">
+					<view class="title">认证授权</view>
+				</view>
+			</van-cell>
+			<van-cell icon="bag-o" is-link url="../myOrder/myOrder">
+				<view slot="title">
+					<view class="title">我的订单</view>
+				</view>
+			</van-cell>
+			<van-cell icon="balance-list-o" is-link url="../wallet/wallet">
+				<view slot="title">
+					<view class="title">充值消费</view>
+				</view>
+			</van-cell>
+			<van-cell icon="balance-list-o" is-link url="../customerInvoiceInfo/customerInvoiceInfo">
+				<view slot="title">
+					<view class="title">发票申请</view>
+				</view>
+			</van-cell>
+			<van-cell icon="coupon-o" is-link bindtap='bindTapmyCoupon' >
+				<view slot="title">
+					<view class="title">我的礼券</view>
+				</view>
+			</van-cell>
+			<van-cell icon="records" is-link url="../contract/contract">
+				<view slot="title">
+					<view class="title">合同查看</view>
+				</view>
+			</van-cell>
+			<van-cell icon="notes-o" is-link url="/pages/me/onlinepublic/onlinepublic">
+				<view slot="title">
+					<view class="title">年度公示</view>
+				</view>
+			</van-cell>
+			<van-cell icon="chat-o" is-link url="../message/message">
+				<view slot="title">
+					<view class="title">消息中心</view>
+				</view>
+				<van-tag mark type="danger" wx:if="{{messageCount >0 }}">{{messageCount > 99 ? (messageCount+'+'): messageCount}}</van-tag>
+			</van-cell>
+
+			<van-cell icon="service-o" is-link url="../../customer/customerService/customerService">
+				<view slot="title">
+					<view class="title">专属客服</view>
+				</view>
+			</van-cell>
+			<!-- <van-cell title="好享得利" is-link icon="shop-o" bindtap="goMinipro"/> -->
+		</view>
+		<view class="page__bd page__bd_spacing">
+			<view class="upload-btn JQbtn">
+				<navigator class="exit" target="miniProgram" open-type="exit">
+					退出小程序
+				</navigator>
+			</view>
+		</view>
+	</view>
+</view>
+<van-toast id="van-toast" />

@@ -1,0 +1,45 @@
+/* pages/statements/paymentDetail/paymentDetail.wxss */
+.pay-content{
+   
+    font-size: 12px;
+}
+.van-cell__value {
+    flex: 2!important;
+    -webkit-box-flex: 2!important;
+}
+.van-collapse-item__content{
+    padding:0 22px!important;
+}
+.van-cell__label{
+    position: absolute;
+    top: 10px;
+    left: 35%;
+    text-align: right;
+    width: 68px;
+
+  }
+.pay-content .pay-title{
+    padding:2% 5%;
+    background: #f8f8f8;
+    color: #666666;
+}
+.pay-content .pay-tr{
+    color:#333333;
+    border-bottom: 1px solid #eee;
+    line-height: 2;
+    padding: 5px 15px;
+}
+.pay-content .basic,.price{
+    color:#AAAAAA
+}
+
+
+.text-center{
+    text-align: center
+}
+.text-right{
+    text-align: right
+}
+.text-left{
+    text-align: left
+}

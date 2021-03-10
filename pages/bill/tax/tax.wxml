@@ -1,0 +1,36 @@
+<!--pages/bill/tax/tax.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<scroll-view class=""  scroll-x="false" >
+    <view class="page">
+        <block wx:if="{{PostWithTaxlist!=''}}">
+             <view class="table">
+                <view class="tr">
+                    <view class="th th0">操作</view>
+                  <view class="th th1">会计月份</view>
+                  <view class="th th2">文件分类</view>
+                  <view class="th th3">总税额</view>
+                  <view class="th th4">上传时间</view>
+                </view>
+                <block wx:for="{{PostWithTaxlist}}" wx:key="index">
+                  <view class='tr' data-item="{{item}}" bindtap="previewPDF">
+                    <view class="td th0 ">
+                        <icon class="./iconfont/icondoc-line:before color-blue" ></icon>
+                    </view>
+                    <view class="td th1 ">{{item.account_month}}</view>
+                    <view class="td th2">{{item.tax_file_category}}</view>
+                    <view class="td th3">{{filter.numberToFixed(item.total_tax_amount)}}</view>
+                    <view class="td th4">{{filter.formatMinute(item.date)}}</view>
+                  </view>
+                </block>
+                
+            </view>
+        </block>
+        <block wx:else>
+            <view class="empty" >
+                <icon class="./iconfont/iconkong:before "></icon>
+                <view class="color-gray">暂无数据</view>
+            </view>
+        </block>
+        
+    </view>
+</scroll-view>

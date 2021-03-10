@@ -1,0 +1,149 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="personal-wrapper">
+	<view class="weui-cell ">
+		<view class="weui-cell__bd infor">
+			<view class="title">{{customerList.customer_name}}</view>
+			<view class="subtext">{{customerList.enterprise_type}}
+				<van-tag class="demo-margin-right text-right" color="#7966FE" plain>{{customerList.tax_levy_method}} </van-tag>
+			</view>
+			<view class="subtext">{{customerList.tax_type}} </view>
+		</view>
+	</view>
+</view>
+<view class="coupons-list">
+	<van-tabs active="{{ active }}" bind:change="onChange">
+		<van-tab title="待使用">
+			<view class="page">
+				<view class="page__bd page__bd_spacing">
+					<block wx:if="{{myCouponList!=''}}">
+						<view class="coupons-item " wx:for="{{myCouponList}}" wx:key="index"
+							style="background-image:url('{{item.wait_image_path}}');">
+							<view class="coupons-item-box">
+								<view class="money-left">
+									<block wx:if="{{item.coupon_category=='减免'}}"><text class="free-txt">免</text></block>
+									<block wx:else><text>¥</text>{{item.coupon_amount}}</block>
+								</view>
+								<view class="money-right">
+									<view class="money-hold">{{item.coupon_desc}}</view>
+									<view class="money-data">有效期: {{filter.formatTime(item.get_time,'yyyy-MM-dd')}} -
+										{{filter.formatTime(item.end_date,'yyyy-MM-dd') }}</view>
+									<block wx:if="{{item.is_transfer=='Y'}}">
+										<view class="money-remark" bindtap="showPost"
+											data-promotion_coupon_id="{{item.promotion_coupon_id}}"
+											data-promotion_coupon_user_id="{{item.promotion_coupon_user_id}}">{{item.remark}}
+											<icon class="./iconfont/iconzhuanfa-:before icon-share"></icon>
+										</view>
+									</block>
+									<block wx:if="{{item.is_transfer=='N'}}">
+										<view class="money-remark mt-5">{{item.remark ==null?'':item.remark}}
+										</view>
+									</block>
+								</view>
+								<view class="money-home" bindtap="goProduct" data-item_id="{{item.pre_product_id}}"
+									data-coupon_category="{{item.coupon_category}}">{{item.status_desc=='未使用'?'立即使用': ''}}</view>
+							</view>
+						</view>
+					</block>
+					<block wx:else>
+						<view class="empty">{{msg}}</view>
+					</block>
+				</view>
+
+			</view>
+
+
+		</van-tab>
+		<van-tab title="已使用">
+			<view class="page__bd page__bd_spacing">
+				<block wx:if="{{myCouponList!=''}}">
+					<view class="coupons-item " wx:for="{{myCouponList}}" wx:key="index"
+						style="background-image:url('{{item.used_image_path}}');">
+						<view class="coupons-item-box">
+							<view class="money-left">
+								<block wx:if="{{item.coupon_category=='减免'}}"><text class="free-txt">免</text></block>
+								<block wx:else><text>¥</text>{{item.coupon_amount}}</block>
+							</view>
+							<view class="money-right">
+								<view class="money-hold">{{item.coupon_desc}}</view>
+								<view class="money-data gray">有效期: {{filter.formatTime(item.get_time,'yyyy-MM-dd')}} -
+									{{filter.formatTime(item.end_date,'yyyy-MM-dd') }}</view>
+								<view class="money-remark">{{item.remark ==null?'':item.remark}}</view>
+							</view>
+							<view class="money-home gray">{{item.status_desc=='已使用'?'已经使用': ''}}</view>
+
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="empty">{{msg}}</view>
+				</block>
+
+			</view>
+
+		</van-tab>
+		<van-tab title="已过期">
+			<view class="page__bd page__bd_spacing">
+				<block wx:if="{{myCouponList!=''}}">
+					<view class="coupons-item " wx:for="{{myCouponList}}" wx:key="index"
+						style="background-image:url('{{item.used_image_path}}');">
+						<view class="coupons-item-box">
+							<view class="money-left">
+								<block wx:if="{{item.coupon_category=='减免'}}"><text class="free-txt">免</text></block>
+								<block wx:else><text>¥</text>{{item.coupon_amount}}</block>
+							</view>
+							<view class="money-right">
+								<view class="money-hold">{{item.coupon_desc}}</view>
+								<view class="money-data gray">有效期: {{filter.formatTime(item.get_time,'yyyy-MM-dd')}} -
+									{{filter.formatTime(item.end_date,'yyyy-MM-dd') }}</view>
+								<view class="money-remark">{{item.remark ==null?'':item.remark}}</view>
+							</view>
+							<view class="money-home gray">{{item.status_desc=='已过期'?'已经过期': ''}}</view>
+
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="empty">{{msg}}</view>
+				</block>
+			</view>
+
+		</van-tab>
+		<van-tab title="待绑定">
+			<view class="page__bd page__bd_spacing">
+
+				<block wx:if="{{myCouponList!=''}}">
+					<view class="coupons-item " wx:for="{{myCouponList}}" wx:key="index"
+						style="background-image:url('{{item.wait_image_path}}');">
+						<view class="coupons-item-box">
+							<view class="money-left">
+								<block wx:if="{{item.coupon_category=='减免'}}"><text class="free-txt">免</text></block>
+								<block wx:else><text>¥</text>{{item.coupon_amount}}</block>
+							</view>
+							<view class="money-right">
+								<view class="money-hold">{{item.coupon_desc}}</view>
+								<view class="money-data">有效期: {{filter.formatTime(item.get_time,'yyyy-MM-dd')}} -
+									{{filter.formatTime(item.end_date,'yyyy-MM-dd') }}</view>
+								<block wx:if="{{item.is_transfer=='Y'}}">
+									<view class="money-remark" bindtap="showPost" data-promotion_coupon_id="{{item.promotion_coupon_id}}"
+										data-promotion_coupon_user_id="{{item.promotion_coupon_user_id}}">{{item.remark}}
+										<icon class="./iconfont/iconzhuanfa-:before icon-share"></icon>
+									</view>
+								</block>
+								<block wx:if="{{item.is_transfer=='N'}}">
+									<view class="money-remark mt-5">{{item.remark ==null?'':item.remark}}
+									</view>
+								</block>
+							</view>
+							<view class="money-home" bindtap="BindCoupon" data-item="{{item}}">立即绑定</view>
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="empty">{{msg}}</view>
+				</block>
+			</view>
+
+		</van-tab>
+	</van-tabs>
+</view>
+<van-toast id="van-toast" />

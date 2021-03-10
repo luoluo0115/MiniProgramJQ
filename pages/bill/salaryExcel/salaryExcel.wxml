@@ -1,0 +1,89 @@
+<!--pages/bill/salaryExcel/salaryExcel.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<scroll-view class="scroll-view_H" scroll-y="true" bindscroll="scrollTopFun">
+<view class=" page__bd_spacing text-center btn-group" >
+  <van-row>
+      <van-col span="24" custom-class="salary-title">
+          薪资发放明细
+      </van-col>
+      <van-col span="12" custom-class="text-left">
+          编制单位:{{customer_info_name}}
+      </van-col>
+       <van-col span="12" custom-class="text-right">
+          月份:{{account_month}}
+      </van-col>
+  </van-row>
+</view>
+  <view class="table">
+    <view class="tr" >
+        <view class="th th0">序号</view>
+        <view class="th th1">编号</view>
+        <view class="th th2">姓名</view>
+        <view class="th th3">国籍</view>
+        <view class="th th4">
+            <view class="th-line">加项</view>
+            <view class="th-line btm">
+                <text class="btm-text">基本工资</text>
+                <text class="btm-text">岗位工资</text>
+                <text class="btm-text">加班</text>
+                <text class="btm-text">津贴</text>
+                <text class="btm-text">奖金</text>
+            </view>
+        </view>
+        <view class="th th5">
+            <view class="th-line">减项</view>
+            <view class="th-line btm"><text class="btm-text">扣减</text></view>
+        </view>
+        <view class="th th6">应发工资</view>
+        <view class="th th7">所得项目分类</view>
+        <view class="th th8">附加扣除总额</view>
+        <view class="th th9">
+            <view class="th-line">代扣款</view>
+            <view class="th-line btm">
+                <text class="btm-text">养老金</text>
+                <text class="btm-text">医疗金</text>
+                <text class="btm-text">失业金</text>
+                <text class="btm-text">公积金</text>
+                <text class="btm-text">个税</text>
+            </view>
+        </view>
+        <view class="th th10">实发工资</view>
+        <view class="th th11">备注</view>
+    </view>
+    <view class="tr" wx:for="{{salaryList}}" wx:key="index">
+        <view class="td th0">{{index}}</view>
+        <view class="td th1">{{item.emp_no}}</view>
+        <view class="td th2">{{item.emp_name}}</view>
+        <view class="td th3">{{item.nationality}}</view>
+        <view class="td th4">
+            <view class="th-line btm nobor">
+                <text class="btm-text">{{filter.numberToFixed(item.base_salary)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.job_salary)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.oevrtime_salary)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.allowance_salary)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.bonus_salary)}}</text>
+            </view>
+        </view>
+        <view class="td th5">
+            {{filter.numberToFixed(item.deduct_salary)}}
+        </view>
+        <view class="td th6">{{filter.numberToFixed(item.income_amt)}}</view>
+        <view class="td th7">{{item.income_category}}</view>
+        <view class="td th8">{{filter.numberToFixed(item.children_edu_deduct_amount+item.housing_rent_deduct_amount+item.loan_interest_deduct_amount+item.support_elder_deduct_amount+item.diploma_edu_deduct_amount+item.vocational_edu_deduct_amount)}}</view>
+        <view class="td th9">
+            <view class="th-line btm nobor">
+                <text class="btm-text">{{filter.numberToFixed(item.personal_pension_insurance)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.personal_medical_insurance)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.personal_unemployment_insurance)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.personal_housing_fund)}}</text>
+                <text class="btm-text">{{filter.numberToFixed(item.income_tax)}}</text>
+            </view>
+        </view>
+        <view class="td th10">{{filter.numberToFixed(item.income_amt-item.income_tax)}}</view>
+        <view class="td th11">{{item.remark==null?'':item.remark}}</view>
+    </view>
+   
+  </view>
+</scroll-view>
+
+

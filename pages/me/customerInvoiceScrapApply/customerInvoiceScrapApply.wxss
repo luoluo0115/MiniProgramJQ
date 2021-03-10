@@ -1,0 +1,21 @@
+.invoice {
+    padding-top: 8px ;
+}
+  
+.invoice-info-list{
+    border:1px solid #eee;
+    border-radius: 5rpx;
+
+}
+.invoice-info-item{
+    font-size: 24rpx!important;
+    padding: 10rpx 16rpx!important;
+} 
+.pur-btn{
+    float: right;
+    margin-right: 15rpx;
+}
+.upload-btn{
+    margin-top: 20rpx;
+    text-align: center;
+} 

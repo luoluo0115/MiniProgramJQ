@@ -1,0 +1,77 @@
+<view class="page area-container center-container">
+	<view class="invoice page__bd page__bd_spacing">
+		<view class="invoice-item">
+			<view class="area-title ">
+				<view class="area-text">地址信息</view>
+            </view>            
+			<view class="invoice-info-list">
+				<van-cell-group>
+                <picker wx:if="{{type=='AddAll'}}" bindchange="bindCustCustomerChange" data-idx="{{index}}" value="{{listCustCustomer[index].customer_name}}" range-key="{{'customer_name'}}" range="{{listCustCustomer}}" >
+                    <view class="picker">
+                        <van-cell title="客户名称"  value="{{cust_customer_name}}" is-link />
+                    </view>
+                </picker>
+                <van-cell wx:if="{{type=='EditAll'}}" title="客户名称"  value="{{expressData.customer_name}}" />
+                <van-field
+                    name="express_contact_name"
+                    data-fieldName="express_contact_name"
+                    value="{{expressData.express_contact_name}}"
+                    required
+                    label="联系人"
+                    placeholder="请输入联系人"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="express_contact_phone"
+                    data-fieldName="express_contact_phone"
+                    value="{{expressData.express_contact_phone}}"
+                    label="电话"
+                    required
+                    placeholder="请输入电话"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-cell required title="省市区" bindtap="selectArea" value="{{val}}" is-link />
+                    
+                <van-field
+                    name="express_address"
+                    data-fieldName="express_address"
+                    value="{{ expressData.express_address }}"
+                    label="详细地址"
+                    required
+                    placeholder="请输入详细地址"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+                <van-field
+                    name="remark"
+                    data-fieldName="remark"
+                    value="{{ expressData.remark }}"
+                    label="备 注"
+                    placeholder="请输入备 注"
+                    input-align="right"
+                    label-class="invoice-info-item"
+                    input-class="invoice-info-item"
+                    bind:blur="handleFieldChange"
+                />
+				</van-cell-group>
+			</view>
+		</view>
+		<van-row custom-class="upload-btn " gutter="10">
+			<van-col span="24">
+				<van-button round type="info" block color="#1e6ce8" bindtap="bindSave">保存</van-button>
+			</van-col>
+		</van-row>
+	</view>
+</view>
+<van-popup show="{{ showArea }}" position="bottom">
+	<van-area area-list="{{ areaList }}" value="310100" bind:cancel="onClose" bind:confirm="onConfirm" />
+</van-popup>
+<van-toast id="van-toast" />

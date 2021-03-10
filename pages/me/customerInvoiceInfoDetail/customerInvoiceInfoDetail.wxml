@@ -1,0 +1,154 @@
+ 
+<wxs module="m1">
+	var dateFormatStr = function(dateStr) {
+		if (dateStr == null) {
+			return '';
+		}
+		return dateStr.replace('T', ' ')
+	}
+	var dateFormatDay = function(dateDay) {
+		if (dateDay == null) {
+			return '';
+		}
+		return dateDay.substring(0, 10)
+	}
+	var moneyFormat = function(money) {
+		return money.toFixed(2);
+	}
+
+	module.exports = {
+		dateFormatStr: dateFormatStr,
+		dateFormatDay: dateFormatDay,
+		moneyFormat: moneyFormat,
+
+	}
+</wxs>
+<van-tabs active="{{ active }}" bind:change="switchTab">
+
+    <van-tab title="发票详情">
+		<view class="page area-container center-container">
+            <view class="invoice page__bd page__bd_spacing">
+                <view class="invoice-item">
+                    <view class="area-title ">
+                        <view class="area-text">抬头信息</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <van-cell title="名称" value="{{formData.invoice_customer_name}}" custom-class="invoice-info-item" />
+                        <van-cell title="税号" value="{{formData.invoice_customer_tax_code}}" custom-class="invoice-info-item" />
+                        <van-cell title="单位地址" wx:if="{{isShowMore}}" value="{{formData.invoice_customer_address}}" custom-class="invoice-info-item" />
+                        <van-cell title="单位电话" wx:if="{{isShowMore}}" value="{{formData.invoice_customer_phone}}" custom-class="invoice-info-item" />
+                        <van-cell title="开户银行" wx:if="{{isShowMore}}" value="{{formData.invoice_customer_bank_name}}" custom-class="invoice-info-item" />
+                        <van-cell title="银行账号" wx:if="{{isShowMore}}" value="{{formData.invoice_customer_bank_account}}" border="{{false}}" custom-class="invoice-info-item" />
+                    </view>
+                    <view class="upload-btn">
+                        <van-button color="#1e6ce8" round plain size="small" bind:click="moreChange">查看更多
+                            <van-icon name="{{isShowMore?'arrow-up':'arrow-down'}}" />
+                        </van-button>
+                    </view>
+                    <view class="area-title ">
+                        <view class="area-text">发票信息</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <view>
+                            <van-cell title="申请日期" link value="{{m1.dateFormatDay(formData.creation_date)}}" custom-class="invoice-info-item" />
+                        </view> 
+                        <view>
+                            <van-cell title="发票分类" link value="{{formData.invoice_category}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票项目" link value="{{formData.invoice_item_name}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票明细"  wx:if="{{isShowMore2}}"  value="{{formData.invoice_item_detail}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="申请开票金额"  wx:if="{{isShowMore2}}"  value="{{formData.invoice_amount}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票号码"  wx:if="{{isShowMore2}}"  value="{{formData.invoice_no}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票代码"  wx:if="{{isShowMore2}}"  value="{{formData.invoice_code}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票税率"  wx:if="{{isShowMore2}}"  value="{{formData.invoice_rate_desc}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票金额"  wx:if="{{isShowMore2}}"  value="{{formData.total_invoice_amount}}" custom-class="invoice-info-item" />
+                        </view>
+                        <view>
+                            <van-cell title="发票税额"  wx:if="{{isShowMore2}}"  value="{{formData.total_tax_amount}}" custom-class="invoice-info-item" />
+                        </view>  
+                        <view>
+                            <van-cell title="发票日期"  wx:if="{{isShowMore2}}"  value="{{m1.dateFormatDay(formData.invoice_date)}}" custom-class="invoice-info-item" />
+                        </view> 
+                        <view>
+                            <van-cell title="发票备注"  wx:if="{{isShowMore2}}"  value="{{formData.invoice_remark}}" border="{{false}}" custom-class="invoice-info-item" />
+                        </view> 
+                    </view>
+                    <view class="upload-btn">
+                        <van-button color="#1e6ce8" round plain size="small" bind:click="moreChange2">查看更多
+                            <van-icon name="{{isShowMore2?'arrow-up':'arrow-down'}}" />
+                        </van-button>
+                    </view>
+        
+                    <view class="area-title ">
+                        <view class="area-text">发票完成</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <van-cell title="完成时间" value="{{m1.dateFormatDay(formData.confirm_time)}}" custom-class="invoice-info-item" />
+                        <van-cell title="完成备注" value="{{formData.confirm_remark}}" custom-class="invoice-info-item" /> 
+                    </view>  
+
+                    <view class="area-title ">
+                        <view class="area-text">备注</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <van-cell title="备注" value="{{formData.remark}}" custom-class="invoice-info-item" />
+                    </view>
+                </view>
+            </view>
+        </view>
+	</van-tab>
+ 
+    <van-tab title="发票作废" wx:if="{{formData.scrap_apply_status=='N' || formData.scrap_apply_status=='S' || formData.scrap_apply_status=='A' || formData.scrap_apply_status=='F' || formData.scrap_apply_status=='C' || formData.scrap_apply_status=='R'}}" >
+		<view class="section">
+			<view class="page">
+				<view class="invoice page__bd page__bd_spacing">
+                    <view class="invoice-item"> 
+                    <view class="area-title ">
+                        <view class="area-text">发票作废内容</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <van-cell title="作废分类" value="{{formData.scrap_category}}" custom-class="invoice-info-item" />
+                        <van-cell title="作废申请理由" value="{{formData.scrap_apply_reason}}" custom-class="invoice-info-item" />
+                        <van-cell title="作废申请人" value="{{formData.scrap_apply_user_name}}" custom-class="invoice-info-item" /> 
+                        <van-cell title="作废申请时间" value="{{m1.dateFormatDay(formData.scrap_apply_time)}}" custom-class="invoice-info-item" />
+                        <van-cell title="作废申请状态" value="{{formData.scrap_apply_status_desc}}" custom-class="invoice-info-item" /> 
+                    </view>
+                    <view class="area-title ">
+                        <view class="area-text">发票作废审核</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <van-cell title="审核用户" value="{{formData.scrap_approve_name}}" custom-class="invoice-info-item" />  
+                        <van-cell title="审核时间" value="{{m1.dateFormatDay(formData.scrap_approve_time)}}" custom-class="invoice-info-item" /> 
+                        <van-cell title="审核备注" value="{{formData.scrap_approve_remake}}" custom-class="invoice-info-item" /> 
+                    </view>
+
+                    <view class="area-title ">
+                        <view class="area-text">发票作废确认</view>
+                    </view>
+                    <view class="invoice-info-list">
+                        <van-cell title="确认用户" value="{{formData.scrap_confirm_user_name}}" custom-class="invoice-info-item" />  
+                        <van-cell title="确认时间" value="{{m1.dateFormatDay(formData.scrap_confirm_time)}}" custom-class="invoice-info-item" /> 
+                        <van-cell title="确认备注" value="{{formData.scrap_confirm_remark}}" custom-class="invoice-info-item" /> 
+                    </view> 
+                </view>
+				</view>
+			</view>
+		</view>
+    </van-tab>
+    
+</van-tabs>
+ 
+<van-toast id="van-toast" />

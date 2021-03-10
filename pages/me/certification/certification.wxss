@@ -1,0 +1,76 @@
+
+.van-tabs__line{
+  background-color:white!important;
+
+}
+.van-hairline--top-bottom:after {
+  border-width: 0 0!important;
+}
+.next-btn{
+  width: 100%;
+  max-width: 100%;
+  height: 72rpx;
+  background-color: #6988FE;
+  border: 1px solid rgb(115, 142, 252);
+  border-radius: 10rpx;
+  margin: 10% auto;
+  color: #fff;
+  text-align: center;
+  line-height: 72rpx;
+}
+.photo-btn{
+  background-color: #6988FE;
+  border: 1px solid rgb(115, 142, 252);
+  text-align: center;
+  color: #fff;
+}
+.certification{
+  margin:30rpx auto;
+  text-align: center;
+  display: block;
+}
+.camera{
+  margin: 100rpx atuo!important;
+  width: 500rpx!important; 
+  height: 500rpx!important;
+  border-radius:100%!important;
+  -webkit-border-radius:100%!important;
+  -moz-border-radius:100%!important;
+  border:1px solid #6988FE!important;
+  display: inline-block!important;
+}
+.sub{
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+.img{
+  margin: 0 auto;
+  border:1px solid #6988FE
+}
+.JQbtn {
+  margin: 40rpx auto;
+  width: 300rpx;
+  font-size: 32rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 4px solid #ff473a;
+  background-color: #ff473a;
+  border-radius: 40rpx;
+}
+.content{
+  color:#333;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+.content .sub{
+  color:#666;
+  font-size: 12px;
+  margin-left: 30px;
+}
+.hr{
+  border-bottom: 1px solid #ddd;
+  margin: 5px 0;
+}

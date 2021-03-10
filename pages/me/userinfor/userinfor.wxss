@@ -1,0 +1,62 @@
+/* pages/me/userinfor/userinfor.wxss */
+.userinfor{
+    font-size:12px;
+}
+.van-cell__title {
+    flex: 1!important;
+    -webkit-box-flex: 1!important;
+}
+.van-cell__value{
+    color: #1e6ce8
+}
+.van-cell__value {
+    flex: 2!important;
+    -webkit-box-flex: 2!important;
+}
+    
+.van-cell{
+    font-size: 12px!important
+}
+
+/*表格*/
+.table {
+    border: 1px solid #eee;
+    border-right: 0;
+    border-bottom: 0;
+    width: 100%;
+    margin-top: 0;
+    }
+    
+    .tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    }
+    
+    .th, .td {
+    height: 64rpx;
+    line-height: 64rpx;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+    text-align: center;
+    width: 100%;
+    font-size:12px;
+    }
+    
+    .th {
+    font-weight: 400;
+    background-color: #f9f9f9;
+    }
+    .th0{
+      width:20%;
+    }
+    .th1{
+      width:20%;
+    }
+    .th2{
+      width:30%;
+    }
+    .th3{
+      width:30%;
+    }
+     

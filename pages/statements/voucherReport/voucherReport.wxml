@@ -1,0 +1,77 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page ">
+    <view class="page__bd page__bd_spacing text-center btn-group" >
+        <van-row>
+            <van-col span="16">
+                <picker mode="date" fields="month" value="{{end_month}}" start="2009-09" end="2040-09" bindchange="bindDateChangeEnd">
+                    <view class="picker-date">
+                        <view class="label">结束:{{end_month}} </view>
+                    </view>
+                </picker>
+                <picker mode="date" fields="month" value="{{begin_month}}" start="2009-09" end="2040-09" bindchange="bindDateChange">
+                    <view class="picker-date">
+                        <view class="label">起始:{{begin_month}} </view>
+                    </view>
+                </picker>
+                
+            </van-col>
+            <van-col span="8" >
+                <van-button icon="down" size="small" color="#1e6ce8" custom-class="top-btn " bind:click="DownPDF">下载电子账册</van-button>
+            </van-col>
+            
+        </van-row>
+    </view>
+    <view class="table" >
+        <view class="tr">
+            <view class="th th1">摘要</view>
+            <view class="th th2">会计科目</view>
+            <view class="th th3">借方金额</view>
+            <view class="th th4">贷方金额</view>
+        </view>
+        <block wx:if="{{dtVoucherNo!=''}}" >
+             <block wx:for="{{dtVoucherNo}}" wx:key="index" wx:for-index="dtIndex" >
+                <view class='tr top'>
+                    <view class="td th1">日期:{{item.voucher_date}}</view>
+                    <view class="td th2" wx:if="{{item.voucher_bill_qty>0}}" bindtap="previewImage" data-item="{{item}}" data-src="{{FileOssUrl}}">
+                        凭证字号：记-{{item.voucher_no}} 
+                        附单据:
+                        <text class="color-blue d-inline-block" > {{item.voucher_bill_qty}}
+                        </text>
+                        <icon class="./iconfont/iconpic-line:before d-inline-block color-blue"  ></icon>
+                    </view>
+                     <view class="td th2" wx:else>
+                        凭证字号：记-{{item.voucher_no}} 
+                        附单据:
+                        <text >{{item.voucher_bill_qty}}</text>
+                    </view>
+                </view>
+                <block wx:for="{{voucherTable}}" wx:key="child" wx:for-item="group" >
+                
+                    <view class='tr' wx:if="{{group.voucher_no==item.voucher_no}}">
+                        <view class="td th1">{{group.voucher_desc}}</view>
+                        <view class="td th2">{{group.code_name }}</view>
+                        <view class="td th3">{{filter.numberToFixed(group.amt_dr==null?'0':group.amt_dr)}}</view>
+                        <view class="td th4">{{filter.numberToFixed(group.amt_cr==null?'0':group.amt_cr)}}</view>
+                    </view> 
+                    <block >
+                        <view class="tr btm" wx:if="{{index+1==voucherTable.length}}">
+                                <view class="th th1" style="text-align:left;text-indent:10rpx">合计:{{sumlist[dtIndex].sumDX}}</view>
+                                <view class="th th3">{{filter.numberToFixed(sumlist[dtIndex].sum)}}</view>
+                                <view class="th th4">{{filter.numberToFixed(sumlist[dtIndex].sum)}}</view>
+                        </view>
+                    </block>
+                </block>
+            
+             </block>
+        </block>
+        <block wx:else>
+            <view class="empty" >
+                <icon class="./iconfont/iconkong:before "></icon>
+                <view class="color-gray">暂无数据</view>
+            </view>
+        </block>
+        
+        
+    </view>
+</view>
+<van-toast id="van-toast" />

@@ -1,0 +1,90 @@
+<!--pages/bill/asset/asset.wxml-->
+<wxs module="m1">
+
+var dateFormatMonth = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.substring(0, 7)
+}
+var dateFormatDay = function (dateDay) {
+    if(dateDay == null){
+        return '';
+    }
+  return dateDay.substring(0, 10)
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatMonth: dateFormatMonth,
+   dateFormatDay: dateFormatDay,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<van-tabs active="{{ active }}" bind:change="onChange">
+  <van-tab title="固定资产折旧">
+  <block wx:if="{{monthlyDepreciationData!=''}}">
+    <van-collapse value="{{ activeNames }}" bind:change="onChangeFixedAssets">
+
+    <van-collapse-item title="{{item.asset_name}}(原值:{{m1.moneyFormat(item.orginal_value)}}  净值:{{m1.moneyFormat(item.net_value)}})" name="{{index}}" wx:for="{{monthlyDepreciationData}}" wx:key="index">
+       <view class="item weui-flex"  >
+          <view class="weui-flex__item left">
+             <view class="time">费用类别:{{item.asset_category}}</view>
+              <view class="time">单价:{{m1.moneyFormat(item.unit_price)}} </view>
+               <view class="time">资产原值:{{m1.moneyFormat(item.orginal_value)}} </view>
+              <view class="time">残值率(%):{{item.salvage_value_rate*100}} %</view>
+              <view class="time">折旧月份:{{m1.dateFormatDay(item.account_month)}}</view>
+              <view class="time">累计折旧金额:{{m1.moneyFormat(item.acc_value)}}</view>
+          </view>
+          <view class="right">
+               <view class="time ">数量:{{item.qty}}</view>
+               <view class="time">购买日期:{{m1.dateFormatDay(item.puchase_date)}}</view>
+               <view class="time">本月折旧金额:{{m1.moneyFormat(item.depreciated_value)}}</view>
+               <view class="time">折旧月数:{{item.depreciation_month}}</view>
+              <view class="time">净值:{{m1.moneyFormat(item.net_value)}}</view>
+               
+          </view>
+      </view>
+    </van-collapse-item>
+  </van-collapse>
+  </block>
+  <block wx:else>
+      <view class="empty" >
+          <icon class="./iconfont/iconkong:before "></icon>
+      </view>
+  </block>
+        
+  </van-tab>
+  <van-tab title="折旧汇总">
+     <view class="page ">
+        <view class="page__bd page__bd_spacing">
+          <view class="table">
+                <view class="tr">
+                  <view class="th th1">费用类别</view>
+                  <view class="th th2">资产分类</view>
+                  <view class="th th3">计提折旧</view>
+                  <view class="th th4">累计折旧</view>
+                </view>
+                <block wx:for="{{monthlyDepreciationDataTotal}}" wx:key="level">
+                  <view class='tr'>
+                    <view class="td th1 ">{{item.expense_category}}</view>
+                    <view class="td th2">{{item.asset_category}}</view>
+                    <view class="td th3">{{m1.moneyFormat(item.depreciated_value)}}</view>
+                    <view class="td th4">{{m1.moneyFormat(item.acc_value)}}</view>
+                  </view>
+                </block>
+                <view class='tr'>
+                    <view class="td th5">总计</view>
+                    <view class="td th3">{{depreciatedTotal}}</view>
+                    <view class="td th4">{{accTotal}}</view>
+                  </view>
+            </view>
+        </view>
+      </view>
+
+  </van-tab>
+ 
+</van-tabs>

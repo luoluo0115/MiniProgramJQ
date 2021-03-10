@@ -1,0 +1,51 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page">
+    <view class="page__bd page__bd_spacing">
+        <view class="pay-header">
+            <view class="weui-flex ">
+                <view class="weui-flex__item left">
+                    <view class="title">应纳税款(元)</view>
+                    <view class="price">{{filter.numberToFixed(total_tax)}}</view>
+                </view>
+                <view class="right ">
+                    {{query_month}}
+                </view>
+            </view>
+        </view>
+        <view class="pay-content">
+            <view class="pay-title">应纳税款明细</view>
+            <view class="pay-detail">
+                <van-cell-group>
+                    <van-cell title="增值税" value="{{filter.numberToFixed(curr_payment_vat)}}" />
+                    <van-cell title="企业所得税" value="{{filter.numberToFixed(curr_income_tax)}}" />
+                    <van-cell title="教育费附加" value="{{filter.numberToFixed(education_supplementary_tax)}}" />
+                    <van-cell title="地方教育费附加" value="{{filter.numberToFixed(local_education_supplementary_tax)}}" />
+                    <van-cell title="城市维护建设税" value="{{filter.numberToFixed(city_construction_tax)}}" />                    
+                </van-cell-group>                    
+            </view>
+            <view class="table" wx:if="{{dtIndividualtax!=''}}">
+                <view class="tr">
+                    <view class="th th1" style='width:50%'>股东姓名</view>
+                    <view class="th th2" style='width:50%'>生产经营个税</view>
+                </view>
+                <view class='tr top' wx:for="{{dtIndividualtax}}" wx:key="index">
+                    <view class="td th1" style='width:50%'>{{item.stockhold_name}}</view>
+                    <view class="td th2" style='width:50%'>
+                        {{filter.numberToFixed(item.declarer_individual_tax)}}
+                    </view>
+                </view>
+            </view>              
+            <view class="tips-info">
+                <view class="item" wx:if="{{amount_tax==0}}">
+                    <van-icon name="question-o" custom-class="icon-Q"/>
+                    本月无需缴款。
+                </view>
+                <view class="item" wx:if="{{amount_tax>0}}">
+                    <van-icon name="question-o" custom-class="icon-Q"/>
+                    请点击下方【确认缴款】按钮,确认税金金额以及确保对应银行账户余额大于应缴纳税金。确认后，我司申报人员会进行缴纳税款作业，谢谢配合！
+                </view>
+            </view>
+            <view class="JQbtn" bindtap="AffirmTaxPay" wx:if="{{is_tax_confirm=='N'}}">缴款确认</view>
+        </view>
+    </view>
+</view>

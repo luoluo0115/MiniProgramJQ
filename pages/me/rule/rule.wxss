@@ -1,0 +1,27 @@
+/* pages/activity/rule/rule.wxss */
+.rule-wrapper{
+  margin: 30rpx auto;
+}
+.title{
+  text-align: center;
+  line-height: 72rpx;
+  height: 72rpx;
+  font-size: 36rpx;
+  color: #333;
+ 
+}
+.sub{
+  text-align: left;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+.third{
+  text-align: left;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+.txt-indent{
+  text-indent: 40rpx;
+}

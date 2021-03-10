@@ -1,0 +1,51 @@
+<!--pages/invoice/imInvoiceStockInventory/imInvoiceStockInventory.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ')
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+var dateFormatDay = function (dateDay) {
+    if(dateDay == null){
+        return '';
+    }
+  return dateDay.substring(0, 10)
+}
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  moneyFormat: moneyFormat,
+  dateFormatDay: dateFormatDay
+  
+}
+</wxs>
+<view class="section">
+    <view class="page">
+        <view class="page__bd page__bd_spacing">
+            <view class="invoice-list">
+                <block  wx:if="{{ominvoicedata == '' }}" >
+                    <view class="empty">
+                        <icon class="./iconfont/iconkong:before "></icon>
+                        <view>暂无数据</view>
+                    </view>
+                   
+                </block>
+                <block wx:else >
+                    <view class="item weui-flex" wx:for="{{invoice_inventory}}" wx:key="index">
+                        <view class="weui-flex__item left">
+                            <view class="name">{{item.invoice_type}}</view>
+                            <view class="time">发票号码:{{item.invoice_no}}</view>
+                        </view>
+                        <view class="right">
+                            <view class="time">发票代码:{{item.invoice_code}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>

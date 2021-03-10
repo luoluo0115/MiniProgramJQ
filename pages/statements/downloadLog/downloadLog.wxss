@@ -1,0 +1,149 @@
+/* pages/statements/voucherReport/voucherReport.wxss */
+.btn-group{
+    margin-top: 2%;
+  }
+  .top-btn{
+    margin-left: 5px;
+  }
+  .top-btn.van-button--small {
+    background-color: #1e6ce8;
+    border: 1px solid #1e6ce8;
+    color: #fff;
+  }
+  .userinfor{
+    font-size:12px;
+  }
+  .van-cell__title {
+    flex: 1!important;
+    -webkit-box-flex: 1!important;
+  }
+  .van-cell__value{
+    color: #1e6ce8
+  }
+  .van-cell__value {
+    flex: 2!important;
+    -webkit-box-flex: 2!important;
+  }
+    
+  .van-cell{
+    font-size: 12px!important
+  }
+  
+  .van-collapse-item__content {
+    padding: 0 15rpx 0 0 !important;
+    
+  }
+  /*添加按钮*/
+  .icon-fix-right{
+    position: fixed;
+    right: 15rpx;
+    bottom: 30rpx;
+    color: #1e6ce8;
+    border-radius: 100%;
+  }
+  .icon-fix-right .icon-article{
+   font-size: 64rpx;
+  }
+  .tag-btn{
+    text-align: right;
+    padding: 15rpx 0;
+    margin-left: 15rpx;
+    border-bottom: 1px solid #f7f7f7;
+  }
+  .left-tag{
+    margin-right: 8rpx;
+  }
+  /*表格*/
+  .table {
+    border: 1px solid #eee;
+    border-right: 0;
+    border-bottom: 0;
+    width: 100%;
+    margin-top: 0;
+    }
+    
+    .tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    }
+    
+    .th, .td {
+    height: 64rpx;
+    line-height: 64rpx;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+    text-align: center;
+    width: 100%;
+    font-size:12px;
+    }
+    .td {
+      font-size:20rpx;
+     
+    }
+    .th {
+    font-weight: 400;
+    background-color: #f9f9f9;
+    }
+    .th0{
+      width:10%;
+      
+    }
+    .th1{
+      width:50%;
+      
+    }
+    .th2{
+      width:20%;
+    }
+    .th3{
+      width:20%;
+    }
+    .th4{
+      width:20%;
+    }
+    .see-btn{
+      width: 45rpx!important;
+      font-size: 20rpx;
+    }
+    .rowColor{
+      background-color: #f9f9f9;
+    }
+    .item-top{
+      display: block;
+    }
+    /*时间*/
+    .picker-date{
+        font-size:22rpx;
+        background-color: #1e6ce8;
+        width: 180rpx;
+        height: 30px;
+        line-height: 30px;
+        color: #fff;
+        padding: 0 15rpx;
+        border-radius:5rpx;
+        text-align: center;
+        float: right;
+    }
+    .picker-date icon{
+      font-size: 24rpx;
+      position: relative;
+      margin-top: -10rpx;
+      margin-right: 5rpx;
+    }
+    .item-top{
+      display: -webkit-flex;
+      display: flex;
+      box-sizing: border-box;
+      position: relative;
+      padding: 10rpx 0;
+      font-size:24rpx ;
+      color: #666;
+      display: block;
+    }
+    .item-top .label, .picker-date .label{
+      flex: 1;
+    }
+    .item-top .label-right, .picker-date .label-right{
+      flex: 2;
+    }

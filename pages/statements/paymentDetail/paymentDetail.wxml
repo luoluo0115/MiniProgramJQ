@@ -1,0 +1,56 @@
+<!--pages/statements/paymentDetail/paymentDetail.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ').substring(0,dateStr.indexOf('.'))
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<view class="page">
+        <view class="pay-content">
+            <view class="pay-detail" wx:if="{{detailData !=''}}">
+              <view class="pay-title" >
+                    <van-row>
+                        <van-col span="6" custom-class="text-left">会计月份</van-col>
+                        <van-col span="12" custom-class="light text-center">摘要</van-col>
+                        <van-col span="6" custom-class="text-right">金额</van-col>
+                    </van-row>
+                </view>
+                <block wx:for="{{detailData}}" wx:key>
+                <van-row custom-class="pay-tr">
+                    <van-col span="6" custom-class="">{{item.account_month}}</van-col>
+                    <van-col span="11" custom-class="basic">{{item.voucher_desc}}</van-col>
+                    <van-col span="7" custom-class="text-right price">
+                    <block wx:if="{{item_type=='pay'}} ">
+                     {{item.amt_cr==null?'': filter.numberToFixed(item.amt_cr)}}{{item.amt_dr==null?'':'-'+filter.numberToFixed(item.amt_dr)}}
+                    
+                     
+                    </block>
+                    <block wx:else>
+                    {{item.amt_dr==null?'': filter.numberToFixed(item.amt_dr)}}{{item.amt_cr==null?'':'-'+filter.numberToFixed(item.amt_cr)}}
+                     </block>
+                    </van-col>
+                </van-row>
+                </block>
+                 <van-row custom-class="pay-tr">
+                    <van-col span="6" custom-class="">合计</van-col>
+                    <van-col span="18" custom-class="text-right price">{{ filter.numberToFixed(total)}}</van-col>
+                </van-row>
+            </view>
+            <view class="empty" wx:else>
+                <icon class="./iconfont/iconkong:before "></icon>
+                <view>暂无数据</view>
+            </view>
+        </view>
+</view>

@@ -1,0 +1,127 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page">
+	<van-tabs active="{{ active }}" bind:change="onChange">
+		<van-tab title="银行回单">
+			<van-row custom-class="num-wrapper">
+				<van-col span="8">
+					<view class="num"><text class="color-red">{{qty}}</text></view>
+					<text class="num-title">回单数量</text>
+				</van-col>
+				<van-col span="8">
+					<view class="num"><text class="color-red">{{filter.numberToFixed(cr)}}</text></view>
+					<text class="num-title">入账金额</text>
+				</van-col>
+				<van-col span="8">
+					<view class="num"><text class="color-red">{{filter.numberToFixed(dr)}}</text></view>
+					<text class="num-title">出账金额</text>
+				</van-col>
+			</van-row>
+			<view class="page__bd page__bd_spacing">
+				<view class="btn-list" wx:if="{{curr_status=='N'}}">
+					{{filename}}
+					<van-button icon="upgrade" size="small" custom-class="top-btn" bind:click="chooseImg">拍照上传</van-button>
+					<van-button icon="upgrade" size="small" custom-class="top-btn" bind:click="chooseFilePDF">文件上传</van-button>
+				</view>
+				<scroll-view class="" scroll-x="false" scroll-y="false" upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false" bindscrolltoupper="" bindscrolltolower="" bindscroll="">
+					<view class="expend-list">
+						<block wx:if="{{BankReceiptList!=''}}">
+							<view class="expend-item" wx:for="{{BankReceiptList}}" wx:key="index">
+								<van-row>
+									<van-col span="20" custom-class="bottom-wrapper">
+										<view class="title">{{item.trans_type=='入账'?'收方名称':'付方名称'}}:{{(item.bank_account_name)}}</view>
+									</van-col>
+									<van-col span="4" custom-class="bottom-wrapper" wx:if="{{curr_status=='N'}}">
+										<van-button size="mini" color="#aaa" plain  round bindtap="deleteFile" data-id="{{item.process_recv_file_id}}" data-data_id="{{item.am_bank_trans_data_id}}" size="mini">删除</van-button>
+									</van-col>
+								</van-row>
+								<view class="a-expend">
+									<van-row>
+										<van-col span="8" custom-class="text-center">
+											<van-image width="80" height="80" fit="fill" src="{{FileOssUrl + item.upload_file_guid}}" data-list="{{FileOssUrl + item.upload_file_guid}}" data-src="{{FileOssUrl + item.upload_file_guid}}" bindtap="previewImage" />
+										</van-col>
+										<van-col span="16">
+											<van-row>
+												<van-col span="12" custom-class="label">币种:{{item.currency}}</van-col>
+												<van-col span="12" custom-class="label">交易类型:{{(item.trans_type)}}</van-col>
+												<van-col span="12" custom-class="label">借方金额:{{filter.numberToFixed(item.amount_dr)}}</van-col>
+												<van-col span="12" custom-class="label">贷方金额:{{filter.numberToFixed(item.amount_cr)}}</van-col>
+												<van-col span="12" custom-class="label">交易日期:{{item.trans_date}}</van-col>
+												<van-col span="12" custom-class="label"></van-col>
+												<van-col span="24" custom-class="label">摘要:{{item.summary}}</van-col>
+											</van-row>
+										</van-col>
+									</van-row>
+								</view>
+							</view>
+						</block>
+						<block wx:else>
+							<view class="empty">
+								<icon class="./iconfont/iconkong:before "></icon>
+							</view>
+						</block>
+					</view>
+				</scroll-view>
+			</view>
+		</van-tab>
+		<van-tab title="银行对账单">
+			<van-row custom-class="num-wrapper">
+				<van-col span="8">
+					<view class="num"><text class="color-red">{{qty}}</text></view>
+					<text class="num-title">流水数量</text>
+				</van-col>
+				<van-col span="8">
+					<view class="num"><text class="color-red">{{filter.numberToFixed(cr)}}</text></view>
+					<text class="num-title">出账金额</text>
+				</van-col>
+				<van-col span="8">
+					<view class="num"><text class="color-red">{{filter.numberToFixed(dr)}}</text></view>
+					<text class="num-title">入账金额</text>
+				</van-col>
+				
+			</van-row>
+			<view class="page__bd page__bd_spacing">
+
+				<view class="btn-list" wx:if="{{curr_status=='N'}}">
+					<picker class="d-inline-block" mode="date" fields="month" value="{{file_month}}" start="2009-09" end="2030-09" bindchange="bindDateChange">
+						<view class="ZCpicker-date">
+							月份
+							{{file_month}}
+						</view>
+					</picker>
+					<van-button icon="upgrade" size="small" custom-class="top-btn d-inline-block" bind:click="chooseFile">文件上传</van-button>
+					<van-button size="small" custom-class="top-btn d-inline-block" bind:click="deleteBankStatement">清除数据</van-button>
+
+				</view>
+				<view class="page ">
+						<view class="expend-list">
+							<block wx:if="{{BankStatementList!=''}}">
+								<view class="expend-item" wx:for="{{BankStatementList}}" wx:key="index">
+									<view class="title">{{item.trans_type=='入账'?'收方名称':'付方名称'}}:{{(item.bank_account_name)}}</view>
+									<view class="a-expend ">
+										<van-row custom-class="page__bd_spacing">
+											<van-col span="12" custom-class="label">币种:{{item.currency}}</van-col>
+											<van-col span="12" custom-class="label">交易类型:{{(item.trans_type)}}</van-col>
+											<van-col span="12" custom-class="label">借方金额:{{filter.numberToFixed(item.amount_dr)}}</van-col>
+											<van-col span="12" custom-class="label">贷方金额:{{filter.numberToFixed(item.amount_cr)}}</van-col>
+											<van-col span="12" custom-class="label">交易日期:{{item.trans_date}}</van-col>
+											<van-col span="12" custom-class="label"></van-col>
+											<van-col span="24" custom-class="label">摘要:{{item.summary}}</van-col>
+										</van-row>
+									</view>
+								</view>
+							</block>
+							<block wx:else>
+								<view class="empty">
+									<icon class="./iconfont/iconkong:before "></icon>
+								</view>
+							</block>
+						</view>
+
+					</view>
+			</view>
+		</van-tab>
+	</van-tabs>
+
+</view>
+
+<van-toast id="van-toast" />

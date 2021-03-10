@@ -1,0 +1,80 @@
+<view>
+	<van-cell-group class="userinfor">
+		<van-cell title="姓名" value="{{userInfo.user_name}}" />
+		<van-cell title="电话" value="{{userInfo.user_phone}}" />
+		<van-cell title="邮件" >
+			
+			<view wx:if="{{userInfo.user_mail !=null && userInfo.user_mail !=''}}">
+				<view slot="value">
+				</view>
+				{{userInfo.user_mail}}
+				<van-tag type="primary" >已认证</van-tag>
+			</view>
+			<view wx:else>
+				<van-button type="warning" size="mini" bindtap="goEmail">去绑定</van-button>
+			</view>
+      
+    	</van-cell>
+		<van-cell title="手机">
+			<view slot="value">
+			</view>
+			{{userInfo.cell_phone}}
+			<van-tag type="primary" wx:if="{{userInfo.cell_phone !=null && userInfo.cell_phone !=''}}">已认证</van-tag>
+		</van-cell>
+		<van-cell title="微信号" value="{{userInfo.user_wechat}}" />
+		<van-cell title="QQ号码" value="{{userInfo.user_qq}}" />
+    <van-cell title="推荐码">
+			<view slot="value">
+			</view>
+			{{userInfo.referral_code}}      
+      <van-button size="mini" color="#1e6ce8" wx:if="{{userInfo.referral_code !=null && userInfo.referral_code !=''}}"  plain  bindtap="onShareAppMessage" open-type="share">分享</van-button>
+		</van-cell>
+	</van-cell-group>
+</view>
+<view class="table" wx-if="{{custList !=''}}">
+	<view class="tr">
+		<view class="th" style="width:50%">企业名称</view>
+		<view class="th" style="width:30%">增值税申报类型</view>
+		<view class="th" style="width:20%">法人</view>
+	</view>
+	<view class='tr' wx:for="{{custList}}" wx:key="index">
+		<view class="td" style="width:50%">{{item.customer_name}}</view>
+		<view class="td" style="width:30%">{{item.tax_type}}</view>
+		<view class="td" style="width:20%">{{item.legal_person}}</view>
+	</view>
+
+</view>
+<van-toast id="van-toast" />
+<van-dialog
+  use-slot
+  title="邮箱认证"
+  show="{{ showEmail }}"
+  show-cancel-button
+  bind:close="onClose"
+	bind:confirm="confirm"
+	zIndex:20
+	asyncClose:true
+>
+	<van-cell-group>
+		<van-field
+			value="{{ email }}"
+			center
+			clearable
+			label="邮箱号"
+			placeholder="请输入邮箱号"
+			bindinput="emailInput"
+			border="{{ false }}"
+			use-button-slot
+		>
+			<!-- <van-button slot="button"  size="small" bindtap="getCode" type="primary">发送验证码</van-button> -->
+			<van-button slot="button" size="small"  custom-class="button"   bindtap="{{isClick?'':'getCode'}}"  color="#1e6ce8" disabled="{{isClick}}" > {{btntext}} </van-button>	
+		</van-field>
+		<van-field
+			value="{{ smscode }}"
+			label="验证码"
+			placeholder="请输入验证码"
+			bindinput="codeInput"
+			border="{{ false }}"
+		/>
+	</van-cell-group>
+</van-dialog>

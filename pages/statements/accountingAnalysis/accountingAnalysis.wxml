@@ -1,0 +1,480 @@
+<!--pages/statements/accountingAnalysis/accountingAnalysis.wxml-->
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<wxs module="m1">
+var dateFormatStr = function (dateStr) {
+    if(dateStr == null){
+        return '';
+    }
+  return dateStr.replace('T', ' ').substring(0,dateStr.indexOf('.'))
+}
+var moneyFormat = function (money) {
+  return money.toFixed(2);
+}
+
+module.exports = {
+  dateFormatStr: dateFormatStr,
+  moneyFormat: moneyFormat,
+  
+}
+</wxs>
+<view class="analysis-wrapper">
+<view class="billing-wrapper ">
+        <view class="title">盈利状况</view>
+        <view class="account-wrapper">
+                <view class="weui-flex page__bd page__bd_spacing">
+                    <view class=" wrapper-title weui-flex__item">
+                        营业收入
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_12==null?"":filter.numberToFixed(dtData.column_val_12)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_13==null?"":filter.numberToFixed(dtData.column_val_13)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                        净利润
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_14==null?"":filter.numberToFixed(dtData.column_val_14)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_15==null?"":filter.numberToFixed(dtData.column_val_15)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                         营业收入净利率
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_16==null?"":filter.numberToFixed(dtData.column_val_16)}}%</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_17==null?"":filter.numberToFixed(dtData.column_val_17)}}%</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                
+                
+            </view>
+    </view>
+    <block wx:if="{{dtData.column_val_03!=0}}">
+        <view class="billing-wrapper mountNode-canvas">
+            <view class="title">收入预警</view>
+            <view class="pay-container">
+                <!--<ff-canvas id="mountNode" canvas-id="mountNode"  opts="{{ mountNodeRadial }}"></ff-canvas>-->
+                 <ff-canvas id="gauge-dom" canvas-id="gauge" opts="{{ gaugedomRadial }}"></ff-canvas>
+                
+            </view>
+        </view>
+    </block>
+       <view class="billing-wrapper mountNode-canvas-pay">
+        <view class="title">三大费用</view>
+        <view class="pay-container ">
+          <text>{{ message }}</text>  
+            <ff-canvas  id="guage-dom" canvas-id="guage"  opts="{{ pieSelectRadial }}"></ff-canvas>
+        </view> 
+        <view class="account-wrapper three-chart" >
+                <view class="weui-flex page__bd page__bd_spacing">
+                    <view class=" wrapper-title weui-flex__item">
+                        销售费用
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong> {{dtData.column_val_18==null?"":filter.numberToFixed(dtData.column_val_18)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_19==null?"":filter.numberToFixed(dtData.column_val_19)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                        管理费用
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_20==null?"":filter.numberToFixed(dtData.column_val_20)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_21==null?"":filter.numberToFixed(dtData.column_val_21)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                        财务费用
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_22==null?"":filter.numberToFixed(dtData.column_val_22)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_23==null?"":filter.numberToFixed(dtData.column_val_23)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                
+                
+                
+            </view>      
+    </view>
+    <block >
+        <view class="billing-wrapper mountNode-canvas-l">
+            <view class="title">费用预警 </view>
+           
+            <view class="pay-container">
+                <!--<ff-canvas id="mountNode" canvas-id="mountNode"  opts="{{ mountNodeRadial }}"></ff-canvas>-->
+                 <ff-canvas id="gauge-dom" canvas-id="gauge" opts="{{ welfareRadial }}" ></ff-canvas>
+            </view>
+             <view class="pay-container-l">
+                 <ff-canvas id="gauge-dom" canvas-id="gauge" opts="{{ educationRadial }}"></ff-canvas>
+            </view>
+             <view class="pay-container-ll">
+                 <ff-canvas id="gauge-dom" canvas-id="gauge" opts="{{ BusinessRadial }}"></ff-canvas>
+            </view>
+             <view class="pay-container-lll">
+                 <ff-canvas id="gauge-dom" canvas-id="gauge" opts="{{ AdvertisingRadial }}"></ff-canvas>
+            </view>
+        </view>
+    </block>
+  
+     
+   <!-- <view class="billing-wrapper ">
+        <view class="title">三项费用</view>
+        
+    </view> -->
+    <view class="billing-wrapper ">
+        <view class="title">税金状况</view>
+        <view class="account-wrapper">
+            <view class="weui-flex page__bd page__bd_spacing">
+                <view class=" wrapper-title weui-flex__item">
+                    增值税
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_36==null?"":filter.numberToFixed(dtData.column_val_36)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_37==null?"":filter.numberToFixed(dtData.column_val_37)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                    城建税
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_38==null?"":filter.numberToFixed(dtData.column_val_38)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_39==null?"":filter.numberToFixed(dtData.column_val_39)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                     教育附加费
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_40==null?"":filter.numberToFixed(dtData.column_val_40)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_41==null?"":filter.numberToFixed(dtData.column_val_41)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+             <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                     地方教育附加费
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_42==null?"":filter.numberToFixed(dtData.column_val_42)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_43==null?"":filter.numberToFixed(dtData.column_val_43)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+             <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                     个税
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_44==null?"":filter.numberToFixed(dtData.column_val_44)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_45==null?"":filter.numberToFixed(dtData.column_val_45)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+             <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                       生产经营个税
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_88==null?"":filter.numberToFixed(dtData.column_val_88)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_89==null?"":filter.numberToFixed(dtData.column_val_89)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+             <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                      文化事业建设费
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_46==null?"":filter.numberToFixed(dtData.column_val_46)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_47==null?"":filter.numberToFixed(dtData.column_val_47)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+           
+             <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                        增值税税负率
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_48==null?"":filter.numberToFixed(dtData.column_val_48)}}%</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_49==null?"":filter.numberToFixed(dtData.column_val_49)}}%</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+           
+            
+        </view>
+    </view>
+     
+    <view class="billing-wrapper ">
+        <view class="title">财务比率</view>
+        <view class="account-wrapper">
+         <view class="weui-flex page__bd page__bd_spacing">
+                <view class=" wrapper-title weui-flex__item">
+                    净利率
+                </view>
+                    <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_52==null?"":filter.numberToFixed(dtData.column_val_52)}}%</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_53==null?"":filter.numberToFixed(dtData.column_val_53)}}%</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                    毛利率
+                </view>
+                 <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_50==null?"":filter.numberToFixed(dtData.column_val_50)}}%</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_51==null?"":filter.numberToFixed(dtData.column_val_51)}}%</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+           
+           
+            <view class="weui-flex page__bd page__bd_spacing">
+                <view class=" wrapper-title weui-flex__item">
+                    资产负债率
+                </view>
+             <view class="weui-flex__item">
+                    <!--   <strong>{{filter.numberToFixed(dtData.column_val_56)}}%</strong>
+                    <text>本期</text>-->
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_56==null?"":filter.numberToFixed(dtData.column_val_56)}}%</strong>
+                    <text>期末负债率</text>
+                </view>
+            </view>
+           
+            
+        </view>
+    </view>
+    <view class="billing-wrapper ">
+        <view class="title">资产状况</view>
+        <view class="account-wrapper">
+                <view class="weui-flex page__bd page__bd_spacing">
+                    <view class=" wrapper-title weui-flex__item">
+                        流动资产
+                    </view>
+                     <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_06==null?"":filter.numberToFixed(dtData.column_val_06)}}</strong>
+                        <text>年初余额</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong> {{dtData.column_val_07==null?"":filter.numberToFixed(dtData.column_val_07)}}</strong>
+                        <text>期末余额</text>
+                    </view>
+                   
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                        非流动资产
+                    </view>
+                      <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_08==null?"":filter.numberToFixed(dtData.column_val_08)}}</strong>
+                        <text>年初余额</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_09==null?"":filter.numberToFixed(dtData.column_val_09)}}</strong>
+                        <text>期末余额</text>
+                    </view>
+                  
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                         资产合计
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_10==null?"":filter.numberToFixed(dtData.column_val_10)}}</strong>
+                        <text>年初余额</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{dtData.column_val_11==null?"":filter.numberToFixed(dtData.column_val_11)}}</strong>
+                        <text>期末余额</text>
+                    </view>
+                    
+                </view>
+                
+                
+            </view>
+    </view>
+    
+   
+    <!-- <view class="billing-wrapper ">
+        <view class="title">应收应付</view>
+        <view class="account-wrapper">
+                <view class="weui-flex page__bd page__bd_spacing">
+                    <view class=" wrapper-title weui-flex__item">
+                        应收帐款
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong> {{filter.numberToFixed(dtData.column_val_26)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{filter.numberToFixed(dtData.column_val_27)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                <view class="weui-flex page__bd page__bd_spacing"  >
+                    <view class=" wrapper-title weui-flex__item">
+                        应付账款
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{filter.numberToFixed(dtData.column_val_28)}}</strong>
+                        <text>本期</text>
+                    </view>
+                    <view class="weui-flex__item">
+                        <strong>{{filter.numberToFixed(dtData.column_val_29)}}</strong>
+                        <text>本年累计</text>
+                    </view>
+                </view>
+                
+                
+            </view>
+    </view> -->
+    <view class="billing-wrapper ">
+        <view class="title">资金状况</view>
+        <view class="account-wrapper">
+            <view class="weui-flex page__bd page__bd_spacing">
+                <view class=" wrapper-title weui-flex__item">
+                    资金收入
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_30==null?"":filter.numberToFixed(dtData.column_val_30)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_31==null?"":filter.numberToFixed(dtData.column_val_31)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                    资金支付
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_32==null?"":filter.numberToFixed(dtData.column_val_32)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_33==null?"":filter.numberToFixed(dtData.column_val_33)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                        资金收支
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_34==null?"":filter.numberToFixed(dtData.column_val_34)}}</strong>
+                    <text>本期</text>
+                </view>
+                <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_35==null?"":filter.numberToFixed(dtData.column_val_35)}}</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            
+        </view>
+    </view>
+   
+   <!-- <view class="billing-wrapper">
+        <view class="title">运营能力</view>
+        <view class="account-wrapper">
+            <view class="weui-flex page__bd page__bd_spacing">
+                <view class=" wrapper-title weui-flex__item">
+                    收入增长率
+                </view>
+                <view class="weui-flex__item">
+                    <strong class=".s"> {{dtData.column_val_90==null?"":filter.numberToFixed(dtData.column_val_90)}}%</strong>
+                       <text>本期</text>
+                </view>
+               <view class="weui-flex__item">
+                    <strong>{{dtData.column_val_57==null?"":filter.numberToFixed(dtData.column_val_57)}}%</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            <view class="weui-flex page__bd page__bd_spacing"  >
+                <view class=" wrapper-title weui-flex__item">
+                    净利润增长率
+                </view>
+                <view class="weui-flex__item">
+                    <strong class="s">{{dtData.column_val_91==null?"":filter.numberToFixed(dtData.column_val_91)}}%</strong>
+                 <text>本期</text>
+                </view>
+              <view class="weui-flex__item">
+                     <strong>{{dtData.column_val_59==null?"":filter.numberToFixed(dtData.column_val_59)}}%</strong>
+                    <text>本年累计</text>
+                </view>
+            </view>
+            
+            
+            
+        </view>
+    </view>-->
+    
+    
+</view>

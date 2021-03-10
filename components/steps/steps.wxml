@@ -1,0 +1,34 @@
+<view class='active-color' style='color:{{uncolor}}'>
+  <view class='m-2'>
+    <view class='cu-steps' wx:if="{{stepType=='basic'}}">
+      <view class='cu-item {{index>num?"":"text-red"}}' wx:for="{{basicsList}}" wx:key > 
+        <icon class="iconfont/icondate-empty:before"></icon>{{item.name}}
+      </view>
+    </view>
+    <view class='cu-steps steps-arrow' wx:if="{{stepType=='detail'}}">
+      <view class='cu-item {{index>num?"":"text-purple"}}' wx:for="{{basicsList}}" wx:key >
+        <icon class='{{item.icon}}'></icon> {{item.name}}
+      </view>
+    </view>
+    <!-- <view class='cu-steps steps-arrow' wx:if="{{stepType=='detail'}}">
+      <view class='cu-item {{index>num?"":"text-purple"}}' wx:for="{{basicsList}}" wx:key>
+        <icon class='{{item.icon}}'></icon> {{item.name}}
+      </view>
+    </view> -->
+  </view>
+  <view class='m-2'>
+    <view class='cu-steps' wx:if="{{stepType=='num'}}">
+      <view class='cu-item {{index>num?"":"text-purple"}} ' wx:for="{{basicsList}}" wx:key>
+        <text class='num {{index==2?"err":""}}' data-index='{{index + 1}}'></text> {{item.name}}
+      </view>
+    </view>
+  </view>
+  <view class='m-2'>
+    <scroll-view scroll-x class='bg-white padding response cu-steps steps-bottom' scroll-into-view="scroll-{{num}}" scroll-with-animation wx:if="{{stepType=='more'}}">
+      <view class='cu-item {{index>num?"":"text-purple"}} padding-lr-xl' wx:for="{{basicsList}}" wx:key id="scroll-{{index}}">
+        {{item.name}}
+        <text class='num' data-index='{{index + 1}}'></text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

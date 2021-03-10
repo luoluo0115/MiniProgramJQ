@@ -1,0 +1,60 @@
+@import '../../weui.wxss';
+@import '../../app.wxss';
+@import '../../icon.wxss';
+.top-wrapper{
+	background: #1e6ce8;
+	color: #fff;
+	padding: 20rpx 0rpx 80rpx;
+	border-bottom-left-radius: 20rpx;
+	border-bottom-right-radius: 20rpx;
+}
+
+.picket-company{
+	text-align: left;
+	position: relative;
+	line-height: 36px;
+	height: 36px;
+	font-size: 14px;
+	overflow: hidden;
+}
+.companyText{
+ 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	display: inline-block;
+	text-indent: 35rpx;
+
+}
+.kind-list__img{
+margin: 6px 12px 0px 0;
+position: absolute;
+top: 0;
+bottom: 0;
+right: 0;
+width:20px;
+height:20px
+}
+.kind-icon{
+font-size: 34rpx;
+display: inline-block;
+position: absolute;
+}
+
+.picker-date{
+font-size:24rpx;
+margin-top: 10rpx;
+}
+.picker-date icon{
+font-size: 36rpx;
+padding-right: 12rpx;
+display: inline-block;
+position: relative;
+margin-top: -5px;
+}
+.picker-date text{
+
+display: inline-block
+}
+  
+  

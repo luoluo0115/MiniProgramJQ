@@ -1,0 +1,238 @@
+/* pages/me/wallet/wallet.wxss */
+
+page{
+    background-color: #EDEDED;
+}
+.top-wrapper{
+    background: #1e6ce8;
+    color: #fff;
+    padding: 20rpx 0rpx 120rpx;
+    border-bottom-left-radius: 20rpx;
+    border-bottom-right-radius: 20rpx;
+}
+.account-wrapper{
+    background: #fff;
+    border-radius: 15px;
+    margin-top: -15%;
+    padding: 30rpx 10rpx;
+    position: relative;
+}
+.account-wrapper .title{
+    font-size: 48rpx;
+    font-weight: 400;
+    color: #1e6ce8;
+    text-align: center;
+}
+.account-wrapper .sub{
+    font-size: 28rpx;
+    color: #1e6ce8;
+    text-align: center;
+}
+.account-wrapper .item{
+    padding: 3% 0
+}
+.account-wrapper .item:first-child,.account-wrapper .item:nth-child(2),.account-wrapper .item:nth-child(3){ 
+    border-bottom:1px dashed #EAE7E7; 
+
+}
+.account-wrapper  strong,.account-wrapper text{
+    display: block;
+    line-height: 1.6;
+}
+.account-wrapper strong{
+    color: #1e6ce8;
+    font-size: 16px
+}
+.account-wrapper text{
+    color:#AAAAAA ;
+    font-size: 12px
+}
+.account-wrapper .weui-flex__item{
+    text-align: center;
+}
+
+.grids-content{
+    position: relative;
+}
+
+.grids-content .title{
+  font-size: 14px;
+  padding: 10px;
+  overflow: hidden;
+}
+.grids-content .text{
+  border-left:2px solid #1e6ce8;
+  padding-left:10px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  color: #333;
+}
+.grids-wrapper{
+    background: #fff;
+    border-radius: 15px;
+}
+.grids-wrapper .weui-grid{
+  text-align: center;
+}
+.grids-wrapper .weui-grid__icon {
+  display: inline-block;
+  width: 56rpx;
+  height: 56rpx;
+}
+.grids-wrapper .weui-grid__label{
+  font-size: 32rpx;
+  color: #666;
+  margin-left: 10rpx;
+  margin-top: 0;
+  display: inline-block;
+  position: relative;
+
+}
+.weui-grid {  
+    width:50%;
+}  
+.no-data{
+    font-size: 14px;
+    color:#999;
+    padding: 30px;
+    text-align: center;
+}
+.wallet-list{
+    background-color: #fff;
+    border-radius: 25rpx;
+    padding: 40rpx 10rpx;
+}
+.wallet-list .title{
+    font-size: 14px;
+    padding: 10px;
+    overflow: hidden;
+}
+.wallet-list .text{
+    border-left:2px solid #1e6ce8;
+    padding-left:10px;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    color: #333;
+}
+/*轮播套餐*/
+.setMeal-list{
+    clear: both;
+    padding: 10rpx;
+}
+.setMeal-list .item{
+    border-radius: 8rpx;
+    border:1px solid #eee;
+    color: #1e6ce8;
+    margin:0 10rpx 15rpx;
+    padding: 20rpx;
+    text-align: center;
+}
+
+.setMeal-list .item.minH{
+    min-height: 135rpx;
+}
+.setMeal-list .title{
+   font-size: 32rpx;
+   color: #333;
+}
+.setMeal-list .price{
+    font-size: 24rpx;
+    color: #999;
+
+ }
+ .setMeal-list .price text{
+    color:#ff473a;
+    font-size: 28rpx;
+ }
+ .setMeal-list .title{
+   font-size: 32rpx;
+   color: #333;
+}
+.setMeal-list .price{
+    font-size: 24rpx;
+    color: #999;
+
+ }
+ .setMeal-list .price text{
+    color:#ff473a;
+    font-size: 28rpx;
+ }
+ .setMeal-list .item.active{
+    border:1px solid #1e6ce8;
+}
+.setMeal-list .item.active .title{
+    font-size: 32rpx;
+    color: #1e6ce8;
+ }
+ .setMeal-list .item.active .price{
+     font-size: 24rpx;
+     color: #1e6ce8;
+ 
+  }
+
+ .setMeal-list .item.minH .van-field__input{
+     text-align: center;
+ }
+ .setMeal-list .payinfo{
+     font-size: 28rpx;
+     color: #1e6ce8;
+
+ }
+ .setMeal-list .checkout-item{
+    padding: 15rpx 10rpx;
+}
+.priceBar{
+    color: #1e6ce8!important;
+}
+.btnBar{
+    border: 1px solid #1e6ce8!important;
+    background-color: #1e6ce8!important;
+}
+.payment-btn{
+    border: 1px solid #1e6ce8!important;
+    background-color: #1e6ce8!important;
+    margin: 20rpx 10rpx;
+    color:#fff;
+    font-size: 28rpx;
+    display: block;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    border-radius: 10rpx;
+}
+/*goRule*/
+.goRecord{
+    position: absolute;
+    top:20rpx;
+    right: 20rpx;
+    border: #eee solid 1px;
+    font-size: 24rpx;
+    color: #999;
+    padding: 5rpx 10rpx;
+}
+/*双十一活动*/
+.itembg{
+    background-size: cover;
+    height: 240rpx;
+    margin: 15rpx;
+    position: relative;
+}
+.itembg.active{
+   
+    opacity: 0.8;
+}
+.itembg .img-bg{
+    width: 100%;
+    height: 100%;
+}
+.otherInput{
+    position: absolute;
+    top: 39%;
+    left: 25rpx;
+    padding: 0 50rpx;
+}
+.otherInput .van-cell{
+    padding: 0;
+}

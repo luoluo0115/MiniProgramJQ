@@ -1,0 +1,147 @@
+.pay-header {
+  margin-top: 5px;
+  background: #1e6ce8;
+  color: #fff;
+  border-radius: 15px;
+  padding: 10px 30px;
+  font-size: 12px;
+}
+
+.pay-header .title {
+  color: #f8f8f8
+}
+
+.pay-header .price {
+  font-size: 18px;
+  line-height: 56px
+}
+
+.pay-header .right {
+  color: #f8f8f8
+}
+
+.pay-content {
+  margin-top: 10px;
+  font-size: 12px;
+  border: 1px solid #efefef;
+  border-radius: 5px;
+  padding: 0px 10px 10px 0;
+}
+
+.pay-content .pay-title {
+  padding: 10px 20px;
+  background: #f8f8f8;
+  color: #666666
+}
+
+.van-cell__title {
+  color: #333333 !important;
+}
+
+.van-cell__value {
+  -webkit-flex: 2.5 !important;
+  flex: 2.5 !important;
+}
+
+.van-cell {
+  font-size: 12px !important;
+  padding: 5px 16px !important;
+  padding: var(--cell-vertical-padding, 5px) var(--cell-horizontal-padding, 16px) !important;
+}
+
+.picker-date {
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.picker-date icon {
+  font-size: 32rpx;
+  padding-right: 12rpx;
+  display: inline-block;
+  position: relative;
+  margin-top: -8px;
+}
+
+.picker-date text {
+  display: inline-block
+}
+
+/*弹窗*/
+.popWrapper {
+  padding: 10px 15px;
+  min-width: 300px;
+}
+
+.popWrapper .pop-title {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.popWrapper .pop-sub {
+  font-size: 20rpx;
+  font-weight: 400;
+}
+
+.popWrapper .invoice-info-item {
+  font-size: 12px;
+}
+
+.input-reason {
+  min-height: 150rpx !important;
+  line-height: 1 !important;
+}
+
+.mt-10 {
+  margin-top: 30rpx;
+}
+
+.mb-10 {
+  margin-bottom: 30rpx;
+}
+
+.demo-margin-right {
+  margin-left: 10rpx;
+}
+
+
+.van-cell {
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 16px;
+  padding: var(--cell-vertical-padding, 10px) var(--cell-horizontal-padding, 16px);
+  font-size: 14px;
+  font-size: var(--cell-font-size, 14px);
+  line-height: 24px;
+  line-height: var(--cell-line-height, 24px);
+  color: #323233;
+  color: var(--cell-text-color, #323233);
+  background-color: #fff;
+  background-color: var(--cell-background-color, #fff);
+}
+.van-cell__title,
+.van-cell__value {
+  -webkit-flex: 1;
+  flex: 1;
+}
+.van-cell__value {
+  overflow: hidden;
+  text-align: right;
+  vertical-align: middle;
+  color: #969799;
+  color: var(--cell-value-color, #969799);
+}
+.border-bottom{
+  border-bottom: 1px solid #eee;
+}
+.ml-10{
+  margin-left: 10rpx;
+}
+.m-info{
+  padding: 5px 0 !important;
+  margin-left: 16px;
+  width: 95%;
+}

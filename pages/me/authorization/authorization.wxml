@@ -1,0 +1,99 @@
+<!--pages/me/authorization/authorization.wxml-->
+<van-tabs active="{{ active }}" bind:change="onChange" color="#1e6ce8">
+	<van-tab title="公司认证">
+		<view class="section">
+			<view class="page">
+				<view class="page__bd page__bd_spacing">
+					<view class="company-info">
+						<view class="item">
+							1. 法人本人可以自助认证本人名下的公司，需要上传公司营业执照，输入身份证号码;
+						</view>
+						<view class="item">
+							2. 系统将对企业营业执照进行四要素认证(企业名称，社会信用号码，法人姓名，法人身份证号码）;
+						</view>
+						<view class="item">
+							3. 通过认证后您才可以进行资料上传或者您的员工申请授权后您短信验证码核准后才能进行资料上传;
+						</view>
+					</view>
+					<view class="upload-btn JQbtn" bindtap="chooseImg">营业执照上传认证</view>
+					<view class="upload-content" wx:if="{{resultShow}}">
+						<van-cell-group>
+							<van-cell title="单位名称" value="{{resultList.enterprise_name}}" />
+							<van-cell title="社会信用代码" value="{{resultList.social_credit_no}}" />
+							<van-cell title="法定代表人" value="{{resultList.legal_person}}" />
+							<van-cell title="公司类型" value="{{resultList.enterprise_type}}" />
+							<picker bindchange="bindIdTypeChange" value="{{index}}" range="{{idTypeList}}">
+								<view class="picker">
+									<van-cell title="证件类型" value="{{resultList.id_type}}" custom-class="picker-item" is-link arrow-direction="down"  />
+								</view>
+							</picker>
+							<van-field wx:if="{{resultList.id_type =='居民身份证'}}" value="{{resultList.id_no}}" clearable label="身份证号" placeholder="请输入身份证号"  maxlength="18" type="idcard" input-align="right" bindinput="idnoInput" />
+							<van-row custom-class="pt-5" wx:if="{{resultList.id_type!='居民身份证'}}">
+								<van-col span="8" custom-class="font-14 text-333">证件文件</van-col>
+								<van-col span="16" custom-class="text-right">
+									<van-uploader preview-full-image="true" preview-image="true" deletable="{{ true }}"  file-list="{{ fileList }}" bind:after-read="afterRead" max-count="2" />
+								</van-col>
+							</van-row>
+						</van-cell-group>
+						<view wx:if="{{resultList.id_type =='居民身份证'}}" class="JQbtn" bindtap="goAuth">开始认证</view>
+						<view wx:else class="JQbtn" bindtap="goVerify">提交审核</view>
+					</view>
+					<view class="table" wx-if="{{verifyCustList !=''}}">
+						<view class="tr">
+							<view class="th th0">操作</view>
+							<view class="th th1">企业名称</view>
+							<view class="th th3">法人</view>
+							<view class="th th2">认证状态</view>
+							<view class="th th3">认证时间</view>
+						</view>
+						<view class='tr' wx:for="{{verifyCustList}}" wx:key="index">
+							<view class="td th0">
+								<icon wx:if="{{item.confirm_status=='N'}}" class="./iconfont/icondelete:before icon-btn" data-item="{{item}}" bindtap="deleteVerify"></icon>
+							</view>
+							<view class="td th1">{{item.enterprise_name}}</view>
+							<view class="td th3">{{item.legal_person}}</view>
+							<view class="td th2" bindtap="{{item.confirm_status =='N'?'verifyEdit':''}}" data-item="{{item}}">{{item.confirm_status_desc}}<icon wx:if="{{item.confirm_status =='N'}}" class="./iconfont/iconflow-Mark:before d-inline-block color-blue"  ></icon></view>
+							<view class="td th3">{{item.confirm_time==null?"":item.confirm_time}}</view>
+						</view>
+
+					</view>
+				</view>
+			</view>
+
+		</view>
+	</van-tab>
+	<van-tab title="授权申请">
+		<view class="section">
+			<view class="page">
+				<view class="page__bd page__bd_spacing">
+					<van-cell-group>
+						<van-field value="{{ enterprise_name }}" clearable label="公司名称" bindinput="enterprisenameInput" placeholder="公司名称" type="text" input-align="right" />
+						<van-field value="{{ legal_person }}" clearable label="法人代表" bindinput="legalpersonInput" placeholder="请输入法人代表" type="text" input-align="right" />
+						<van-field value="{{ phone }}" clearable label="法人手机号" bindinput="phoneInput" placeholder="请输入法人手机号" type="number" input-align="right" />
+						<van-field value="{{ smscode }}" center clearable label="短信验证码" bindinput="smscodeInput" placeholder="请输入短信验证码" use-button-slot>
+							<van-button slot="button" size="small" custom-class="send-btn" bindtap="{{isClick?'':'getCode'}}" disabled="{{isClick}}">{{btntext}}</van-button>
+						</van-field>
+						<van-field value="{{ username }}" clearable label="申请人姓名" bindinput="usernameInput" placeholder="请输入申请人姓名" border="{{ false }}" type="text" input-align="right" />
+					</van-cell-group>
+					<view class="upload-btn JQbtn {{btnDisabled?'gray-bg':''}}" bindtap="{{!btnDisabled?'VerifyEmp':''}}">申请授权</view>
+					<view class="table" wx-if="{{custList !=''}}">
+						<view class="tr">
+							<view class="th th1">企业名称</view>
+							<view class="th th2">增值税申报类型</view>
+							<view class="th th3">法人</view>
+						</view>
+						<view class='tr' wx:for="{{custList}}" wx:key="index">
+							<view class="td th1">{{item.customer_name}}</view>
+							<view class="td th2">{{item.tax_type}}</view>
+							<view class="td th3">{{item.legal_person}}</view>
+						</view>
+
+					</view>
+				</view>
+			</view>
+		</view>
+
+
+	</van-tab>
+</van-tabs>
+<van-toast id="van-toast" />

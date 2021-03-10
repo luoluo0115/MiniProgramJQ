@@ -1,0 +1,56 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<view class="page" >
+    <van-row custom-class="num-wrapper">
+        <van-col span="8">
+            <view class="num"><text class="color-red">{{InvoiceQty}}</text></view>
+            <text class="num-title">上传数量</text>
+        </van-col>
+         <van-col span="8">
+            <view class="num"><text class="color-red">{{filter.numberToFixed(InvoiceTax)}}</text></view>
+            <text class="num-title">税额</text>
+        </van-col>
+        <van-col span="8">
+            <view class="num"><text class="color-red">{{filter.numberToFixed(InvoiceTax+InvoiceAmount)}}</text></view>
+            <text class="num-title">价税合计</text>
+        </van-col>
+    </van-row>
+   
+</view>
+
+<view class="page" >
+    <view class="expend-list">
+            <block wx:if="{{invoiceFileList!=''}}">
+               <view class="expend-item" wx:for="{{invoiceFileList}}" wx:key="index">
+                   <van-row custom-class="title">
+                        <van-col span="24" >
+                            发票类型: {{item.file_small_category}}                        
+                        </van-col>
+                    </van-row>
+                    <view class="a-expend">
+                        <van-row>
+                            <van-col span="7" custom-class="text-center">
+                                <van-image width="80" height="80" fit="fill" src="{{FileOssUrl + item.upload_file_guid}}" data-list="{{FileOssUrl + item.upload_file_guid}}" data-src="{{FileOssUrl + item.upload_file_guid}}" bindtap="previewImage"  />
+                            </van-col>
+                            <van-col span="17" custom-class="{{(item.bill_non_tax_amt+item.bill_tax_amt!=item.trans_amount ||(item.process_flag=='E')) ? 'color-red':'color-label'}}">
+                                <van-row >
+                                    <van-col span="12" custom-class="label">购买方:{{item.bill_pay_name}}</van-col>
+                                    <van-col span="12" custom-class="label">税局代开:{{item.d}}</van-col>
+                                    <van-col span="12" custom-class="label">税额:{{(item.bill_tax_amt)}}</van-col>
+                                    <van-col span="12" custom-class="label">发票号码:{{item.invoice_no}}</van-col>
+                                    <van-col span="12" custom-class="label">金额:{{(item.bill_non_tax_amt)}}</van-col>
+                                    <van-col span="12" custom-class="label">开票日期:{{item.invoice_date}}</van-col>
+                                    <van-col span="24" custom-class="label">价税合计:{{(item.trans_amount)}}</van-col>
+                                </van-row>
+                            </van-col>
+                        </van-row>
+                    </view>
+                    
+                </view>
+            
+            </block>
+            <block wx:else>
+                <view class="empty">{{msg}}</view>
+            </block>
+        </view>
+</view>
+<van-toast id="van-toast" />

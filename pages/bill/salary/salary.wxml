@@ -1,0 +1,178 @@
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<van-tabs active="{{ active }}" bind:change="onChange">
+	<van-tab title="工资奖金">
+		<scroll-view class="" scroll-x="false" scroll-y="false" upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false" bindscrolltoupper="" bindscrolltolower="" bindscroll="">
+			<view class="page ">
+				<view class="page__bd  text-right btn-group" wx:if="{{curr_status=='N'}}">
+					<van-button size="small" custom-class="top-btn" bind:click="gotoAddSalary">新增</van-button>
+					<van-button  size="small" custom-class="top-btn" bind:click="copySalary">复制上月</van-button>
+					<van-button  size="small" custom-class="top-btn" bind:click="generateSalary">生成薪资</van-button>
+					<van-button size="small" custom-class="top-btn" bind:click="gotoUpload">上传</van-button>
+					<van-button size="small" custom-class="top-btn" bind:click="gotoSalaryExcel">工资表</van-button>
+				</view>
+				<van-collapse value="{{ activeNames }}" bind:change="onChangelist">
+
+					<van-collapse-item title="{{item.emp_name}}-({{item.income_category}}) 【总额:{{item.income_amt}} 税额:{{item.income_tax}}】" name="{{index}}" wx:for="{{salaryList}}" wx:key="index">
+						<view class="tag-btn" wx:if="{{curr_status=='N'}}">
+							<van-button size="mini" custom-class="left-tag" color="#1e6ce8" data-item="{{item}}" bind:click="gotoEditSalary">修改</van-button>
+							<van-button size="mini" color="#1e6ce8" data-item="{{item}}" bind:click="deleteSalary">删除</van-button>
+						</view>
+						<block wx:if="{{item.income_category=='月工资'}}">
+							<view custom-class="userinfor">
+								<van-cell title="所得项目分类" value="{{item.income_category}}" />
+								<van-cell title="基本工资" value="{{item.base_salary}}" />
+								<van-cell title="岗位工资" value="{{item.job_salary}}" />
+								<van-cell title="加班工资" value="{{item.oevrtime_salary}}" />
+								<van-cell title="奖金工资" value="{{item.bonus_salary}}" />
+								<van-cell title="补贴工资" value="{{item.allowance_salary}}" />
+								<van-cell title="扣除工资" value="{{item.deduct_salary}}" />
+								<van-cell title="个人养老保险" value="{{item.personal_pension_insurance}}" />
+								<van-cell title="个人医疗保险" value="{{item.personal_medical_insurance}}" />
+								<van-cell title="个人失业保险" value="{{item.personal_unemployment_insurance}}" />
+								<van-cell title="个人公积金" value="{{item.personal_housing_fund}}" />
+								<van-cell title="个税" value="{{item.income_tax}}" />
+								<van-cell title="税前工资" value="{{item.income_amt}}" />
+								<!-- <van-cell title="薪资发放方式" value="{{item.salary_pay_method}}" /> -->
+								<van-cell title="抵扣额" value="{{item.tax_deduct_amount}}" />
+								<van-cell title="专项附加扣除汇总" value="{{item.total_plus_deduct_amt}}" />
+								<van-cell title="备注" value="{{item.remark}}" />
+							</view>
+						</block>
+						<block wx:if="{{item.income_category=='劳务报酬所得'}}">
+							<view custom-class="userinfor">
+								<van-cell title="所得项目分类" value="{{item.income_category}}" />
+								<van-cell title="劳务工资" value="{{item.base_salary}}" />
+								<van-cell title="个税" value="{{item.income_tax}}" />
+								<van-cell title="税前工资" value="{{item.income_amt}}" />
+								<van-cell title="备注" value="{{item.remark}}" />
+							</view>
+						</block>
+						<block wx:if="{{item.income_category=='数月奖金'}}">
+							<view custom-class="userinfor">
+								<van-cell title="所得项目分类" value="{{item.income_category}}" />
+								<van-cell title="奖金工资" value="{{item.bonus_salary}}" />
+								<van-cell title="个税" value="{{item.income_tax}}" />
+								<van-cell title="税前工资" value="{{item.income_amt}}" />
+								<van-cell title="备注" value="{{item.remark}}" />
+							</view>
+						</block>
+					</van-collapse-item>
+
+				</van-collapse>
+			</view>
+		</scroll-view>
+	</van-tab>
+	<van-tab title="员工资料">
+		<scroll-view class="" scroll-x="false" scroll-y="false" upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false" bindscrolltoupper="" bindscrolltolower="" bindscroll="">
+			<view class="page ">
+				<view class="page__bd text-right btn-group" >
+					<van-button icon="add-o " size="small" custom-class="top-btn" bind:click="gotoAddEmp" wx:if="{{curr_status=='N'}}">新增</van-button>
+					<van-button  size="small" custom-class="top-btn {{Valid?'default ':''}}" bind:click="gotoValid" >显示有效</van-button>
+
+				</view>
+				<van-collapse value="{{ activeNames }}" bind:change="onChangelist">
+
+					<van-collapse-item title="{{item.emp_name}} 【工资:{{item.salary_total}} 社保:{{item.personal_insurance_total}} 公积金:{{item.personal_housing_fund_total}}】 " name="{{index}}" wx:for="{{employeeList}}" wx:key="index">
+						<view class="tag-btn" wx:if="{{curr_status=='N'}}">
+							<van-button size="mini" custom-class="left-tag" color="#1e6ce8" data-item="{{item}}" bind:click="gotoEditEmp">修改</van-button>
+							<van-button size="mini" color="#1e6ce8" data-item="{{item}}" bind:click="deleteEmp">删除</van-button>
+						</view>
+						<view custom-class="userinfor">
+							<van-cell title="员工姓名" value="{{item.emp_name}}" />
+							<van-cell title="任职日期" value="{{filter.formatTime(item.ard_date,'yyyy-MM-dd')}}" />
+							<van-cell title="证件类型" value="{{item.identification_type}}" />
+							<van-cell title="证件号码" value="{{item.identification_number}}" />
+							<van-cell title="是否有效" value="{{item.enabled == true ? '是':'否'}}" />
+							<van-cell title="基本工资" value="{{filter.numberToFixed(item.base_salary)}}" />
+						</view>
+					</van-collapse-item>
+
+				</van-collapse>
+			</view>
+		</scroll-view>
+	</van-tab>
+	<van-tab title="社保公积金收据">
+		<scroll-view class="" scroll-x="false" scroll-y="false" upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false" bindscrolltoupper="" bindscrolltolower="" bindscroll="">
+			<view class="page ">
+				<view class="page__bd page__bd_spacing text-center btn-group" wx:if="{{curr_status=='N'}}">
+					<van-row>
+						<van-col span="24">
+							<picker mode="date" fields="month" value="{{account_month}}" start="2009-09" end="2030-09" bindchange="bindDateChange">
+								<view class="picker-date">
+									<view class="label">社保公积金月份:{{account_month}} </view>
+								</view>
+							</picker>
+						</van-col>
+						<van-col span="6" custom-class="item-top">
+							<view >上传社保收据</view>
+							<van-button icon="upgrade" size="small" color="#1e6ce8" custom-class="top-btn " bind:click="chooseImgSocial">社保</van-button>
+						</van-col>
+						<van-col span="11" custom-class="item-top">
+							<view >上传社保缴费证明(PDF)</view>
+							<van-button icon="upgrade" size="small" color="#1e6ce8" custom-class="top-btn " bind:click="choosePDFSocial">上传社保缴费证明</van-button>
+						</van-col>
+						<van-col span="7" custom-class="item-top">
+							<view >上传公积金收据</view>
+							<van-button icon="upgrade" size="small" color="#1e6ce8" custom-class="top-btn " bind:click="chooseImgHousingFund">公积金</van-button>
+						</van-col>
+					</van-row>
+				</view>
+			</view>
+			<view class="table" wx-if="{{socialList !=''}}">
+				<view class="tr">
+					<view class="th th0">操作</view>
+					<view class="th th1">票据月份</view>
+					<view class="th th2">票据类型</view>
+					<view class="th th3">总额</view>
+					<view class="th th4">单位金额</view>
+				</view>
+				<view class="tr {{(item.bill_non_tax_amt+item.bill_tax_amt!=item.trans_amount ||(item.process_flag=='E')) ? 'color-red':''}}" wx:for="{{socialList}}" wx:key="index">
+						
+					<view class="th th0">
+						 
+						<icon wx:if="{{curr_status=='N'}}" class="./iconfont/icondelete:before icon-btn" data-item="{{item}}" bindtap="deleteSocial"></icon>
+						<icon wx:if="{{curr_status=='N'}}" class="./iconfont/iconflow-Mark:before icon-btn" data-item="{{item}}" bindtap="editSocial" style="margin-left:10px"></icon>
+					</view>
+					<view class="td th1">{{item.file_month}}</view>
+					<view class="td th2" data-list="{{FileOssUrl + item.upload_file_guid}}" data-src="{{FileOssUrl + item.upload_file_guid}}" bindtap="previewImage">{{item.file_small_category}}<icon class="./iconfont/iconpic-line:before d-inline-block color-blue"  ></icon></view>
+					
+					<view class="td th3">{{filter.numberToFixed(item.trans_amount)}}</view>
+					<view class="td th4">{{filter.numberToFixed(item.bill_non_tax_amt)}}</view>
+				</view>
+			</view>
+		</scroll-view>
+	</van-tab>
+</van-tabs>
+<van-popup show="{{ showModal }}" bind:close="close" round custom-class="popWrapper" closeable="true">
+	<view class="pop-title">编辑社保金额</view>
+	<van-cell-group>
+		<van-cell title="总额:" value="{{trans_amount}}" custom-class="invoice-info-item" />
+		<van-cell title="个人金额:" value="{{bill_tax_amt}}" custom-class="invoice-info-item" />
+        <!-- <van-field
+            value="{{ bill_tax_amt }}"
+            label="个人金额"
+            required
+            clearable
+            placeholder="请输入社保个人金额"
+            input-align="right"
+            input-class="right"
+            type="digit" 
+            data-fieldName="bill_tax_amt"
+            bind:input="handleFieldChange"
+        /> -->
+        <van-field
+            value="{{ bill_non_tax_amt }}"
+            label="单位金额"
+            clearable
+            required
+            placeholder="请输入社保单位金额"
+            input-align="right"
+            type="digit" 
+            data-fieldName="bill_non_tax_amt"
+            bind:input="handleFieldChange"
+        />
+		<van-button round size="small" block color="#1e6ce8" custom-class="{{btnDisabled?'gray-bg':''}}" bindtap="{{!btnDisabled?'bindSave':''}}">保存</van-button>
+	</van-cell-group>
+</van-popup>
+<van-toast id="van-toast" />
+<van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm" />

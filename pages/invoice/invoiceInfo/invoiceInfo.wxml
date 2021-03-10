@@ -1,0 +1,182 @@
+<wxs module="m1">
+	var getStatus = function(status) {
+		switch (status) {
+			case "N":
+				return "新";
+				break;
+			case "R":
+				return "拒绝";
+				break;
+			case "S":
+				return "提交完成";
+				break;
+			case "B":
+				return "开始开票";
+				break;
+			case "E":
+				return "结束开票";
+				break;
+			case "P":
+				return "打印快递单";
+				break;
+			case "C":
+				return "取走发票";
+				break;
+			case "O":
+				return "交接";
+				break;
+			case "I":
+				return "接收";
+				break;
+			case "L":
+				return "档案转出";
+				break;
+			case "M":
+				return "客服接收";
+				break;
+			case "X":
+				return "取消";
+				break;
+			case "D":
+				return "作废";
+				break;
+			default:
+				return status;
+				break;
+		}
+	}
+	module.exports = {
+		getStatus: getStatus,
+	}
+</wxs>
+<wxs module="filter" src="../../../utils/money.wxs"></wxs>
+<van-tabs active="{{ active }}" bind:change="switchTab">
+	<van-tab title="开票申请">
+		<view class="page area-container center-container">
+			<view class="invoice page__bd page__bd_spacing">
+				<view class="invoice-item">
+					<view class="area-title ">
+						<view class="area-text">发票抬头</view>
+					</view>
+					<van-search value="{{ value }}" placeholder="输入企业名称" use-action-slot bind:change="custChange" bind:search="onSearch">
+						<view slot="action" bind:tap="goAddInvoiceCust">
+							<van-icon name="add-o" size="20px" color='#1e6ce8' />
+						</view>
+					</van-search>
+					<van-row custom-class="invoice-header-list" wx:for="{{invoiceCustList}}" wx:key="index" bindtap="goEditInvoiceCust" data-item="{{item}}">
+						<van-col span="16">
+							<view class="title">{{item.customer_name}}</view>
+							<view class="sub">税号：{{item.customer_tax_code}}</view>
+						</van-col>
+						<van-col span="8" custom-class="text-right">
+							<van-button size="small" custom-class="btn" round catchtap='bindTapInvoiceApply' data-item="{{item}}">开票</van-button>
+						</van-col>
+					</van-row>
+				</view>
+
+			</view>
+		</view>
+	</van-tab>
+	<van-tab title="开票列表">
+		<view class="page area-container center-container">
+			<view class="invoice page__bd page__bd_spacing">
+				<van-search value="{{ value }}" placeholder="输入企业名称" use-action-slot bind:change="custChangeSearch" bind:search="onSearchList">
+				</van-search>
+				<block wx:if="{{InvoiceApplyList!=''}}">
+					<van-row custom-class="grids-wrapper" wx:for="{{InvoiceApplyList}}" wx:key="index" data-index="{{index}}" data-item="{{item}}" >
+						<van-col span="20" custom-class="text-333">
+							<text>单位名称：</text>
+							{{item.customer_name}}
+						</van-col>
+						<van-col span="4">
+							<van-tag mark type="success">{{m1.getStatus(item.status)}}</van-tag>
+						</van-col>
+						<van-col span="12">
+							<text>发票类型：</text>
+							{{item.invoice_type}}
+						</van-col>
+						<van-col span="12">
+							<text>项目类型：</text>
+							{{item.invoice_item_type}}
+						</van-col>
+						<van-col span="12">
+							<text>申请日期：</text>
+							{{filter.formatTime(item.reqeust_date,"yyyy-MM-dd")}}
+						</van-col>
+						<van-col span="12">
+							<text>含税金额：</text>
+							{{filter.numberToFixed(item.total_amount)}}
+						</van-col>
+						<van-col span="24" custom-class="card-bottom">
+							<van-button round color="#1e6ce8" size="mini" data-item="{{item}}" bindtap="deleteApply" custom-class="detail-btn" wx:if="{{item.status=='N'}}">删除</van-button>
+							<van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" data-item="{{item}}" data-type="Edit" bindtap="goEdit" wx:if="{{item.status=='N'}}">修改</van-button>
+							<van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" data-item="{{item}}" bindtap="goDetail">详情</van-button>
+							<van-button round color="#1e6ce8" size="mini" custom-class="detail-btn" bindtap="InvoiceSubmit" data-item="{{item}}" wx:if="{{item.status=='N'}}">提交</van-button>
+							<!-- <van-button round color="linear-gradient(to right, #4bb0ff, #6149f6)" size="mini" data-item="{{item}}" wx:if="{{item.is_can_scrap=='Y'}}" bindtap="goScrap">明细</van-button> -->
+						</van-col>
+					</van-row>
+				</block>
+				<block wx:else>
+					<view class="empty">{{msg}}</view>
+				</block>
+			</view>
+		</view>
+	</van-tab>
+</van-tabs>
+<van-popup show="{{ showModal }}" bind:close="close" round custom-class="popWrapper" closeable="true" close-on-click-overlay="{{false}}">
+	<van-row>
+		<van-col span="24" custom-class="pop-title">发票付款</van-col>
+		<van-col wx:if="{{is_service_fee}}" span="24" custom-class="pop-sub color-red">按次付费服务需在每次提交申请前支付服务费</van-col>
+	</van-row>
+	<van-cell-group>		
+		<van-cell title="服务方式:" value="{{service_type}}" custom-class="invoice-info-item" />
+		<van-cell title="购买方:" value="{{customer_name}}" custom-class="invoice-info-item" />
+		<van-cell title="价税合计:" value="{{total_amount}}" custom-class="invoice-info-item" />
+		<van-cell title="税额:" value="{{total_tax_amt}}" custom-class="invoice-info-item" />
+		<van-cell wx:if="{{is_service_fee}}" title="开票服务费:" value="{{invoice_service_fee}}" custom-class="invoice-info-item" />
+		<van-cell title="快递服务费:" value="{{express_expense}}" custom-class="invoice-info-item" />
+		<view class="peisong-way" wx:if="{{couponLength>0}}">
+			<van-cell custom-class="invoice-info-item" title="优惠券:" wx:if="{{coupon_amount=='0'}}" is-link value="{{couponLength}}张可用" bindtap="goCoupon" />
+			<van-cell custom-class="invoice-info-item" title="优惠券:" wx:else is-link value="-{{filter.numberToFixed(coupon_amount)}}" bindtap="goCoupon" />
+		</view>
+		<van-cell title="服务费总计:" value="{{((invoice_service_fee-coupon_amount>0?invoice_service_fee-coupon_amount:0)+express_expense)}}"   custom-class="invoice-info-item" />
+		<van-cell title="账户余额({{balance_amt}})支付:" value="{{balancepayment}}"   custom-class="invoice-info-item" />
+		<van-cell wx:if="{{!isbalance_amt}}" title="立即支付:" value="{{codepayment}}" custom-class="invoice-info-item" />
+		<van-cell wx:if="{{agentpay_show}}" title="{{pay_customer_name}}余额({{pay_balance_amt}})代付:" value="{{agentpayment}}" border="{{false}}" custom-class="invoice-info-item" />
+		<van-button round size="small" block color="#1e6ce8" custom-class="{{payDisabled?'gray-bg':''}}" bindtap="{{!payDisabled?'AffirmPay':''}}">{{isbalance_amt?'确认付款':'立即付款'}}</van-button>
+	</van-cell-group>
+</van-popup>
+<van-popup show="{{ showCoupon }}" bind:close="onClose" position="bottom" custom-class="showCoupon">
+	<form bindsubmit="userCoupon">
+		<view class="page">
+			<view class="page__bd page__bd_spacing">
+				<view class="nouserCoupon" bindtap='noCoupon'>
+					暂不使用优惠券
+				</view>
+				<van-radio-group value="{{ radio }}" bind:change="onChange">
+					<view class="coupons-item " wx:for="{{couponUseList}}" wx:key="index" style="background-image:url('{{item.wait_image_path}}');">
+						<view class="coupons-item-box">
+							<block wx:if="{{item.coupon_category=='减免'}}">
+								<view class="money-left"> <text class="free-txt">免</text>
+								</view>
+							</block>
+							<block wx:else>
+								<view class="money-left"> <text>¥</text>{{item.coupon_amount}}
+								</view>
+							</block>
+							<view class="money-right">
+								<view class="money-hold">{{item.coupon_desc}}</view>
+								<view class="money-data">有效期: {{item.get_time}} - {{item.end_date}}</view>
+							</view>
+							<view class="money-home">
+								<van-radio name="{{index}}" />
+							</view>
+						</view>
+					</view>
+				</van-radio-group>
+				<button class="user-btn" formType="submit">立即使用</button>
+			</view>
+		</view>
+	</form>
+</van-popup>
+<van-toast id="van-toast" />

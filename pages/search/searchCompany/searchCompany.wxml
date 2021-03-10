@@ -1,0 +1,20 @@
+<view class="page">
+    <view class="page__bd">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="请搜索公司名"  confirm-type='search' bindinput='input1' bindconfirm='confirm1'  />
+                   
+                </view>
+            </view>
+        </view>
+        <view class=" searchbar-result" >
+            <van-cell-group >
+                <block wx:for="{{customer_List}}" wx:key wx:if="{{index<10}}">
+                    <van-cell title="{{item.customer_name}}" wx:if="{{item.show}}" bindtap="returnPre"  data-customer_info_id="{{item.customer_info_id}}" data-class_type_id="{{index}}" data-index="0"/>
+                </block>
+            </van-cell-group>
+        </view>
+    </view>
+</view>

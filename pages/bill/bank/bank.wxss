@@ -1,0 +1,69 @@
+
+.area-title{
+  font-size: 24rpx;
+  padding: 10px 0 ;
+  overflow: hidden;
+
+}
+.area-title .area-text{
+  border-left:2px solid #1e6ce8;
+  padding-left:10px;
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+  float:left;
+
+}
+
+
+.list_view {
+  height: 168rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20rpx;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  padding:50rpx 40rpx;
+  margin-bottom: 25rpx;
+}
+
+/* 图片 */
+.image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+/* 文字 */
+.view_text {
+  width: 100%;
+  margin-left: 25rpx;
+  display: flex;
+  flex-direction: column;
+}
+/* 小字 */
+.view_text_small {
+  font-size: 30rpx;
+  word-break: break-all;
+  color: #7a7878;
+  margin-top: 10rpx
+}
+.list_view .price{
+ color: #1e6ce8;
+ font-size: 42rpx;
+}
+.list_view .title{
+  font-size: 32rpx;
+  margin-top: 14rpx;
+}
+.list_view .sub{
+  font-size: 20rpx;
+}
+
+.list_view .third{
+  font-size: 20rpx;
+}
+.list_view  .four{
+  font-size: 28rpx;
+  color: #999;
+}
