@@ -6,9 +6,9 @@ App({
   is_on_launch: true,
   onLaunch: function () {
     var client_id="qhminiapi";
-    var client_secret="rbrlVLRWPsQvJqiciLUEKDIzMSTgt1";
-    var AppID='wxf119f3738feeb18f';
-    var AppSecret ='b4bb2f838a1d082a44ccce777ab6d68e';
+    var client_secret="";
+    var AppID='';
+    var AppSecret ='';
     var that=this;
     that.globalData.client_id=client_id;
     that.globalData.client_secret=client_secret;
